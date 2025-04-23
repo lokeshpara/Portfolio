@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// Repo name for GitHub Pages - special case for dash-only name
-const REPO_NAME = '-';
+// Get repo name from environment variable or use default
+const REPO_NAME = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\//, '') || '-';
 
 console.log('Starting deployment preparation...');
 console.log(`Repository name: "${REPO_NAME}"`);
