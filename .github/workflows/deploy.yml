@@ -39,8 +39,6 @@ jobs:
           
       - name: Fix paths for GitHub Pages
         run: |
-          # Copy index.html as fallback
-          cp public/index.html out/
           # Create a .nojekyll file to bypass Jekyll
           touch out/.nojekyll
           

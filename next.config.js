@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // Use correct basePath for the repository named '-'
-  basePath: process.env.NODE_ENV === 'production' ? '/-' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/-/' : '',
+  // Use correct basePath for GitHub Pages
+  basePath: '',
+  assetPrefix: '',
   images: {
     unoptimized: true,
   },
