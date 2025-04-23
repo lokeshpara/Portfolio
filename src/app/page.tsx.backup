@@ -7,8 +7,6 @@ import ProjectsSection from '@/components/sections/ProjectsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import EducationSection from '@/components/sections/EducationSection';
 import LoadingScreen from '@/components/LoadingScreen';
-import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
 
 // Add a debounce utility at the top of the file, after imports
 const debounce = (func: Function, wait: number) => {
@@ -138,8 +136,8 @@ export default function Home() {
     // Create options for the observer with larger thresholds and margins
     const options = {
       root: rightColumnRef.current,
-      rootMargin: '-10% 0px -10% 0px', // Less restrictive margin for better detection
-      threshold: [0.15, 0.25, 0.5, 0.75] // More gradual thresholds for smoother detection
+      rootMargin: '-15% 0px -15% 0px', // Increased margin to reduce sensitivity
+      threshold: [0.2, 0.4, 0.6, 0.8] // Higher thresholds for more stable detection
     };
     
     // Track which sections are in view with their visibility ratios
@@ -153,12 +151,7 @@ export default function Home() {
     
     // Create new observer with debounced section changes
     observerRef.current = new IntersectionObserver((entries) => {
-      if (isScrollingRef.current) {
-        console.log("Skipping observer during programmatic scrolling");
-        return; // Skip during programmatic scrolling
-      }
-      
-      console.log("Observer entries:", entries.map(e => `${e.target.id}: ${e.isIntersecting ? e.intersectionRatio.toFixed(2) : 'not visible'}`).join(', '));
+      if (isScrollingRef.current) return; // Skip during programmatic scrolling
       
       // Update which sections are visible with their intersection ratios
       entries.forEach(entry => {
@@ -167,7 +160,6 @@ export default function Home() {
         if (entry.isIntersecting) {
           // Store intersection ratio for visible sections
           visibleSections.set(sectionId, entry.intersectionRatio);
-          console.log(`Section ${sectionId} is visible with ratio ${entry.intersectionRatio.toFixed(2)}`);
         } else {
           visibleSections.delete(sectionId);
         }
@@ -176,7 +168,7 @@ export default function Home() {
       // If we have visible sections, find the one with highest visibility ratio
       if (visibleSections.size > 0) {
         // Apply a minimum threshold to prevent flickering
-        const VISIBILITY_THRESHOLD = 0.15; // Lower threshold for easier detection
+        const VISIBILITY_THRESHOLD = 0.3;
         let highestRatio = 0;
         let mostVisibleSection = lastActiveSection;
         
@@ -187,8 +179,6 @@ export default function Home() {
             mostVisibleSection = sectionId;
           }
         });
-        
-        console.log(`Most visible section: ${mostVisibleSection} with ratio ${highestRatio.toFixed(2)}`);
         
         // Debounce the section change to prevent rapid toggling
         if (mostVisibleSection !== lastActiveSection && mostVisibleSection !== activeSection) {
@@ -227,7 +217,7 @@ export default function Home() {
                 }
               });
             }
-          }, 150); // Reduced debounce timing for more responsive UI (was 250ms)
+          }, 250); // 250ms debounce to ensure stability
         }
       }
     }, options);
@@ -402,8 +392,8 @@ export default function Home() {
       const nextSection = sections[i + 1];
       
       // If this is the last section or we're before the next section's top
-      if (!nextSection || scrollPos < nextSection.top - viewportHeight * 0.2) { // Improved threshold
-        if (scrollPos >= section.top - viewportHeight * 0.2) { // Improved threshold
+      if (!nextSection || scrollPos < nextSection.top - viewportHeight * 0.25) {
+        if (scrollPos >= section.top - viewportHeight * 0.25) {
           current = section.id;
           break;
         }
@@ -443,137 +433,6 @@ export default function Home() {
       }
     };
   }, [isLoading, activeSection]);
-
-  // Get the currently active section based on scroll position - enhanced version
-  const getActiveSection = () => {
-    if (!rightColumnRef.current) return 'about'; // Default to first section
-    
-    const scrollTop = rightColumnRef.current.scrollTop;
-    const containerHeight = rightColumnRef.current.clientHeight;
-    const scrollCenter = scrollTop + (containerHeight / 2);
-    
-    // Calculate the position of each section relative to the scroll container
-    const sectionPositions = Object.entries(sectionRefs).map(([id, ref]) => {
-      const offsetTop = ref.current?.offsetTop || 0;
-      const height = ref.current?.clientHeight || 0;
-      const center = offsetTop + (height / 2);
-      const distance = Math.abs(scrollCenter - center);
-      return { id, offsetTop, center, distance };
-    });
-    
-    // Sort by vertical distance from the center of the viewport
-    sectionPositions.sort((a, b) => a.distance - b.distance);
-    
-    // The closest section to the center is our active section
-    return sectionPositions[0]?.id || 'about';
-  };
-
-  // Add a more reliable scroll handler
-  useEffect(() => {
-    if (isLoading || !rightColumnRef.current) return;
-    
-    const handleEnhancedScroll = debounce(() => {
-      if (isScrollingRef.current) return;
-      
-      const newActiveSection = getActiveSection();
-      console.log("Enhanced scroll detection: detected section", newActiveSection);
-      
-      if (newActiveSection !== activeSection) {
-        console.log("Updating active section to:", newActiveSection);
-        setActiveSection(newActiveSection);
-        history.replaceState(null, '', `#${newActiveSection}`);
-        
-        // Highlight the active navlink
-        document.querySelectorAll('.navlink').forEach(link => {
-          if (link.getAttribute('href') === `#${newActiveSection}`) {
-            link.classList.add('navlink-active');
-          } else {
-            link.classList.remove('navlink-active');
-          }
-        });
-      }
-    }, 100); // Fast debounce for responsive UI
-    
-    // Poll for section changes even when not scrolling
-    const checkInterval = setInterval(() => {
-      handleEnhancedScroll();
-    }, 1000);
-    
-    const scrollElement = rightColumnRef.current;
-    scrollElement.addEventListener('scroll', handleEnhancedScroll);
-    
-    // Also check when components might have been updated
-    window.addEventListener('resize', handleEnhancedScroll);
-    
-    // Clean up
-    return () => {
-      clearInterval(checkInterval);
-      scrollElement.removeEventListener('scroll', handleEnhancedScroll);
-      window.removeEventListener('resize', handleEnhancedScroll);
-    };
-  }, [isLoading, activeSection]);
-
-  // Set explicit data-attributes to help with section detection
-  const aboutProps = {
-    ref: aboutRef,
-    id: "about",
-    "data-section": "about",
-    className: "right-column-section mb-24 section-container",
-    style: { 
-      minHeight: '40vh', 
-      scrollMarginTop: '40px',
-      border: '1px solid transparent' // Add invisible border to help with calculations
-    }
-  };
-
-  const experienceProps = {
-    ref: experienceRef,
-    id: "experience",
-    "data-section": "experience",
-    className: "right-column-section mb-24 section-container",
-    style: { 
-      minHeight: '40vh',
-      scrollMarginTop: '40px',
-      border: '1px solid transparent'
-    }
-  };
-
-  const projectsProps = {
-    ref: projectsRef,
-    id: "projects",
-    "data-section": "projects",
-    className: "right-column-section mb-24 section-container",
-    style: { 
-      minHeight: '40vh',
-      scrollMarginTop: '40px',
-      border: '1px solid transparent'
-    }
-  };
-
-  const blogProps = {
-    ref: blogRef,
-    id: "blog",
-    "data-section": "blog",
-    className: "right-column-section mb-24 section-container",
-    style: { 
-      minHeight: '40vh',
-      scrollMarginTop: '40px',
-      border: '1px solid transparent'
-    }
-  };
-
-  const educationProps = {
-    ref: educationRef,
-    id: "education",
-    "data-section": "education",
-    className: "right-column-section section-container",
-    style: { 
-      minHeight: '40vh',
-      scrollMarginTop: '40px',
-      paddingBottom: '5rem',
-      border: '1px solid transparent'
-    }
-  };
 
   // Return loading screen while content is preparing
   if (isLoading) {
@@ -619,109 +478,104 @@ export default function Home() {
         // Mobile View
         <div className="block p-4 sm:p-6 md:p-8" style={{ fontSize: 'small' }}>
           <header className="text-left mb-6 pt-6 sm:pt-8 relative p-3 rounded-lg" style={{ marginLeft: '1rem' }}>
-            <div 
-              className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10"
-            />
-            <h1 
-              className="font-bold text-lightest-slate mb-2 tracking-tight"
-              style={{ fontSize: 'xxx-large' }}
-            >
-              Lokesh Para
-            </h1>
-            
-            <div
-              className="flex items-center gap-1 mb-4"
-            >
-              <p 
-                className="font-bold text-lightest-slate mb-2 tracking-tight"
-                style={{ fontSize: 'medium' }}
-              >
-                Full Stack Developer
-              </p>
-            </div>
-            
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10"
+          />
+          <h1 
+            className="font-bold text-lightest-slate mb-2 tracking-tight"
+            style={{ fontSize: 'xxx-large' }}
+          >
+            Lokesh Para
+          </h1>
+          
+          <div
+            className="flex items-center gap-1 mb-4"
+          >
             <p 
-              className="text-light-slate opacity-70 font-light tracking-wide mb-8"
-              style={{ fontSize: 'small' }}
+              className="font-bold text-lightest-slate mb-2 tracking-tight"
+              style={{ fontSize: 'medium' }}
             >
-              Building digital experiences that matter
+              Full Stack Developer
             </p>
-            
-            <div className="mobile-social-container">
+          </div>
+          
+          <p 
+            className="text-light-slate opacity-70 font-light tracking-wide mb-8"
+            style={{ fontSize: 'small' }}
+          >
+            Building digital experiences that matter
+          </p>
+          
+            <div className="social-container mobile-social" style={{ marginBottom: '3rem' }}>
               <a 
                 href="https://github.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mobile-social-link github"
+                className="social-link"
                 aria-label="GitHub Profile"
-                data-tooltip="GitHub"
               >
-                <svg className="mobile-social-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
-                <div className="mobile-tooltip">GitHub</div>
               </a>
               
               <a 
                 href="https://linkedin.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mobile-social-link linkedin"
+                className="social-link"
                 aria-label="LinkedIn Profile"
-                data-tooltip="LinkedIn"
               >
-                <svg className="mobile-social-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
-                <div className="mobile-tooltip">LinkedIn</div>
               </a>
               
               <a 
                 href="https://twitter.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mobile-social-link twitter"
+                className="social-link"
                 aria-label="Twitter Profile"
-                data-tooltip="Twitter"
               >
-                <FaTwitter className="mobile-social-icon" />
-                <div className="mobile-tooltip">Twitter</div>
+                <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                </svg>
               </a>
               
               <a 
                 href="mailto:john@doe.com"
-                className="mobile-social-link email"
-                data-tooltip="Contact Me"
+                className="email-link"
+                data-email="john@doe.com"
                 aria-label="Email Me"
               >
-                <svg className="mobile-social-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="email-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/>
                 </svg>
-                <div className="mobile-tooltip">Email Me</div>
               </a>
             </div>
-          </header>
-          
-          <main style={{ fontSize: 'small' }}>
+        </header>
+        
+        <main style={{ fontSize: 'small' }}>
             <div id="about" style={{ scrollMarginTop: '1rem', minHeight: '30vh' }}>
-              <AboutSection />
+          <AboutSection />
             </div>
             <div id="experience" style={{ scrollMarginTop: '1rem', minHeight: '30vh' }}>
-              <ExperienceSection />
+          <ExperienceSection />
             </div>
             <div id="projects" style={{ scrollMarginTop: '1rem', minHeight: '30vh' }}>
-              <ProjectsSection />
+          <ProjectsSection />
             </div>
             <div id="blog" style={{ scrollMarginTop: '1rem', minHeight: '30vh' }}>
-              <BlogSection />
+          <BlogSection />
             </div>
             <div id="education" style={{ scrollMarginTop: '1rem', minHeight: '30vh', paddingBottom: '2rem' }}>
               <EducationSection />
             </div>
-          </main>
-        </div>
+      </main>
+      </div>
       ) : (
-        // Desktop View
+        // Desktop View - Use a Fragment to contain both columns
         <>
           {/* Fixed Left Column */}
           <div className="fixed top-0 left-0 h-screen w-[calc(min(90vw,1000px)*0.4)] max-w-[400px] z-10" style={{ 
@@ -752,7 +606,7 @@ export default function Home() {
               </div>
               
               {/* Desktop Navigation */}
-              <nav className="mb-6 pl-1" style={{ opacity: 1 }}>
+                <nav className="mb-6 pl-1" style={{ opacity: 1 }}>
                 <ul className="flex flex-col" style={{ opacity: 1 }}>
                   <li className="navlink-container" style={{ opacity: 1 }}>
                     <a 
@@ -764,14 +618,14 @@ export default function Home() {
                       }}
                       style={{ opacity: 1 }}
                     >
-                      <div className="navlink-indicator"></div>
-                      <span className="navlink-text">
-                        <span data-letter="A">A</span>
-                        <span data-letter="b">b</span>
-                        <span data-letter="o">o</span>
-                        <span data-letter="u">u</span>
-                        <span data-letter="t">t</span>
-                      </span>
+                        <div className="navlink-indicator"></div>
+                        <span className="navlink-text">
+                          <span data-letter="A">A</span>
+                          <span data-letter="b">b</span>
+                          <span data-letter="o">o</span>
+                          <span data-letter="u">u</span>
+                          <span data-letter="t">t</span>
+                        </span>
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
@@ -784,19 +638,19 @@ export default function Home() {
                       }}
                       style={{ opacity: 1 }}
                     >
-                      <div className="navlink-indicator"></div>
-                      <span className="navlink-text">
-                        <span data-letter="E">E</span>
-                        <span data-letter="x">x</span>
-                        <span data-letter="p">p</span>
-                        <span data-letter="e">e</span>
-                        <span data-letter="r">r</span>
-                        <span data-letter="i">i</span>
-                        <span data-letter="e">e</span>
-                        <span data-letter="n">n</span>
-                        <span data-letter="c">c</span>
-                        <span data-letter="e">e</span>
-                      </span>
+                        <div className="navlink-indicator"></div>
+                        <span className="navlink-text">
+                          <span data-letter="E">E</span>
+                          <span data-letter="x">x</span>
+                          <span data-letter="p">p</span>
+                          <span data-letter="e">e</span>
+                          <span data-letter="r">r</span>
+                          <span data-letter="i">i</span>
+                          <span data-letter="e">e</span>
+                          <span data-letter="n">n</span>
+                          <span data-letter="c">c</span>
+                          <span data-letter="e">e</span>
+                        </span>
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
@@ -809,17 +663,17 @@ export default function Home() {
                       }}
                       style={{ opacity: 1 }}
                     >
-                      <div className="navlink-indicator"></div>
-                      <span className="navlink-text">
-                        <span data-letter="P">P</span>
-                        <span data-letter="r">r</span>
-                        <span data-letter="o">o</span>
-                        <span data-letter="j">j</span>
-                        <span data-letter="e">e</span>
-                        <span data-letter="c">c</span>
-                        <span data-letter="t">t</span>
-                        <span data-letter="s">s</span>
-                      </span>
+                        <div className="navlink-indicator"></div>
+                        <span className="navlink-text">
+                          <span data-letter="P">P</span>
+                          <span data-letter="r">r</span>
+                          <span data-letter="o">o</span>
+                          <span data-letter="j">j</span>
+                          <span data-letter="e">e</span>
+                          <span data-letter="c">c</span>
+                          <span data-letter="t">t</span>
+                          <span data-letter="s">s</span>
+                        </span>
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
@@ -832,13 +686,13 @@ export default function Home() {
                       }}
                       style={{ opacity: 1 }}
                     >
-                      <div className="navlink-indicator"></div>
-                      <span className="navlink-text">
-                        <span data-letter="B">B</span>
-                        <span data-letter="l">l</span>
-                        <span data-letter="o">o</span>
-                        <span data-letter="g">g</span>
-                      </span>
+                        <div className="navlink-indicator"></div>
+                        <span className="navlink-text">
+                          <span data-letter="B">B</span>
+                          <span data-letter="l">l</span>
+                          <span data-letter="o">o</span>
+                          <span data-letter="g">g</span>
+                        </span>
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
@@ -851,18 +705,18 @@ export default function Home() {
                       }}
                       style={{ opacity: 1 }}
                     >
-                      <div className="navlink-indicator"></div>
-                      <span className="navlink-text">
-                        <span data-letter="E">E</span>
-                        <span data-letter="d">d</span>
-                        <span data-letter="u">u</span>
-                        <span data-letter="c">c</span>
-                        <span data-letter="a">a</span>
-                        <span data-letter="t">t</span>
-                        <span data-letter="i">i</span>
-                        <span data-letter="o">o</span>
-                        <span data-letter="n">n</span>
-                      </span>
+                        <div className="navlink-indicator"></div>
+                        <span className="navlink-text">
+                          <span data-letter="E">E</span>
+                          <span data-letter="d">d</span>
+                          <span data-letter="u">u</span>
+                          <span data-letter="c">c</span>
+                          <span data-letter="a">a</span>
+                          <span data-letter="t">t</span>
+                          <span data-letter="i">i</span>
+                          <span data-letter="o">o</span>
+                          <span data-letter="n">n</span>
+                        </span>
                     </a>
                   </li>
                 </ul>
@@ -877,12 +731,11 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="social-link"
                     aria-label="GitHub Profile"
-                    data-tooltip="GitHub"
+                    style={{ opacity: 1 }}
                   >
-                    <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 1 }}>
                       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
-                    <div className="tooltip">GitHub<div className="tooltip-arrow"></div></div>
                   </a>
                   
                   <a 
@@ -891,12 +744,11 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="social-link"
                     aria-label="LinkedIn Profile"
-                    data-tooltip="LinkedIn"
+                    style={{ opacity: 1 }}
                   >
-                    <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 1 }}>
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                     </svg>
-                    <div className="tooltip">LinkedIn<div className="tooltip-arrow"></div></div>
                   </a>
                   
                   <a 
@@ -905,22 +757,23 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="social-link"
                     aria-label="Twitter Profile"
-                    data-tooltip="Twitter"
+                    style={{ opacity: 1 }}
                   >
-                    <FaTwitter className="social-icon" />
-                    <div className="tooltip">Twitter<div className="tooltip-arrow"></div></div>
+                    <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 1 }}>
+                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
                   </a>
                   
                   <a 
                     href="mailto:john@doe.com" 
                     className="email-link"
-                    data-tooltip="Contact Me"
+                    data-email="john@doe.com"
                     aria-label="Email Me"
+                    style={{ opacity: 1 }}
                   >
                     <svg className="email-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/>
                     </svg>
-                    <div className="tooltip">Email Me<div className="tooltip-arrow"></div></div>
                   </a>
                 </div>
               </div>
@@ -1005,7 +858,6 @@ export default function Home() {
                 display: flex;
                 gap: 18px;
                 margin-bottom: 16px;
-                margin-top: 6rem;
                 opacity: 1 !important;
               }
               
@@ -1039,339 +891,343 @@ export default function Home() {
                 opacity: 1 !important;
               }
               
-              /* Navlink container with minimal gap */
+                  /* Navlink container with minimal gap */
               .navlink-container {
                 opacity: 1;
-                margin-bottom: 2px; /* Very tight spacing between nav items */
+                    margin-bottom: 2px; /* Very tight spacing between nav items */
               }
               
-              /* Clean modern navlink style */
+                  /* Clean modern navlink style */
               .navlink {
                 position: relative;
                 display: flex;
                 align-items: center;
-                padding: 3px 0; /* Minimal padding */
+                    padding: 3px 0; /* Minimal padding */
                 opacity: 1;
                 color: #8892b0;
-                font-size: 13px;
-                transition: all 0.2s ease;
-                text-decoration: none;
-                overflow: hidden; /* Ensure text doesn't wrap */
-                white-space: nowrap; /* Keep text on single line */
+                    font-size: 13px;
+                    transition: all 0.2s ease;
+                    text-decoration: none;
               }
               
               .navlink:hover {
                 color: #64ffda;
               }
               
-              /* Text styling with modern rollback animation */
-              .navlink-text {
+                  /* Text styling with modern rollback animation */
+                  .navlink-text {
                 position: relative;
-                font-weight: 400;
-                letter-spacing: 0.3px;
-                font-size: 13px;
+                    font-weight: 400;
+                    letter-spacing: 0.3px;
+                    font-size: 13px;
+                    color: #8892b0;
+                    display: inline-block;
+                    margin-left: 10px; /* Space after the line */
+                  }
+                  
+                  /* Define keyframes for continuous rotation */
+                  @keyframes continuousRollback {
+                    0% { transform: rotateX(0deg); }
+                    100% { transform: rotateX(360deg); }
+                  }
+                  
+                  /* Define keyframes for one-time rotation */
+                  @keyframes oneTimeRollback {
+                    0% { transform: rotateX(0deg); }
+                    100% { transform: rotateX(360deg); }
+                  }
+                  
+                  /* Enhanced 3D letter animation */
+                  .navlink-text span {
+                    display: inline-block;
+                    position: relative;
+                    transition: color 0.2s ease;
+                    transform-style: preserve-3d;
+                    perspective: 800px;
+                  }
+                  
+                  /* Continuous rollback animation on hover */
+                  .navlink:hover .navlink-text span {
+                    color: #64ffda;
+                    animation-name: continuousRollback;
+                    animation-duration: 1s;
+                    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+                    animation-iteration-count: infinite;
+                    animation-fill-mode: forwards;
+                  }
+                  
+                  /* Different timing for each letter to create wave effect */
+                  .navlink:hover .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
+                  .navlink:hover .navlink-text span:nth-child(2) { animation-delay: 0.05s; }
+                  .navlink:hover .navlink-text span:nth-child(3) { animation-delay: 0.10s; }
+                  .navlink:hover .navlink-text span:nth-child(4) { animation-delay: 0.15s; }
+                  .navlink:hover .navlink-text span:nth-child(5) { animation-delay: 0.20s; }
+                  .navlink:hover .navlink-text span:nth-child(6) { animation-delay: 0.25s; }
+                  .navlink:hover .navlink-text span:nth-child(7) { animation-delay: 0.30s; }
+                  .navlink:hover .navlink-text span:nth-child(8) { animation-delay: 0.35s; }
+                  .navlink:hover .navlink-text span:nth-child(9) { animation-delay: 0.40s; }
+                  .navlink:hover .navlink-text span:nth-child(10) { animation-delay: 0.45s; }
+                  
+                  /* One-time animation for active state */
+                  .navlink-active .navlink-text span {
+                    color: #64ffda;
+                    font-weight: 500;
+                    animation-name: oneTimeRollback;
+                    animation-duration: 0.8s;
+                    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+                    animation-iteration-count: 1;
+                    animation-fill-mode: forwards;
+                  }
+                  
+                  /* Different timing for active state animation */
+                  .navlink-active .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
+                  .navlink-active .navlink-text span:nth-child(2) { animation-delay: 0.04s; }
+                  .navlink-active .navlink-text span:nth-child(3) { animation-delay: 0.08s; }
+                  .navlink-active .navlink-text span:nth-child(4) { animation-delay: 0.12s; }
+                  .navlink-active .navlink-text span:nth-child(5) { animation-delay: 0.16s; }
+                  .navlink-active .navlink-text span:nth-child(6) { animation-delay: 0.20s; }
+                  .navlink-active .navlink-text span:nth-child(7) { animation-delay: 0.24s; }
+                  .navlink-active .navlink-text span:nth-child(8) { animation-delay: 0.28s; }
+                  .navlink-active .navlink-text span:nth-child(9) { animation-delay: 0.32s; }
+                  .navlink-active .navlink-text span:nth-child(10) { animation-delay: 0.36s; }
+                  
+                  /* Handle animation end gracefully when mouse leaves */
+                  .navlink-text span {
+                    animation-play-state: paused;
+                  }
+                  
+                  .navlink:hover .navlink-text span {
+                    animation-play-state: running;
+                  }
+                  
+                  /* Line indicator before text */
+                  .navlink-indicator {
+                    position: relative;
+                    height: 1px;
+                    width: 40px;
+                    background: transparent;
+                  }
+                  
+                  /* Line before text - actual line element */
+                  .navlink-indicator::before {
+                    content: '';
+                    position: absolute;
+                    height: 1px;
+                    width: 0;
+                    background: #8892b0;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    opacity: 0.7;
+                    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                  }
+                  
+                  /* Short line on normal state */
+                  .navlink .navlink-indicator::before {
+                    width: 15px;
+                  }
+                  
+                  /* Line extends on hover/active */
+                  .navlink:hover .navlink-indicator::before,
+                  .navlink-active .navlink-indicator::before {
+                    width: 40px;
+                    background: #64ffda;
+                    opacity: 1;
+                  }
+                  
+                  /* Active indicator is always visible */
+                  .navlink-active .navlink-indicator::before {
+                    width: 40px;
+                  }
+                  
+                  /* Clean up old styles */
+                  .navlink-dots,
+                  .navlink-indicator::after {
+                    display: none;
+                  }
+                  
+                  /* Compact nav styling */
+                  nav {
+                    margin-bottom: 4px;
+              }
+              
+              /* Social media icons animation */
+              .social-container {
+                display: flex;
+                gap: 18px;
+                margin-bottom: 16px;
+                opacity: 1 !important;
+              }
+              
+              .social-link {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(100, 255, 218, 0.05);
                 color: #8892b0;
-                display: inline-block;
-                margin-left: 10px; /* Add gap between line and text */
-                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Same transition as line */
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                overflow: hidden;
               }
               
-              /* Define keyframes for modern rollback effect */
-              @keyframes modernRollback {
-                0% { 
-                  transform: rotateX(0deg);
-                  opacity: 1;
-                }
-                50% {
-                  transform: rotateX(180deg);
-                  opacity: 0.5;
-                }
-                100% { 
-                  transform: rotateX(360deg);
-                  opacity: 1;
-                }
-              }
-              
-              /* Define keyframes for single rollback */
-              @keyframes singleRollback {
-                0% { 
-                  transform: rotateX(0deg) translateY(0);
-                  opacity: 1;
-                }
-                50% {
-                  transform: rotateX(180deg) translateY(-2px);
-                  opacity: 0.7;
-                }
-                100% { 
-                  transform: rotateX(360deg) translateY(0);
-                  opacity: 1;
-                }
-              }
-              
-              /* Enhanced 3D letter animation */
-              .navlink-text span {
-                display: inline-block;
+              /* Icon inner styling */
+              .social-icon {
                 position: relative;
-                transition: color 0.15s ease;
-                transform-style: preserve-3d;
-                perspective: 1000px;
-                transform-origin: bottom center;
-                backface-visibility: hidden;
+                z-index: 2;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
               }
               
-              /* Line indicator before text - container */
-              .navlink-indicator {
-                position: relative;
-                height: 1px;
-                min-width: 25px; /* Minimum width for the indicator */
-                background: transparent;
-                margin-right: 0; /* No gap on right side of line */
-                flex-shrink: 0; /* Don't allow shrinking */
-                transition: min-width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Add transition */
-              }
-              
-              /* Line before text - actual line element */
-              .navlink-indicator::before {
+              /* Background animation */
+              .social-link::before {
                 content: '';
                 position: absolute;
-                height: 1px;
-                width: 100%; /* Always fill the container */
-                background: #8892b0;
+                top: 0;
                 left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                opacity: 0.7;
-                transition: background-color 0.3s ease, opacity 0.3s ease;
-              }
-              
-              /* Hover state: line indicator grows and text moves */
-              .navlink:hover .navlink-indicator,
-              .navlink-active .navlink-indicator {
-                min-width: 45px; /* Grow to this width on hover */
-                background: transparent;
-              }
-              
-              /* Change line color on hover/active */
-              .navlink:hover .navlink-indicator::before,
-              .navlink-active .navlink-indicator::before {
+                width: 100%;
+                height: 100%;
                 background: #64ffda;
+                transform: scale(0);
+                transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                border-radius: 50%;
+                z-index: 1;
+              }
+              
+              /* Hover effects */
+              .social-link:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px -10px rgba(100, 255, 218, 0.5);
+              }
+              
+              .social-link:hover::before {
+                transform: scale(1);
+              }
+              
+              .social-link:hover .social-icon {
+                color: #0a192f;
+                transform: rotate(360deg) scale(1.1);
+              }
+              
+              /* Email icon styling */
+              .email-link {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(100, 255, 218, 0.05);
+                color: #8892b0;
+                margin-left: 8px;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                overflow: hidden;
+              }
+              
+              /* Email tooltip */
+              .email-link::after {
+                content: attr(data-email);
+                position: absolute;
+                top: -40px;
+                left: 50%;
+                transform: translateX(-50%) translateY(10px);
+                background: #0a192f;
+                color: #64ffda;
+                padding: 4px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(100, 255, 218, 0.2);
+              }
+              
+              .email-link:hover::after {
                 opacity: 1;
+                transform: translateX(-50%) translateY(0);
               }
               
-              /* Modern rollback animation on hover */
-              .navlink:hover .navlink-text span {
-                color: #64ffda;
-                animation-name: modernRollback;
-                animation-duration: 0.6s;
-                animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-                animation-iteration-count: 1;
-                animation-fill-mode: forwards;
+              /* Same hover effects as social */
+              .email-link:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px -10px rgba(100, 255, 218, 0.5);
               }
               
-              /* Faster staggered timing for hover effect */
-              .navlink:hover .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
-              .navlink:hover .navlink-text span:nth-child(2) { animation-delay: 0.03s; }
-              .navlink:hover .navlink-text span:nth-child(3) { animation-delay: 0.06s; }
-              .navlink:hover .navlink-text span:nth-child(4) { animation-delay: 0.09s; }
-              .navlink:hover .navlink-text span:nth-child(5) { animation-delay: 0.12s; }
-              .navlink:hover .navlink-text span:nth-child(6) { animation-delay: 0.15s; }
-              .navlink:hover .navlink-text span:nth-child(7) { animation-delay: 0.18s; }
-              .navlink:hover .navlink-text span:nth-child(8) { animation-delay: 0.21s; }
-              .navlink:hover .navlink-text span:nth-child(9) { animation-delay: 0.24s; }
-              .navlink:hover .navlink-text span:nth-child(10) { animation-delay: 0.27s; }
-              
-              /* More subtle active state animation */
-              .navlink-active .navlink-text span {
-                color: #64ffda;
-                font-weight: 500;
-                animation-name: singleRollback;
-                animation-duration: 0.5s;
-                animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-                animation-iteration-count: 1;
-                animation-fill-mode: forwards;
+              .email-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #64ffda;
+                transform: scale(0);
+                transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                border-radius: 50%;
+                z-index: 1;
               }
               
-              /* Faster staggered timing for active state */
-              .navlink-active .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
-              .navlink-active .navlink-text span:nth-child(2) { animation-delay: 0.02s; }
-              .navlink-active .navlink-text span:nth-child(3) { animation-delay: 0.04s; }
-              .navlink-active .navlink-text span:nth-child(4) { animation-delay: 0.06s; }
-              .navlink-active .navlink-text span:nth-child(5) { animation-delay: 0.08s; }
-              .navlink-active .navlink-text span:nth-child(6) { animation-delay: 0.10s; }
-              .navlink-active .navlink-text span:nth-child(7) { animation-delay: 0.12s; }
-              .navlink-active .navlink-text span:nth-child(8) { animation-delay: 0.14s; }
-              .navlink-active .navlink-text span:nth-child(9) { animation-delay: 0.16s; }
-              .navlink-active .navlink-text span:nth-child(10) { animation-delay: 0.18s; }
-              
-              /* Hover text color change */
-              .navlink:hover .navlink-text,
-              .navlink-active .navlink-text {
-                color: #64ffda;
+              .email-link:hover::before {
+                transform: scale(1);
               }
-
-              /* Mobile social media enhancements */
+              
+              .email-link .email-icon {
+                position: relative;
+                z-index: 2;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+              }
+              
+              .email-link:hover .email-icon {
+                color: #0a192f;
+                transform: rotate(360deg) scale(1.1);
+              }
+              
+              /* Mobile social icons */
+              .mobile-social .social-link,
+              .mobile-social .email-link {
+                width: 36px;
+                height: 36px;
+              }
+              
+              .mobile-email {
+                display: none;
+              }
+              
               @media (max-width: 799px) {
-                .mobile-social-container {
+                .mobile-social {
                   display: flex;
-                  justify-content: center;
-                  gap: 22px;
-                  margin: 2.5rem auto;
-                  padding: 18px 20px;
-                  background: rgba(10, 25, 47, 0.8);
-                  backdrop-filter: blur(12px);
-                  border-radius: 20px;
-                  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-                  border: 1px solid rgba(100, 255, 218, 0.2);
-                  width: fit-content;
-                  position: relative;
-                  z-index: 10;
+                  gap: 15px;
+                  margin-top: 1rem;
+                  margin-bottom: 0;
                 }
-                
-                /* Background glow effect */
-                .mobile-social-container::before {
-                  content: '';
-                  position: absolute;
-                  inset: 0;
-                  background: radial-gradient(circle at center, rgba(100, 255, 218, 0.15), transparent 70%);
-                  border-radius: inherit;
-                  z-index: -1;
-                  animation: pulseBackground 5s ease-in-out infinite alternate;
-                }
-                
-                @keyframes pulseBackground {
-                  0% { opacity: 0.5; transform: scale(0.97); }
-                  100% { opacity: 0.8; transform: scale(1.03); }
-                }
-                
-                /* Individual social links */
-                .mobile-social-link {
-                  position: relative;
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 15px;
-                  background: rgba(17, 34, 64, 0.95);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  overflow: hidden;
-                  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                  transform-style: preserve-3d;
-                  perspective: 800px;
-                  animation: float 3s infinite ease-in-out;
-                }
-                
-                /* Individual floating animations with different delays */
-                .mobile-social-link.github {
-                  animation-delay: 0s;
-                }
-                
-                .mobile-social-link.linkedin {
-                  animation-delay: 0.5s;
-                }
-                
-                .mobile-social-link.twitter {
-                  animation-delay: 1s;
-                }
-                
-                .mobile-social-link.email {
-                  animation-delay: 1.5s;
-                }
-                
-                @keyframes float {
-                  0%, 100% { transform: translateY(0); }
-                  50% { transform: translateY(-8px); }
-                }
-                
-                /* Inner glow effect */
-                .mobile-social-link::after {
-                  content: '';
-                  position: absolute;
-                  top: -5px;
-                  left: -5px;
-                  right: -5px;
-                  bottom: -5px;
-                  z-index: -1;
-                  opacity: 0;
-                  background: radial-gradient(
-                    circle at center,
-                    rgba(100, 255, 218, 0.8) 0%,
-                    transparent 70%
-                  );
-                  border-radius: inherit;
-                  transition: opacity 0.3s ease;
-                  filter: blur(8px);
-                }
-                
-                /* Icon style */
-                .mobile-social-icon {
-                  color: #8892b0;
-                  transition: all 0.3s ease;
-                  transform: translateZ(10px);
-                  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-                }
-                
-                /* Active state styles */
-                .mobile-social-link:active {
-                  transform: translateY(4px) scale(0.92);
-                  box-shadow: 0 0 20px rgba(100, 255, 218, 0.6);
-                }
-                
-                .mobile-social-link:active::after {
-                  opacity: 0.7;
-                }
-                
-                /* Icon-specific active colors */
-                .mobile-social-link.github:active .mobile-social-icon {
-                  color: white;
-                }
-                
-                .mobile-social-link.linkedin:active .mobile-social-icon {
-                  color: #0077b5;
-                }
-                
-                .mobile-social-link.twitter:active .mobile-social-icon {
-                  color: white;
-                }
-                
-                .mobile-social-link.email:active .mobile-social-icon {
-                  color: #64ffda;
-                }
-                
-                /* Tooltip style */
-                .mobile-tooltip {
-                  position: fixed;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%) scale(0.8);
-                  background: rgba(10, 25, 47, 0.95);
-                  color: #64ffda;
-                  font-weight: 600;
-                  padding: 10px 20px;
-                  border-radius: 12px;
-                  border: 2px solid rgba(100, 255, 218, 0.4);
-                  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-                  opacity: 0;
-                  visibility: hidden;
-                  z-index: 100;
-                  transition: all 0.3s ease;
-                  font-size: 16px;
-                  letter-spacing: 1px;
-                }
-                
-                /* Show tooltip on active state with animation */
-                .mobile-social-link:active .mobile-tooltip {
-                  opacity: 1;
-                  visibility: visible;
-                  transform: translate(-50%, -50%) scale(1);
-                  animation: pulseTooltip 1.5s infinite ease;
-                }
-                
-                @keyframes pulseTooltip {
-                  0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.6); }
-                  70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); }
-                  100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
-                }
+              }
+              
+              /* Add subtle pulse animation to icons */
+              @keyframes subtlePulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+              }
+              
+              .social-icon, .email-icon {
+                animation: subtlePulse 3s infinite ease-in-out;
+              }
+              
+              .social-link:nth-child(1) .social-icon,
+              .email-link .email-icon {
+                animation-delay: 0s;
+              }
+              
+              .social-link:nth-child(2) .social-icon {
+                animation-delay: 0.5s;
+              }
+              
+              .social-link:nth-child(3) .social-icon {
+                animation-delay: 1s;
               }
             `}</style>
             
@@ -1389,7 +1245,7 @@ export default function Home() {
                 className="bg-slate-900/50 rounded-lg shadow-lg backdrop-blur-sm"
               >
                 <div className="px-6 py-12">
-                  <section {...aboutProps}>
+                  <section ref={aboutRef} id="about" className="right-column-section mb-24 section-container">
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">About</h2>
                       <SectionReference id="about" title="About" onSectionClick={scrollToSection} />
@@ -1397,7 +1253,12 @@ export default function Home() {
                     <AboutSection />
                   </section>
                   
-                  <section {...experienceProps}>
+                      <section 
+                        ref={experienceRef} 
+                        id="experience" 
+                        className="right-column-section mb-24 section-container"
+                        style={{ minHeight: '50vh', scrollMarginTop: '5rem' }}
+                      >
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Experience</h2>
                       <SectionReference id="experience" title="Experience" onSectionClick={scrollToSection} />
@@ -1405,7 +1266,12 @@ export default function Home() {
                     <ExperienceSection />
                   </section>
                   
-                  <section {...projectsProps}>
+                      <section 
+                        ref={projectsRef} 
+                        id="projects" 
+                        className="right-column-section mb-24 section-container"
+                        style={{ minHeight: '50vh', scrollMarginTop: '5rem' }}
+                      >
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Projects</h2>
                       <SectionReference id="projects" title="Projects" onSectionClick={scrollToSection} />
@@ -1413,7 +1279,12 @@ export default function Home() {
                     <ProjectsSection />
                   </section>
                   
-                  <section {...blogProps}>
+                      <section 
+                        ref={blogRef} 
+                        id="blog" 
+                        className="right-column-section mb-24 section-container"
+                        style={{ minHeight: '50vh', scrollMarginTop: '5rem' }}
+                      >
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Blog</h2>
                       <SectionReference id="blog" title="Blog" onSectionClick={scrollToSection} />
@@ -1421,7 +1292,12 @@ export default function Home() {
                     <BlogSection />
                   </section>
                   
-                  <section {...educationProps}>
+                      <section 
+                        ref={educationRef} 
+                        id="education" 
+                        className="right-column-section section-container"
+                        style={{ minHeight: '50vh', scrollMarginTop: '5rem', paddingBottom: '5rem' }}
+                      >
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Education</h2>
                       <SectionReference id="education" title="Education" onSectionClick={scrollToSection} />
@@ -1437,4 +1313,3 @@ export default function Home() {
     </div>
   );
 }
-      

@@ -82,13 +82,13 @@ export default function EducationSection() {
 
   return (
     <section id="education" className="py-8">
-      <div className="mb-4 md:hidden">
-        <h2 className="text-lg font-semibold text-lightest-slate">Education</h2>
-      </div>
+      
 
       {/* Certifications */}
       <div className="mb-12">
-        <h3 className="text-md font-semibold mb-6 text-lightest-slate">Professional Certifications</h3>
+      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+        <h2 className="text-lg font-semibold text-lightest-slate">CERTIFICAATIONS</h2>
+      </div>
         
         <div 
           className="space-y-3 certification-container"
@@ -339,8 +339,10 @@ export default function EducationSection() {
       </div>
       
       {/* Academic Education */}
-      <div>
-        <h3 className="text-md font-semibold mb-6 text-lightest-slate">Academic Education</h3>
+      <div style={{ marginTop: '5rem' }}>
+      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+        <h2 className="text-lg font-semibold text-lightest-slate">EDUCATION</h2>
+      </div>
         <div 
           className="space-y-3 education-container"
           onMouseLeave={() => {
