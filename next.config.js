@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   // Use correct basePath for GitHub Pages
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/-',
+  assetPrefix: '/-/',
   images: {
     unoptimized: true,
   },
