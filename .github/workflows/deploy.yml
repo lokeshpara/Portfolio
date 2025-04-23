@@ -32,18 +32,19 @@ jobs:
         
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ""
         
       - name: Create .nojekyll file
         run: |
           touch out/.nojekyll
           
-      - name: Fix paths for GitHub Pages
-        run: |
-          # Create a .nojekyll file to bypass Jekyll
-          touch out/.nojekyll
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v3
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages 
+          clean: true 

@@ -2,8 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 
-// Repo name for GitHub Pages - special case for dash-only name
-const REPO_NAME = '-';
+// Get repo name from environment variable or use default
+const REPO_NAME = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\//, '') || '-';
+
+console.log(`Verifying paths for repository: ${REPO_NAME}`);
 
 // Function to recursively check HTML files
 function checkDirectory(directory) {
