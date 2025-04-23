@@ -2,16 +2,19 @@
   "name": "portfolio-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lokeshpara.github.io/portfolio-1",
+  "homepage": "https://lokeshpara.github.io/-",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && (IF NOT EXIST out\\.nojekyll type nul > out\\.nojekyll)",
+    "build": "next build && (IF NOT EXIST out\\.nojekyll type nul > out\\.nojekyll) && copy out\\.nojekyll .",
     "start": "next start",
     "lint": "next lint",
+    "clean": "IF EXIST out rmdir /s /q out",
     "deploy:vercel": "vercel",
     "deploy:vercel:prod": "vercel --prod",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out -t true",
+    "predeploy": "npm run clean && npm run build && copy public\\index.html out\\",
+    "deploy": "gh-pages -d out",
+    "deploy-only": "gh-pages -d out",
+    "verify-paths": "node scripts/verify-paths.js",
     "export": "next build && next export"
   },
   "dependencies": {
@@ -25,6 +28,7 @@
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {

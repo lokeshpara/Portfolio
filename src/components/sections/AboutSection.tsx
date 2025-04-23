@@ -11,7 +11,7 @@ export default function AboutSection() {
         {/* Replace motion.div with regular div and remove animation properties */}
         <div className="flex items-center group mb-8 md:hidden">
           <h2 className="text-2xl font-semibold text-lightest-slate">
-            About
+            ABOUT
           </h2>
           <a
             href="#about"

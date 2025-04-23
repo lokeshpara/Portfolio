@@ -72,8 +72,8 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience" className="py-8">
-      <div className="mb-4 md:hidden">
-        <h2 className="text-lg font-semibold text-lightest-slate">Experience</h2>
+      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+        <h2 className="text-lg font-semibold text-lightest-slate">EXPERIENCE</h2>
       </div>
 
       <div 
@@ -358,7 +358,7 @@ export default function ExperienceSection() {
         ))}
       </div>
 
-      <div className="mt-16 text-left pl-4" style={{ margin: "1rem 0.5rem" }}>
+      <div className="mt-16 text-left pl-4" style={{ margin: "1rem 1rem" }}>
         <style jsx>{`
           @keyframes borderGlow {
             0%, 100% { box-shadow: 0 0 2px rgba(100, 255, 218, 0.5); }
