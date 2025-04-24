@@ -12,7 +12,9 @@
     "deploy:vercel": "vercel",
     "deploy:vercel:prod": "vercel --prod",
     "predeploy": "npm run clean && npm run build",
-    "deploy": "gh-pages -d out",
+    "fix-paths": "node scripts/fix-paths.js",
+    "fix-paths-alt": "node fix-script.js",
+    "deploy": "npm run build && npm run fix-paths && npm run fix-paths-alt && gh-pages -d out",
     "deploy-only": "gh-pages -d out",
     "verify-paths": "node scripts/verify-paths.js",
     "export": "next build && next export"
@@ -25,7 +27,6 @@
     "clsx": "^2.1.1",
     "critters": "^0.0.23",
     "framer-motion": "^12.7.4",
-    "glob": "^11.0.2",
     "lucide-react": "^0.501.0",
     "next": "15.3.1",
     "react": "^19.0.0",
