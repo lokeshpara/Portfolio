@@ -1,114 +1,59 @@
+// Script to fix paths in HTML files for GitHub Pages deployment
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-// Get repo name from environment variable or use default
-const REPO_NAME = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/^\//, '') || '-';
+// Repository name is just a dash
+const REPO_NAME = '-';
 
-console.log(`Fixing paths for repository: ${REPO_NAME}`);
+console.log(`Fixing paths for GitHub Pages deployment with base path: /${REPO_NAME}`);
 
-// Helper function to add a delay
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// Find all HTML files in the out directory
+const htmlFiles = glob.sync('out/**/*.html');
+console.log(`Found ${htmlFiles.length} HTML files to process`);
 
-// Function to recursively go through all HTML files in the out directory
-async function processDirectory(directory) {
-  const files = fs.readdirSync(directory);
-  
-  for (const file of files) {
-    const fullPath = path.join(directory, file);
-    const stat = fs.statSync(fullPath);
-    
-    if (stat.isDirectory()) {
-      await processDirectory(fullPath);
-    } else if (path.extname(file) === '.html') {
-      await fixHtmlFile(fullPath);
-      // Add a small delay between file operations
-      await sleep(100);
-    }
-  }
-}
-
-// Function to fix paths in HTML files
-async function fixHtmlFile(filePath) {
-  console.log(`Processing: ${filePath}`);
-  let content;
-  
+// Process each HTML file
+htmlFiles.forEach(filePath => {
+  console.log(`Processing ${filePath}`);
   try {
-    content = fs.readFileSync(filePath, 'utf8');
+    let content = fs.readFileSync(filePath, 'utf8');
     
-    // Escape special characters in repo name for regex
-    const escapedRepoName = REPO_NAME.replace(/-/g, '\\-');
+    // Replace absolute paths with repository-prefixed paths
+    content = content.replace(/href="\//g, `href="/${REPO_NAME}/`);
+    content = content.replace(/src="\//g, `src="/${REPO_NAME}/`);
     
-    // First replacement set - specific patterns
-    content = content.replace(/href="\/_next\//g, `href="/${REPO_NAME}/_next/`);
-    content = content.replace(/src="\/_next\//g, `src="/${REPO_NAME}/_next/`);
-    content = content.replace(/href="\/assets\//g, `href="/${REPO_NAME}/assets/`);
-    content = content.replace(/src="\/assets\//g, `src="/${REPO_NAME}/assets/`);
+    // Fix double repository name if present
+    content = content.replace(new RegExp(`/${REPO_NAME}/${REPO_NAME}/`, 'g'), `/${REPO_NAME}/`);
     
-    // Special handling for root path since our repo is just a dash
-    content = content.replace(/href="\//g, (match, offset, string) => {
-      // Don't replace if it's already prefixed with repo name
-      // Check if this is part of a repository name path we already fixed
-      const prevChars = string.substring(Math.max(0, offset - 20), offset);
-      if (prevChars.includes(`/${REPO_NAME}/`)) {
-        return match;
-      }
-      return `href="/${REPO_NAME}/`;
-    });
-    
-    content = content.replace(/src="\//g, (match, offset, string) => {
-      // Don't replace if it's already prefixed with repo name
-      const prevChars = string.substring(Math.max(0, offset - 20), offset);
-      if (prevChars.includes(`/${REPO_NAME}/`)) {
-        return match;
-      }
-      return `src="/${REPO_NAME}/`;
-    });
-    
-    // Fix double prefixes that might have been created
-    const doublePrefix = `/${REPO_NAME}/${REPO_NAME}/`;
-    const singlePrefix = `/${REPO_NAME}/`;
-    content = content.replace(new RegExp(doublePrefix, 'g'), singlePrefix);
-    
-    // Try to write with retries
-    let maxRetries = 5;
-    let retryCount = 0;
-    let success = false;
-    
-    while (!success && retryCount < maxRetries) {
-      try {
-        fs.writeFileSync(filePath, content);
-        success = true;
-        console.log(`Fixed: ${filePath}`);
-      } catch (err) {
-        if (err.code === 'EBUSY') {
-          retryCount++;
-          console.log(`File busy, retrying (${retryCount}/${maxRetries}): ${filePath}`);
-          await sleep(1000); // Wait a second before trying again
-        } else {
-          throw err; // Re-throw if it's not a busy error
-        }
-      }
-    }
-    
-    if (!success) {
-      console.error(`Failed to write to ${filePath} after ${maxRetries} attempts`);
-    }
+    // Write the fixed content back to the file
+    fs.writeFileSync(filePath, content);
+    console.log(`✓ Fixed paths in ${filePath}`);
   } catch (err) {
-    console.error(`Error processing file ${filePath}: ${err.message}`);
+    console.error(`Error processing file ${filePath}:`, err);
   }
-}
+});
 
-// Main execution
-(async () => {
-  console.log('Starting path fixing process for GitHub Pages...');
+// Find and process any CSS files that might contain absolute URLs
+const cssFiles = glob.sync('out/**/*.css');
+console.log(`Found ${cssFiles.length} CSS files to process`);
+
+cssFiles.forEach(filePath => {
+  console.log(`Processing CSS file ${filePath}`);
   try {
-    await processDirectory(path.join(process.cwd(), 'out'));
-    console.log('Completed fixing paths!');
+    let content = fs.readFileSync(filePath, 'utf8');
+    
+    // Replace CSS URL paths
+    content = content.replace(/url\(\//g, `url(/${REPO_NAME}/`);
+    
+    // Fix double paths
+    content = content.replace(new RegExp(`/${REPO_NAME}/${REPO_NAME}/`, 'g'), `/${REPO_NAME}/`);
+    
+    // Write the fixed content back
+    fs.writeFileSync(filePath, content);
+    console.log(`✓ Fixed paths in CSS file ${filePath}`);
   } catch (err) {
-    console.error('Error during path fixing:', err);
-    process.exit(1);
+    console.error(`Error processing CSS file ${filePath}:`, err);
   }
-})(); 
+});
+
+console.log('Path fixing completed successfully!'); 
