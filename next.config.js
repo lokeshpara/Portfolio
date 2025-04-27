@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   // Use correct basePath for GitHub Pages only in production
-  basePath: process.env.NODE_ENV === 'production' ? '/-' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/-/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '',
   images: {
     unoptimized: true,
   },
