@@ -8,6 +8,7 @@ import BlogSection from '@/components/sections/BlogSection';
 import EducationSection from '@/components/sections/EducationSection';
 import LoadingScreen from '@/components/LoadingScreen';
 import SocialLinks from '@/components/SocialLinks';
+import SocialMediaMobile from '@/components/SocialMediaMobile';
 
 // Add a debounce utility at the top of the file, after imports
 const debounce = (func: Function, wait: number) => {
@@ -106,9 +107,6 @@ export default function Home() {
       // Call the scroll function
       smoothScrollTo(ref.current);
       
-      // Update URL quietly without triggering scroll events
-      history.replaceState(null, '', `#${sectionId}`);
-      
       // Add a class to trigger animation and remove it after animation completes
       const navLinks = document.querySelectorAll('.navlink');
       navLinks.forEach(link => {
@@ -125,157 +123,114 @@ export default function Home() {
     }
   };
 
-  // Modify the IntersectionObserver setup to reduce toggling
+  // Replace the IntersectionObserver with a more deterministic scroll handler
   useEffect(() => {
-    if (isLoading || typeof IntersectionObserver === 'undefined') return;
+    if (isLoading || !rightColumnRef.current) return;
     
-    // Clean up any existing observer
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-    
-    // Create options for the observer with larger thresholds and margins
-    const options = {
-      root: rightColumnRef.current,
-      rootMargin: '-10% 0px -10% 0px', // Less restrictive margin for better detection
-      threshold: [0.15, 0.25, 0.5, 0.75] // More gradual thresholds for smoother detection
-    };
-    
-    // Track which sections are in view with their visibility ratios
-    const visibleSections = new Map();
+    let lastScrollTime = Date.now();
     let lastActiveSection = activeSection;
-    let debounceTimer: NodeJS.Timeout | null = null;
+    let scrollTimeout: NodeJS.Timeout | null = null;
     
-    console.log("Setting up IntersectionObserver with refs:", Object.keys(sectionRefs).map(id => 
-      `${id}: ${sectionRefs[id as keyof typeof sectionRefs]?.current ? 'exists' : 'missing'}`
-    ));
-    
-    // Create new observer with debounced section changes
-    observerRef.current = new IntersectionObserver((entries) => {
-      if (isScrollingRef.current) {
-        console.log("Skipping observer during programmatic scrolling");
-        return; // Skip during programmatic scrolling
-      }
+    const handleScroll = () => {
+      if (isScrollingRef.current) return;
       
-      console.log("Observer entries:", entries.map(e => `${e.target.id}: ${e.isIntersecting ? e.intersectionRatio.toFixed(2) : 'not visible'}`).join(', '));
+      const currentTime = Date.now();
+      if (currentTime - lastScrollTime < 100) return; // Throttle to 100ms
       
-      // Update which sections are visible with their intersection ratios
-      entries.forEach(entry => {
-        const sectionId = entry.target.id;
+      const container = rightColumnRef.current;
+      if (!container) return;
+      
+      const viewportHeight = container.clientHeight;
+      const scrollTop = container.scrollTop;
+      const viewportCenter = scrollTop + (viewportHeight / 2);
+      
+      // Get all section positions and heights
+      const sections = Object.entries(sectionRefs).map(([id, ref]) => {
+        const element = ref.current;
+        if (!element) return null;
         
-        if (entry.isIntersecting) {
-          // Store intersection ratio for visible sections
-          visibleSections.set(sectionId, entry.intersectionRatio);
-          console.log(`Section ${sectionId} is visible with ratio ${entry.intersectionRatio.toFixed(2)}`);
-        } else {
-          visibleSections.delete(sectionId);
+        const rect = element.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        return {
+          id,
+          top: rect.top - containerRect.top + scrollTop,
+          bottom: rect.bottom - containerRect.top + scrollTop,
+          height: rect.height,
+          center: rect.top - containerRect.top + scrollTop + (rect.height / 2)
+        };
+      }).filter(Boolean);
+      
+      // Find the section whose center is closest to the viewport center
+      let closestSection = lastActiveSection;
+      let minDistance = Infinity;
+      
+      sections.forEach(section => {
+        if (!section) return;
+        
+        const distance = Math.abs(section.center - viewportCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section.id;
         }
       });
       
-      // If we have visible sections, find the one with highest visibility ratio
-      if (visibleSections.size > 0) {
-        // Apply a minimum threshold to prevent flickering
-        const VISIBILITY_THRESHOLD = 0.15; // Lower threshold for easier detection
-        let highestRatio = 0;
-        let mostVisibleSection = lastActiveSection;
+      // Only update if we have a clear winner and enough time has passed
+      if (closestSection !== lastActiveSection && 
+          closestSection !== activeSection && 
+          currentTime - lastScrollTime > 300) {
         
-        visibleSections.forEach((ratio, sectionId) => {
-          // Only consider sections with significant visibility
-          if (ratio > highestRatio && ratio >= VISIBILITY_THRESHOLD) {
-            highestRatio = ratio;
-            mostVisibleSection = sectionId;
-          }
-        });
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
         
-        console.log(`Most visible section: ${mostVisibleSection} with ratio ${highestRatio.toFixed(2)}`);
-        
-        // Debounce the section change to prevent rapid toggling
-        if (mostVisibleSection !== lastActiveSection && mostVisibleSection !== activeSection) {
-          // Clear any existing debounce timer
-          if (debounceTimer) {
-            clearTimeout(debounceTimer);
-          }
+        scrollTimeout = setTimeout(() => {
+          setActiveSection(closestSection);
+          lastActiveSection = closestSection;
+          lastScrollTime = currentTime;
           
-          // Set a timer to update the section only if it remains the most visible
-          debounceTimer = setTimeout(() => {
-            // Double check if this is still the most visible section
-            if (mostVisibleSection === getMostVisibleSection(visibleSections)) {
-              console.log("Changing active section from", activeSection, "to", mostVisibleSection);
-              setActiveSection(mostVisibleSection);
-              lastActiveSection = mostVisibleSection;
+          // Add animation to the newly active section
+          const navLinks = document.querySelectorAll('.navlink');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${closestSection}`) {
+              // Remove active animation from all links first
+              navLinks.forEach(l => l.classList.remove('animate-on-scroll'));
               
-              // Update URL hash without triggering scroll
-              if (!isScrollingRef.current) {
-                history.replaceState(null, '', `#${mostVisibleSection}`);
-              }
+              // Add animation trigger class
+              link.classList.add('animate-on-scroll');
               
-              // Add animation to the newly active section
-              const navLinks = document.querySelectorAll('.navlink');
-              navLinks.forEach(link => {
-                if (link.getAttribute('href') === `#${mostVisibleSection}`) {
-                  // Remove active animation from all links first
-                  navLinks.forEach(l => l.classList.remove('animate-on-scroll'));
-                  
-                  // Add animation trigger class
-                  link.classList.add('animate-on-scroll');
-                  
-                  // Remove it after animation completes
-                  setTimeout(() => {
-                    link.classList.remove('animate-on-scroll');
-                  }, 1000);
-                }
-              });
+              // Remove it after animation completes
+              setTimeout(() => {
+                link.classList.remove('animate-on-scroll');
+              }, 1000);
             }
-          }, 150); // Reduced debounce timing for more responsive UI (was 250ms)
-        }
+          });
+        }, 100);
       }
-    }, options);
-    
-    // Helper function to get most visible section
-    const getMostVisibleSection = (visibleSections: Map<string, number>) => {
-      let highestRatio = 0;
-      let mostVisibleSection = activeSection;
-      
-      visibleSections.forEach((ratio, sectionId) => {
-        if (ratio > highestRatio) {
-          highestRatio = ratio;
-          mostVisibleSection = sectionId;
-        }
-      });
-      
-      return mostVisibleSection;
     };
     
-    // Observe all section elements
-    Object.entries(sectionRefs).forEach(([id, ref]) => {
-      if (ref.current) {
-        console.log(`Observing section: ${id}`);
-        observerRef.current?.observe(ref.current);
-      } else {
-        console.warn(`Section ref for "${id}" not available`);
-      }
-    });
+    // Add scroll event listener
+    rightColumnRef.current.addEventListener('scroll', handleScroll);
     
-    console.log("IntersectionObserver setup complete");
+    // Initial check
+    handleScroll();
     
-    // Cleanup function
+    // Cleanup
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-        console.log("IntersectionObserver disconnected");
+      if (rightColumnRef.current) {
+        rightColumnRef.current.removeEventListener('scroll', handleScroll);
       }
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
     };
-  }, [isLoading, activeSection]); // Re-initialize when loading state changes
+  }, [isLoading, activeSection]);
 
   // Handle screen size changes
   useEffect(() => {
     const checkScreenSize = () => {
-      const newIsMobile = window.innerWidth < 800;
+      const newIsMobile = window.innerWidth < 1140;
       setIsMobile(newIsMobile);
-      console.log("Screen width:", window.innerWidth, "isMobile:", newIsMobile);
     };
     
     // Check on initial render
@@ -304,20 +259,6 @@ export default function Home() {
         }, 700); // Increased delay for more reliable scrolling
       }
     }
-    
-    // Add event listener for hash changes
-    const handleHashChange = () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && Object.keys(sectionRefs).includes(hash)) {
-        scrollToSection(hash);
-      }
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
   }, [isLoading]);
 
   // Initialize click handlers for navigation
@@ -386,9 +327,6 @@ export default function Home() {
       { id: 'education', top: educationRef.current?.offsetTop || 0 }
     ];
     
-    console.log("Scroll position:", scrollPos, "ViewportHeight:", viewportHeight);
-    console.log("Section positions:", sections.map(s => `${s.id}: ${s.top}`).join(', '));
-    
     // Sort sections by position to ensure correct order
     sections.sort((a, b) => a.top - b.top);
     
@@ -409,13 +347,9 @@ export default function Home() {
       }
     }
     
-    console.log("Detected section by scroll:", current);
-    
     // Update active section if different
     if (current !== activeSection) {
       setActiveSection(current);
-      // Update URL hash without triggering scroll
-      history.replaceState(null, '', `#${current}`);
     }
   };
 
@@ -475,12 +409,9 @@ export default function Home() {
       if (isScrollingRef.current) return;
       
       const newActiveSection = getActiveSection();
-      console.log("Enhanced scroll detection: detected section", newActiveSection);
       
       if (newActiveSection !== activeSection) {
-        console.log("Updating active section to:", newActiveSection);
         setActiveSection(newActiveSection);
-        history.replaceState(null, '', `#${newActiveSection}`);
         
         // Highlight the active navlink
         document.querySelectorAll('.navlink').forEach(link => {
@@ -517,11 +448,11 @@ export default function Home() {
     ref: aboutRef,
     id: "about",
     "data-section": "about",
-    className: "right-column-section mb-24 section-container",
+    className: "right-column-section section-container",
     style: { 
       minHeight: '40vh', 
       scrollMarginTop: '40px',
-      border: '1px solid transparent' // Add invisible border to help with calculations
+      border: '1px solid transparent'
     }
   };
 
@@ -529,7 +460,7 @@ export default function Home() {
     ref: experienceRef,
     id: "experience",
     "data-section": "experience",
-    className: "right-column-section mb-24 section-container",
+    className: "right-column-section section-container",
     style: { 
       minHeight: '40vh',
       scrollMarginTop: '40px',
@@ -541,7 +472,7 @@ export default function Home() {
     ref: projectsRef,
     id: "projects",
     "data-section": "projects",
-    className: "right-column-section mb-24 section-container",
+    className: "right-column-section section-container",
     style: { 
       minHeight: '40vh',
       scrollMarginTop: '40px',
@@ -553,7 +484,7 @@ export default function Home() {
     ref: blogRef,
     id: "blog",
     "data-section": "blog",
-    className: "right-column-section mb-24 section-container",
+    className: "right-column-section section-container",
     style: { 
       minHeight: '40vh',
       scrollMarginTop: '40px',
@@ -621,7 +552,7 @@ export default function Home() {
       </div>
       
       {isMobile ? (
-        // Mobile View
+        // Mobile View (below 1140px)
         <div className="block p-4 sm:p-6 md:p-8" style={{ fontSize: 'small' }}>
           <header className="text-left mb-6 pt-6 sm:pt-8 relative p-3 rounded-lg" style={{ marginLeft: '1rem' }}>
             <div 
@@ -652,7 +583,7 @@ export default function Home() {
               Building digital experiences that matter
             </p>
             
-            <SocialLinks variant="mobile" />
+            <SocialMediaMobile />
           </header>
           
           <main style={{ fontSize: 'small' }}>
@@ -674,11 +605,11 @@ export default function Home() {
           </main>
         </div>
       ) : (
-        // Desktop View
+        // Desktop View (1140px and above)
         <>
           {/* Fixed Left Column */}
           <div className="fixed top-0 left-0 h-screen w-[calc(min(90vw,1000px)*0.4)] max-w-[400px] z-10" style={{ 
-            marginLeft: 'calc((100vw - min(90vw, 1000px))/2)',
+            marginLeft: 'calc((105vw - min(90vw, 1000px))/2)',
             top: '2rem'
           }}>
             <div className="flex flex-col h-full px-3 md:px-4 lg:px-5 xl:px-6">
@@ -893,77 +824,33 @@ export default function Home() {
                 }
               }
               
-              /* Remove all animations that affect initial render */
-              .navlink-container {
-                opacity: 1 !important;
-                animation: none !important;
-                transform: none !important;
-              }
-              
-              .social-container {
-                display: flex;
-                gap: 18px;
-                margin-bottom: 16px;
-                margin-top: 6rem;
-                opacity: 1 !important;
-              }
-              
-              .social-link,
-              .email-link,
-              .navlink,
-              .navlink-icon,
-              .navlink-text,
-              .resume-btn,
-              .mobile-social {
-                opacity: 1 !important;
-                animation: none !important;
-              }
-              
-              /* Remove all animation delays */
-              .navlink-container:nth-child(1),
-              .navlink-container:nth-child(2),
-              .navlink-container:nth-child(3),
-              .navlink-container:nth-child(4),
-              .navlink-container:nth-child(5),
-              .social-link:nth-child(1),
-              .social-link:nth-child(2),
-              .social-link:nth-child(3) {
-                animation-delay: 0s !important;
-              }
-              
-              /* Mobile styles */
-              .mobile-social {
-                margin-top: 1rem;
-                margin-bottom: 0;
-                opacity: 1 !important;
-              }
-              
-              /* Navlink container with minimal gap */
+              /* Navlink styles */
               .navlink-container {
                 opacity: 1;
-                margin-bottom: 2px; /* Very tight spacing between nav items */
+                margin-bottom: 2px;
+                width: fit-content;
               }
-              
-              /* Clean modern navlink style */
+
               .navlink {
                 position: relative;
                 display: flex;
                 align-items: center;
-                padding: 3px 0; /* Minimal padding */
+                padding: 3px 0;
                 opacity: 1;
                 color: #8892b0;
                 font-size: 13px;
-                transition: all 0.2s ease;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                 text-decoration: none;
-                overflow: hidden; /* Ensure text doesn't wrap */
-                white-space: nowrap; /* Keep text on single line */
+                overflow: hidden;
+                white-space: nowrap;
+                width: fit-content;
               }
-              
+
               .navlink:hover {
                 color: #64ffda;
+                transform: translateX(4px);
               }
-              
-              /* Text styling with modern rollback animation */
+
               .navlink-text {
                 position: relative;
                 font-weight: 400;
@@ -971,28 +858,101 @@ export default function Home() {
                 font-size: 13px;
                 color: #8892b0;
                 display: inline-block;
-                margin-left: 10px; /* Add gap between line and text */
-                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Same transition as line */
+                margin-left: 10px;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                width: fit-content;
               }
-              
-              /* Define keyframes for modern rollback effect */
-              @keyframes modernRollback {
-                0% { 
-                  transform: rotateX(0deg);
-                  opacity: 1;
-                }
-                50% {
-                  transform: rotateX(180deg);
-                  opacity: 0.5;
-                }
-                100% { 
-                  transform: rotateX(360deg);
-                  opacity: 1;
-                }
+
+              .navlink-text span {
+                display: inline-block;
+                position: relative;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                transform-style: preserve-3d;
+                perspective: 1000px;
+                transform-origin: bottom center;
+                backface-visibility: hidden;
               }
-              
-              /* Define keyframes for single rollback */
-              @keyframes singleRollback {
+
+              .navlink-indicator {
+                position: relative;
+                height: 1px;
+                min-width: 25px;
+                background: transparent;
+                margin-right: 0;
+                flex-shrink: 0;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+
+              .navlink-indicator::before {
+                content: '';
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                background: #8892b0;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0.7;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+
+              .navlink:hover .navlink-indicator,
+              .navlink-active .navlink-indicator {
+                min-width: 45px;
+                background: transparent;
+              }
+
+              .navlink:hover .navlink-indicator::before,
+              .navlink-active .navlink-indicator::before {
+                background: #64ffda;
+                opacity: 1;
+              }
+
+              /* Modern rollback animation on hover */
+              .navlink:hover .navlink-text span {
+                color: #64ffda;
+                animation: letterRollback 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+              }
+
+              /* Staggered timing for individual letters */
+              .navlink:hover .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
+              .navlink:hover .navlink-text span:nth-child(2) { animation-delay: 0.02s; }
+              .navlink:hover .navlink-text span:nth-child(3) { animation-delay: 0.04s; }
+              .navlink:hover .navlink-text span:nth-child(4) { animation-delay: 0.06s; }
+              .navlink:hover .navlink-text span:nth-child(5) { animation-delay: 0.08s; }
+              .navlink:hover .navlink-text span:nth-child(6) { animation-delay: 0.10s; }
+              .navlink:hover .navlink-text span:nth-child(7) { animation-delay: 0.12s; }
+              .navlink:hover .navlink-text span:nth-child(8) { animation-delay: 0.14s; }
+              .navlink:hover .navlink-text span:nth-child(9) { animation-delay: 0.16s; }
+              .navlink:hover .navlink-text span:nth-child(10) { animation-delay: 0.18s; }
+
+              /* More subtle active state animation */
+              .navlink-active .navlink-text span {
+                color: #64ffda;
+                font-weight: 500;
+                animation: letterRollback 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+              }
+
+              /* Staggered timing for active state */
+              .navlink-active .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
+              .navlink-active .navlink-text span:nth-child(2) { animation-delay: 0.01s; }
+              .navlink-active .navlink-text span:nth-child(3) { animation-delay: 0.02s; }
+              .navlink-active .navlink-text span:nth-child(4) { animation-delay: 0.03s; }
+              .navlink-active .navlink-text span:nth-child(5) { animation-delay: 0.04s; }
+              .navlink-active .navlink-text span:nth-child(6) { animation-delay: 0.05s; }
+              .navlink-active .navlink-text span:nth-child(7) { animation-delay: 0.06s; }
+              .navlink-active .navlink-text span:nth-child(8) { animation-delay: 0.07s; }
+              .navlink-active .navlink-text span:nth-child(9) { animation-delay: 0.08s; }
+              .navlink-active .navlink-text span:nth-child(10) { animation-delay: 0.09s; }
+
+              /* Hover text color change */
+              .navlink:hover .navlink-text,
+              .navlink-active .navlink-text {
+                color: #64ffda;
+              }
+
+              /* Define keyframes for letter rollback effect */
+              @keyframes letterRollback {
                 0% { 
                   transform: rotateX(0deg) translateY(0);
                   opacity: 1;
@@ -1006,271 +966,86 @@ export default function Home() {
                   opacity: 1;
                 }
               }
-              
-              /* Enhanced 3D letter animation */
-              .navlink-text span {
-                display: inline-block;
-                position: relative;
-                transition: color 0.15s ease;
-                transform-style: preserve-3d;
-                perspective: 1000px;
-                transform-origin: bottom center;
-                backface-visibility: hidden;
-              }
-              
-              /* Line indicator before text - container */
-              .navlink-indicator {
-                position: relative;
-                height: 1px;
-                min-width: 25px; /* Minimum width for the indicator */
-                background: transparent;
-                margin-right: 0; /* No gap on right side of line */
-                flex-shrink: 0; /* Don't allow shrinking */
-                transition: min-width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Add transition */
-              }
-              
-              /* Line before text - actual line element */
-              .navlink-indicator::before {
-                content: '';
-                position: absolute;
-                height: 1px;
-                width: 100%; /* Always fill the container */
-                background: #8892b0;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                opacity: 0.7;
-                transition: background-color 0.3s ease, opacity 0.3s ease;
-              }
-              
-              /* Hover state: line indicator grows and text moves */
-              .navlink:hover .navlink-indicator,
-              .navlink-active .navlink-indicator {
-                min-width: 45px; /* Grow to this width on hover */
-                background: transparent;
-              }
-              
-              /* Change line color on hover/active */
-              .navlink:hover .navlink-indicator::before,
-              .navlink-active .navlink-indicator::before {
-                background: #64ffda;
-                opacity: 1;
-              }
-              
-              /* Modern rollback animation on hover */
-              .navlink:hover .navlink-text span {
-                color: #64ffda;
-                animation-name: modernRollback;
-                animation-duration: 0.6s;
-                animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-                animation-iteration-count: 1;
-                animation-fill-mode: forwards;
-              }
-              
-              /* Faster staggered timing for hover effect */
-              .navlink:hover .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
-              .navlink:hover .navlink-text span:nth-child(2) { animation-delay: 0.03s; }
-              .navlink:hover .navlink-text span:nth-child(3) { animation-delay: 0.06s; }
-              .navlink:hover .navlink-text span:nth-child(4) { animation-delay: 0.09s; }
-              .navlink:hover .navlink-text span:nth-child(5) { animation-delay: 0.12s; }
-              .navlink:hover .navlink-text span:nth-child(6) { animation-delay: 0.15s; }
-              .navlink:hover .navlink-text span:nth-child(7) { animation-delay: 0.18s; }
-              .navlink:hover .navlink-text span:nth-child(8) { animation-delay: 0.21s; }
-              .navlink:hover .navlink-text span:nth-child(9) { animation-delay: 0.24s; }
-              .navlink:hover .navlink-text span:nth-child(10) { animation-delay: 0.27s; }
-              
-              /* More subtle active state animation */
-              .navlink-active .navlink-text span {
-                color: #64ffda;
-                font-weight: 500;
-                animation-name: singleRollback;
-                animation-duration: 0.5s;
-                animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-                animation-iteration-count: 1;
-                animation-fill-mode: forwards;
-              }
-              
-              /* Faster staggered timing for active state */
-              .navlink-active .navlink-text span:nth-child(1) { animation-delay: 0.00s; }
-              .navlink-active .navlink-text span:nth-child(2) { animation-delay: 0.02s; }
-              .navlink-active .navlink-text span:nth-child(3) { animation-delay: 0.04s; }
-              .navlink-active .navlink-text span:nth-child(4) { animation-delay: 0.06s; }
-              .navlink-active .navlink-text span:nth-child(5) { animation-delay: 0.08s; }
-              .navlink-active .navlink-text span:nth-child(6) { animation-delay: 0.10s; }
-              .navlink-active .navlink-text span:nth-child(7) { animation-delay: 0.12s; }
-              .navlink-active .navlink-text span:nth-child(8) { animation-delay: 0.14s; }
-              .navlink-active .navlink-text span:nth-child(9) { animation-delay: 0.16s; }
-              .navlink-active .navlink-text span:nth-child(10) { animation-delay: 0.18s; }
-              
-              /* Hover text color change */
-              .navlink:hover .navlink-text,
-              .navlink-active .navlink-text {
-                color: #64ffda;
+
+              /* Social media styles */
+              .social-container {
+                display: flex;
+                gap: 18px;
+                margin-bottom: 16px;
+                margin-top: 6rem;
+                opacity: 1 !important;
               }
 
-              /* Mobile social media enhancements */
-              @media (max-width: 799px) {
-                .mobile-social-container {
-                  display: flex;
-                  justify-content: center;
-                  gap: 22px;
-                  margin: 2.5rem auto;
-                  padding: 18px 20px;
-                  background: rgba(10, 25, 47, 0.8);
-                  backdrop-filter: blur(12px);
-                  border-radius: 20px;
-                  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-                  border: 1px solid rgba(100, 255, 218, 0.2);
-                  width: fit-content;
-                  position: relative;
-                  z-index: 10;
-                }
-                
-                /* Background glow effect */
-                .mobile-social-container::before {
-                  content: '';
-                  position: absolute;
-                  inset: 0;
-                  background: radial-gradient(circle at center, rgba(100, 255, 218, 0.15), transparent 70%);
-                  border-radius: inherit;
-                  z-index: -1;
-                  animation: pulseBackground 5s ease-in-out infinite alternate;
-                }
-                
-                @keyframes pulseBackground {
-                  0% { opacity: 0.5; transform: scale(0.97); }
-                  100% { opacity: 0.8; transform: scale(1.03); }
-                }
-                
-                /* Individual social links */
-                .mobile-social-link {
-                  position: relative;
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 15px;
-                  background: rgba(17, 34, 64, 0.95);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  overflow: hidden;
-                  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                  transform-style: preserve-3d;
-                  perspective: 800px;
-                  animation: float 3s infinite ease-in-out;
-                }
-                
-                /* Individual floating animations with different delays */
-                .mobile-social-link.github {
-                  animation-delay: 0s;
-                }
-                
-                .mobile-social-link.linkedin {
-                  animation-delay: 0.5s;
-                }
-                
-                .mobile-social-link.twitter {
-                  animation-delay: 1s;
-                }
-                
-                .mobile-social-link.email {
-                  animation-delay: 1.5s;
-                }
-                
-                @keyframes float {
-                  0%, 100% { transform: translateY(0); }
-                  50% { transform: translateY(-8px); }
-                }
-                
-                /* Inner glow effect */
-                .mobile-social-link::after {
-                  content: '';
-                  position: absolute;
-                  top: -5px;
-                  left: -5px;
-                  right: -5px;
-                  bottom: -5px;
-                  z-index: -1;
-                  opacity: 0;
-                  background: radial-gradient(
-                    circle at center,
-                    rgba(100, 255, 218, 0.8) 0%,
-                    transparent 70%
-                  );
-                  border-radius: inherit;
-                  transition: opacity 0.3s ease;
-                  filter: blur(8px);
-                }
-                
-                /* Icon style */
-                .mobile-social-icon {
-                  color: #8892b0;
-                  transition: all 0.3s ease;
-                  transform: translateZ(10px);
-                  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-                }
-                
-                /* Active state styles */
-                .mobile-social-link:active {
-                  transform: translateY(4px) scale(0.92);
-                  box-shadow: 0 0 20px rgba(100, 255, 218, 0.6);
-                }
-                
-                .mobile-social-link:active::after {
-                  opacity: 0.7;
-                }
-                
-                /* Icon-specific active colors */
-                .mobile-social-link.github:active .mobile-social-icon {
-                  color: white;
-                }
-                
-                .mobile-social-link.linkedin:active .mobile-social-icon {
-                  color: #0077b5;
-                }
-                
-                .mobile-social-link.twitter:active .mobile-social-icon {
-                  color: white;
-                }
-                
-                .mobile-social-link.email:active .mobile-social-icon {
-                  color: #64ffda;
-                }
-                
-                /* Tooltip style */
-                .mobile-tooltip {
-                  position: fixed;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%) scale(0.8);
-                  background: rgba(10, 25, 47, 0.95);
-                  color: #64ffda;
-                  font-weight: 600;
-                  padding: 10px 20px;
-                  border-radius: 12px;
-                  border: 2px solid rgba(100, 255, 218, 0.4);
-                  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-                  opacity: 0;
-                  visibility: hidden;
-                  z-index: 100;
-                  transition: all 0.3s ease;
-                  font-size: 16px;
-                  letter-spacing: 1px;
-                }
-                
-                /* Show tooltip on active state with animation */
-                .mobile-social-link:active .mobile-tooltip {
-                  opacity: 1;
-                  visibility: visible;
-                  transform: translate(-50%, -50%) scale(1);
-                  animation: pulseTooltip 1.5s infinite ease;
-                }
-                
-                @keyframes pulseTooltip {
-                  0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.6); }
-                  70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); }
-                  100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
-                }
+              .social-link {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background: rgba(17, 34, 64, 0.95);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                transform-style: preserve-3d;
+                perspective: 800px;
+              }
+
+              .social-icon {
+                color: #8892b0;
+                transition: all 0.3s ease;
+                transform: translateZ(10px);
+                filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+                font-size: 1.2rem;
+              }
+
+              .social-link:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+              }
+
+              .social-link:hover .social-icon {
+                color: #64ffda;
+                transform: translateZ(20px) scale(1.1);
+              }
+
+              .tooltip {
+                position: absolute;
+                top: -40px;
+                left: 50%;
+                transform: translateX(-50%) scale(0.8);
+                background: rgba(10, 25, 47, 0.95);
+                color: #64ffda;
+                font-weight: 600;
+                padding: 8px 16px;
+                border-radius: 8px;
+                border: 1px solid rgba(100, 255, 218, 0.4);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+              }
+
+              .tooltip-arrow {
+                position: absolute;
+                bottom: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-top: 6px solid rgba(100, 255, 218, 0.4);
+              }
+
+              .social-link:hover .tooltip {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) scale(1);
               }
             `}</style>
             

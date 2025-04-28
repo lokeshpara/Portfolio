@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import styles from '@/app/mobile-click.module.css';
 
 // Education data
 const education = [
@@ -87,7 +88,7 @@ export default function EducationSection() {
       {/* Certifications */}
       <div className="mb-12">
       <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate">CERTIFICAATIONS</h2>
+        <h2 className="text-lg font-semibold text-lightest-slate">CERTIFICATIONS</h2>
       </div>
         
         <div 
@@ -103,7 +104,7 @@ export default function EducationSection() {
           {certifications.map((cert, index) => (
             <div 
               key={index} 
-              className="rounded-lg overflow-hidden cursor-pointer certification-card"
+              className={`rounded-lg overflow-hidden cursor-pointer certification-card ${styles.mobileClick}`}
               style={{ 
                 padding: "10px",
                 transition: "all 0.3s ease",
@@ -356,7 +357,7 @@ export default function EducationSection() {
           {education.map((edu, index) => (
             <div 
               key={index} 
-              className="rounded-lg overflow-hidden cursor-pointer education-card"
+              className={`rounded-lg overflow-hidden cursor-pointer education-card ${styles.mobileClick}`}
               style={{ 
                 padding: "10px",
                 transition: "all 0.3s ease",

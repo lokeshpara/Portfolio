@@ -1,5 +1,7 @@
 "use client";
 
+import styles from '@/app/mobile-click.module.css';
+
 // Remove motion import
 // import { motion } from 'framer-motion';
 // import Link from 'next/link';
@@ -61,7 +63,7 @@ export default function ProjectsSection() {
         {projects.map((project, index) => (
           <div 
             key={index} 
-            className="rounded-lg overflow-hidden cursor-pointer project-card"
+            className={`rounded-lg overflow-hidden cursor-pointer project-card ${styles.mobileClick}`}
             style={{ 
               padding: "10px",
               transition: "all 0.3s ease",
