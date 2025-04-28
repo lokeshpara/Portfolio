@@ -2,6 +2,7 @@
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .mobileClick:active {
@@ -53,12 +54,6 @@
 }
 
 @media (max-width: 768px) {
-  .mobileClick {
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-tap-highlight-color: transparent;
-  }
-
   .mobileClick:active {
     transform: scale(0.98);
   }
@@ -70,6 +65,7 @@
     background: radial-gradient(circle, rgba(100, 255, 218, 0.2) 0%, transparent 70%);
     border-radius: inherit;
     animation: mobileRipple 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
   }
 
   .mobileClick:active::after {
@@ -79,5 +75,6 @@
     background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
     border-radius: inherit;
     animation: mobileGlow 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
   }
 } 
