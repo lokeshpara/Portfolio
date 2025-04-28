@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/Portfolio',
+  basePath: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
   assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '',
   eslint: {
     // Warning: This allows production builds to successfully complete even if
