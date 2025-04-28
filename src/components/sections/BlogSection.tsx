@@ -227,29 +227,17 @@ export default function BlogSection() {
               
               {/* Right column - Content */}
               <div style={{ flex: "1", padding: "8px" }}>
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-end mb-2">
                   <span 
-                    className="category-tag"
+                    className="read-time" 
                     style={{ 
-                      fontSize: '0.65rem',
-                      padding: '2px 6px',
-                      backgroundColor: '#112240',
-                      color: '#64ffda',
-                      transition: "all 0.3s ease",
-                      borderRadius: "4px"
+                      fontSize: "0.65rem", 
+                      color: "rgba(100, 255, 218, 0.7)", 
+                      transition: "0.3s" 
                     }}
                   >
-                    {post.category}
+                    {post.readTime}
                   </span>
-                  <div className="flex items-center text-light-slate">
-                    <span className="date-text" style={{ fontSize: '0.65rem', color: '#a8b2d1', transition: "all 0.3s ease" }}>
-                      {post.date}
-                    </span>
-                    <span style={{ margin: '0 4px', fontSize: '0.65rem' }}>•</span>
-                    <span className="read-time" style={{ fontSize: '0.65rem', color: '#a8b2d1', transition: "all 0.3s ease" }}>
-                      {post.readTime}
-                    </span>
-                  </div>
                 </div>
                 
                 <h3 className="font-semibold m-0 p-0 flex items-center">
