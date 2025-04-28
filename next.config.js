@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // Use correct basePath for GitHub Pages only in production
-  basePath: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '',
   images: {
     unoptimized: true,
   },
+  basePath: '/Portfolio',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '',
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
