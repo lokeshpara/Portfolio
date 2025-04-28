@@ -1,5 +1,7 @@
 "use client";
 
+import styles from '@/app/mobile-click.module.css';
+
 const experiences = [
   {
     period: "dec 2024 — Present",
@@ -89,12 +91,13 @@ export default function ExperienceSection() {
         {experiences.map((exp, index) => (
           <div 
             key={index} 
-            className="rounded-lg overflow-hidden cursor-pointer experience-card"
+            className={`experience-card p-6 rounded-lg bg-light-navy/50 backdrop-blur-sm hover:border-green/50 transition-all duration-300 hover:shadow-lg hover:shadow-green/5 hover:-translate-y-1 ${styles.mobileClick}`}
             style={{ 
               padding: "10px",
               transition: "all 0.3s ease",
               borderRadius: "15px",
-              
+              position: "relative",
+              WebkitTapHighlightColor: "transparent"
             }}
             onClick={() => handleCardClick(exp.url)}
             onMouseEnter={(e) => {

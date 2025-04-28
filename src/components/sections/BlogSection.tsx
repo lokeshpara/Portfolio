@@ -1,5 +1,7 @@
 "use client";
 
+import styles from '@/app/mobile-click.module.css';
+
 // import Link from 'next/link';
 
 // Blog post data with images
@@ -57,7 +59,7 @@ export default function BlogSection() {
         {blogPosts.map((post, index) => (
           <div 
             key={index} 
-            className="rounded-lg overflow-hidden cursor-pointer blog-card"
+            className={`rounded-lg overflow-hidden cursor-pointer blog-card ${styles.mobileClick}`}
             style={{ 
               padding: "10px",
               transition: "all 0.3s ease",
