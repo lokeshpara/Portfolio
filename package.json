@@ -5,10 +5,10 @@
   "homepage": "https://lokeshpara.github.io/Portfolio",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && (IF NOT EXIST out\\.nojekyll type nul > out\\.nojekyll) && copy out\\.nojekyll .",
+    "build": "next build && touch out/.nojekyll",
     "start": "next start",
     "lint": "next lint",
-    "clean": "IF EXIST out rmdir /s /q out",
+    "clean": "rm -rf out",
     "deploy:vercel": "vercel",
     "deploy:vercel:prod": "vercel --prod",
     "predeploy": "npm run clean && npm run build",
