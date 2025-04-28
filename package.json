@@ -11,7 +11,7 @@
     "clean": "IF EXIST out rmdir /s /q out",
     "deploy:vercel": "vercel",
     "deploy:vercel:prod": "vercel --prod",
-    "predeploy": "npm run clean && npm run build && copy public\\index.html out\\",
+    "predeploy": "npm run clean && npm run build",
     "deploy": "gh-pages -d out",
     "deploy-only": "gh-pages -d out",
     "verify-paths": "node scripts/verify-paths.js",
