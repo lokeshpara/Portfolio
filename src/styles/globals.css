@@ -1,0 +1,68 @@
+/* Global CSS variables */
+:root {
+  --navy: #0a192f;
+  --light-navy: #112240;
+  --lightest-navy: #233554;
+  --slate: #8892b0;
+  --light-slate: #a8b2d1;
+  --lightest-slate: #ccd6f6;
+  --white: #e6f1ff;
+  --green: #64ffda;
+  --green-tint: #64ffda1a;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--navy);
+  color: var(--slate);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  min-width: 1140px;
+}
+
+/* Container styles */
+.container {
+  width: 100%;
+  min-width: 1140px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1140px) {
+  body {
+    min-width: 100%;
+  }
+  
+  .container {
+    min-width: 100%;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Hide elements based on screen size */
+@media (min-width: 1140px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1139px) {
+  .desktop-only {
+    display: none !important;
+  }
+} 

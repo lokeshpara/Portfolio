@@ -29,6 +29,7 @@ export default function LoadingScreen() {
       setFadeIn(true);
     }, 10);
 
+    // Simulate loading progress
     const interval = setInterval(() => {
       setCounter(prev => {
         if (prev < 100) return prev + 1;
@@ -47,7 +48,7 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    // Add command lines at specific percentages to simulate terminal output
+    // Add command lines at specific percentages
     if (counter === 5) {
       setCommandLines(prev => [...prev, "$ Initializing portfolio application..."]);
     } else if (counter === 20) {
@@ -91,52 +92,6 @@ export default function LoadingScreen() {
       </>
     );
   };
-  
-  // Define styles as objects to avoid SSR issues
-  const terminalContainerStyle = {
-    width: '90%',
-    maxWidth: '550px',
-    height: 'auto',
-    minHeight: isMobile ? '200px' : '230px',
-    maxHeight: '60vh',
-    backgroundColor: '#0f172a',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
-    fontFamily: 'monospace',
-    opacity: fadeIn ? 1 : 0,
-    transform: fadeIn ? 'scale(1)' : 'scale(0.98)',
-    transition: 'opacity 0.5s ease, transform 0.5s ease',
-  };
-  
-  const terminalHeaderStyle = {
-    height: isMobile ? '26px' : '30px',
-    backgroundColor: '#1e293b',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 12px',
-    position: 'relative' as const,
-    justifyContent: 'space-between',
-  };
-  
-  const terminalBodyStyle = {
-    padding: isMobile ? '8px' : '12px',
-    height: isMobile ? 'calc(100% - 26px)' : 'calc(100% - 30px)',
-    minHeight: isMobile ? '160px' : '180px',
-    position: 'relative' as const,
-    display: 'flex',
-    flexDirection: 'column' as const,
-    overflow: 'hidden',
-    color: '#adbac7',
-  };
-  
-  const progressBarStyle = {
-    width: `${counter}%`,
-    height: '100%',
-    backgroundColor: '#64ffda',
-    boxShadow: '0 0 5px rgba(100, 255, 218, 0.5)',
-    transition: 'width 0.1s linear',
-  };
 
   return (
     <div 
@@ -153,8 +108,30 @@ export default function LoadingScreen() {
         zIndex: 9999,
       }}
     >
-      <div style={terminalContainerStyle}>
-        <div style={terminalHeaderStyle}>
+      <div style={{
+        width: '90%',
+        maxWidth: '550px',
+        height: 'auto',
+        minHeight: isMobile ? '200px' : '230px',
+        maxHeight: '60vh',
+        backgroundColor: '#0f172a',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+        fontFamily: 'monospace',
+        opacity: fadeIn ? 1 : 0,
+        transform: fadeIn ? 'scale(1)' : 'scale(0.98)',
+        transition: 'opacity 0.5s ease, transform 0.5s ease',
+      }}>
+        <div style={{
+          height: isMobile ? '26px' : '30px',
+          backgroundColor: '#1e293b',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 12px',
+          position: 'relative',
+          justifyContent: 'space-between',
+        }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ff5f57', marginRight: '6px' }}></div>
             <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#febc2e', marginRight: '6px' }}></div>
@@ -162,10 +139,19 @@ export default function LoadingScreen() {
           </div>
           <div style={{ color: '#adbac7', fontSize: '12px' }}>Portfolio.exe</div>
         </div>
-        <div style={terminalBodyStyle}>
+        <div style={{
+          padding: isMobile ? '8px' : '12px',
+          height: isMobile ? 'calc(100% - 26px)' : 'calc(100% - 30px)',
+          minHeight: isMobile ? '160px' : '180px',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          color: '#adbac7',
+        }}>
           <div style={{ 
             flexGrow: 1, 
-            overflowY: 'auto' as const,
+            overflowY: 'auto',
             marginBottom: '12px',
             fontSize: isMobile ? '12px' : '13px',
             lineHeight: isMobile ? '1.4' : '1.5',
@@ -175,7 +161,7 @@ export default function LoadingScreen() {
               display: 'flex',
               alignItems: 'center',
               marginTop: '12px',
-              flexWrap: 'wrap' as const,
+              flexWrap: 'wrap',
               gap: '5px',
               rowGap: isMobile ? '6px' : '5px',
             }}>
@@ -191,7 +177,13 @@ export default function LoadingScreen() {
                 border: '1px solid #2d3748',
                 flexGrow: 1,
               }}>
-                <div style={progressBarStyle}></div>
+                <div style={{
+                  width: `${counter}%`,
+                  height: '100%',
+                  backgroundColor: '#64ffda',
+                  boxShadow: '0 0 5px rgba(100, 255, 218, 0.5)',
+                  transition: 'width 0.1s linear',
+                }}></div>
               </div>
               <span style={{ 
                 color: '#64ffda', 
@@ -205,10 +197,10 @@ export default function LoadingScreen() {
           </div>
         </div>
       </div>
-      
+
       <style jsx>{`
         .loading-initial-line, .loading-command-line {
-          margin-bottom: 8px;
+          margin-bottom: 4px;
           opacity: 0.9;
           word-wrap: break-word;
           word-break: break-word;
