@@ -12,6 +12,11 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   trailingSlash: true,
+  // Disable webpack5 cache
+  webpack: (config, { isServer }) => {
+    config.cache = false;
+    return config;
+  },
 };
 
 module.exports = nextConfig; 

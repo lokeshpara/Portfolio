@@ -1,10 +1,10 @@
 "use client";
 
-import styles from '@/app/mobile-click.module.css';
-
 // Remove motion import
 // import { motion } from 'framer-motion';
 // import Link from 'next/link';
+
+import ClickEffect from '../ClickEffect';
 
 // Add your project images to the /public/images/ directory
 // Recommended image size: 600x400px or similar ratio
@@ -46,8 +46,8 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="py-8">
-      <div className="mb-4 md:hidden" style={{ marginLeft: '0.95rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate">Projects</h2>
+      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+        <h2 className="text-lg font-semibold text-lightest-slate">PROJECTS</h2>
       </div>
 
       <div 
@@ -61,279 +61,237 @@ export default function ProjectsSection() {
         }}
       >
         {projects.map((project, index) => (
-          <div 
-            key={index} 
-            className={`rounded-lg overflow-hidden cursor-pointer project-card ${styles.mobileClick}`}
-            style={{ 
-              padding: "10px",
-              transition: "all 0.3s ease",
-              borderRadius: "15px",
-            }}
+          <ClickEffect
+            key={index}
             onClick={() => handleCardClick(project.url)}
-            onMouseEnter={(e) => {
-              // Make all other cards less visible
-              document.querySelectorAll('.project-card').forEach(card => {
-                if (card !== e.currentTarget) {
-                  (card as HTMLElement).style.opacity = '0.4';
-                  (card as HTMLElement).style.filter = 'grayscale(40%)';
-                }
-              });
-              
-              // Style current card
-              e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-              e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-              e.currentTarget.style.opacity = '1';
-              e.currentTarget.style.filter = 'none';
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
-              
-              if (titleEl) titleEl.style.color = "#64ffda";
-              
-              if (projectImg) {
-                projectImg.style.transform = "scale(1.05)";
-                projectImg.style.filter = "brightness(1.1)";
-              }
-               
-              if (linkIcon) {
-                linkIcon.style.color = "#64ffda";
-                linkIcon.style.opacity = "1";
-                
-                // Add simple animation to SVG
-                const keyframes = `
-                  @keyframes arrowOut {
-                    0% { transform: translate(0, 0); }
-                    50% { transform: translate(1px, -1px); }
-                    100% { transform: translate(0, 0); }
-                  }
-                  
-                  @keyframes arrowLineDraw {
-                    0% { stroke-dashoffset: 12; }
-                    100% { stroke-dashoffset: 0; }
-                  }
-                  
-                  @keyframes arrowHeadDraw {
-                    0% { stroke-dashoffset: 12; opacity: 0; }
-                    50% { stroke-dashoffset: 6; opacity: 0.5; }
-                    100% { stroke-dashoffset: 0; opacity: 1; }
-                  }
-                  
-                  @keyframes iconPulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.2); }
-                    100% { transform: scale(1); }
-                  }
-                `;
-                
-                // Create and append style element if it doesn't exist
-                if (!document.getElementById('arrow-animations-projects')) {
-                  const styleEl = document.createElement('style');
-                  styleEl.id = 'arrow-animations-projects';
-                  styleEl.textContent = keyframes;
-                  document.head.appendChild(styleEl);
-                }
-                
-                linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
-                
-                if (arrowLine) {
-                  arrowLine.style.strokeDasharray = "12";
-                  arrowLine.style.strokeDashoffset = "12";
-                  arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                }
-                
-                if (arrowHead) {
-                  arrowHead.style.strokeDasharray = "12";
-                  arrowHead.style.strokeDashoffset = "12";
-                  arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                }
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#64ffda";
-                (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
-              });
-            }}
-            onMouseLeave={(e) => {
-              // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-              e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.boxShadow = "0 0 0 0px rgba(100, 255, 219, 0), 0 2px 4px rgba(2, 12, 27, 0)";
-              e.currentTarget.style.background = "linear-gradient(to right, transparent, rgba(100, 255, 219, 0), transparent)";
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
-              
-              if (titleEl) titleEl.style.color = "#ccd6f6";
-              
-              if (projectImg) {
-                projectImg.style.transform = "scale(1)";
-                projectImg.style.filter = "brightness(1)";
-              }
-               
-              if (linkIcon) {
-                linkIcon.style.color = "#a8b2d1";
-                linkIcon.style.opacity = "0.6";
-                linkIcon.style.transform = "scale(1)";
-                linkIcon.style.animation = "none";
-                linkIcon.style.filter = "none";
-                linkIcon.style.transition = "all 0.3s ease";
-              }
-              
-              if (arrowLine) {
-                arrowLine.style.animation = "none";
-                arrowLine.style.strokeDashoffset = "12";
-              }
-              
-              if (arrowHead) {
-                arrowHead.style.animation = "none";
-                arrowHead.style.strokeDashoffset = "12";
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-                (el as HTMLElement).style.backgroundColor = "#112240";
-              });
-            }}
           >
-            {/* Flex container - creates two columns */}
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {/* Left column - Project Image */}
-              <div style={{ width: "165px", padding: "10px" }}>
-                <div className="image-container" style={{ 
-                  overflow: "hidden", 
-                  borderRadius: "8px", 
-                  height: "100px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#112240"
-                }}>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="project-image"
-                    style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      objectFit: "cover",
-                      transition: "all 0.3s ease"
-                    }} 
-                  />
-                </div>
-              </div>
-              
-              {/* Right column - Content */}
-              <div style={{ flex: "1", padding: "8px" }}>
-                <h3 className="font-semibold m-0 p-0 flex items-center">
-                  <span className="title-text" style={{ 
-                    fontSize: "0.8rem", 
-                    color: "#ccd6f6",
-                    transition: "color 0.3s ease",
+            <div 
+              className="rounded-lg overflow-hidden cursor-pointer project-card"
+              style={{ 
+                padding: "10px",
+                transition: "all 0.3s ease",
+                borderRadius: "15px",
+              }}
+              onMouseEnter={(e) => {
+                // Make all other cards less visible
+                document.querySelectorAll('.project-card').forEach(card => {
+                  if (card !== e.currentTarget) {
+                    (card as HTMLElement).style.opacity = '0.4';
+                    (card as HTMLElement).style.filter = 'grayscale(40%)';
+                  }
+                });
+                
+                // Style current card
+                e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+                e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.filter = 'none';
+                
+                const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
+                const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
+                const techEls = e.currentTarget.querySelectorAll(".tech-item");
+                const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
+                const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
+                const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
+                const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
+                
+                if (titleEl) titleEl.style.color = "#64ffda";
+                if (projectImg) projectImg.style.transform = "scale(1.05)";
+                
+                if (linkIcon) {
+                  linkIcon.style.color = "#64ffda";
+                  linkIcon.style.opacity = "1";
+                  
+                  // Animation is already defined in the academic section
+                  linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
+                  
+                  if (arrowLine) {
+                    arrowLine.style.strokeDasharray = "12";
+                    arrowLine.style.strokeDashoffset = "12";
+                    arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
+                  }
+                  
+                  if (arrowHead) {
+                    arrowHead.style.strokeDasharray = "12";
+                    arrowHead.style.strokeDashoffset = "12";
+                    arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
+                  }
+                }
+                
+                subtitleEls.forEach(el => {
+                  (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
+                });
+                
+                techEls.forEach(el => {
+                  (el as HTMLElement).style.color = "#64ffda";
+                  (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
+                });
+              }}
+              onMouseLeave={(e) => {
+                // Reset this card styles (the container onMouseLeave will handle resetting all cards)
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.boxShadow = "none";
+                
+                const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
+                const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
+                const techEls = e.currentTarget.querySelectorAll(".tech-item");
+                const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
+                const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
+                const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
+                const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
+                
+                if (titleEl) titleEl.style.color = "#ccd6f6";
+                if (projectImg) projectImg.style.transform = "scale(1)";
+                
+                if (linkIcon) {
+                  linkIcon.style.color = "#a8b2d1";
+                  linkIcon.style.opacity = "0.6";
+                  linkIcon.style.animation = "none";
+                  
+                  if (arrowLine) {
+                    arrowLine.style.animation = "none";
+                    arrowLine.style.strokeDashoffset = "12";
+                  }
+                  
+                  if (arrowHead) {
+                    arrowHead.style.animation = "none";
+                    arrowHead.style.strokeDashoffset = "12";
+                  }
+                }
+                
+                subtitleEls.forEach(el => {
+                  (el as HTMLElement).style.color = "#a8b2d1";
+                });
+                
+                techEls.forEach(el => {
+                  (el as HTMLElement).style.color = "#a8b2d1";
+                  (el as HTMLElement).style.backgroundColor = "#112240";
+                });
+              }}
+            >
+              {/* Flex container - creates two columns */}
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                {/* Left column - Project Image */}
+                <div style={{ width: "165px", padding: "10px" }}>
+                  <div className="image-container" style={{ 
+                    overflow: "hidden", 
+                    borderRadius: "8px", 
+                    height: "100px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "8px"
+                    justifyContent: "center",
+                    backgroundColor: "#112240"
                   }}>
-                    {project.title} - {project.company}
-                      <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="18" 
-                      height="18" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="1.5" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      className="link-icon" 
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="project-image"
                       style={{ 
-                        opacity: 0.6,
-                        color: "#a8b2d1",
-                        transition: "all 0.3s ease",
-                        cursor: "pointer",
-                        position: "relative",
-                        marginTop: "0px",
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCardClick(project.url);
-                      }}
-                    >
-                      {/* Arrow line */}
-                      <path 
-                        className="arrow-line" 
-                        d="M7,17 L17,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* 90 degree arrow head */}
-                      <path 
-                        className="arrow-head" 
-                        d="M17,7 L17,13 M17,7 L11,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* Small box outline */}
-                      <rect 
-                        x="7" 
-                        y="7" 
-                        width="10" 
-                        height="10" 
+                        width: "100%", 
+                        height: "100%", 
+                        objectFit: "cover",
+                        transition: "all 0.3s ease"
+                      }} 
+                    />
+                  </div>
+                </div>
+                
+                {/* Right column - Content */}
+                <div style={{ flex: "1", padding: "8px" }}>
+                  <h3 className="font-semibold m-0 p-0 flex items-center">
+                    <span className="title-text" style={{ 
+                      fontSize: "0.8rem", 
+                      color: "#ccd6f6",
+                      transition: "color 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px"
+                    }}>
+                      {project.title} - {project.company}
+                        <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="18" 
+                        height="18" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
                         strokeWidth="1.5" 
-                        strokeOpacity="0.4"
-                        rx="1"
-                      />
-                    </svg>
-                  </span>
-                </h3>
-                
-                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
-                  fontSize: '0.7rem', 
-                  lineHeight: 1.3, 
-                  padding: "10px 0" 
-                }}>
-                  {project.description}
-                </p>
-                
-                <ul className="flex flex-wrap gap-2 mt-1" style={{ padding: "2px 0 10px 0" }}>
-                  {project.technologies.map((tech, techIndex) => (
-                    <li 
-                      key={techIndex}
-                      className="rounded tech-item"
-                      style={{ 
-                        fontSize: '0.65rem',
-                        padding: '2px 6px',
-                        margin: '2px',
-                        display: 'inline-block',
-                        backgroundColor: '#112240',
-                        color: '#a8b2d1',
-                        transition: "all 0.3s ease",
-                        borderRadius: "4px"
-                      }}
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="link-icon" 
+                        style={{ 
+                          opacity: 0.6,
+                          color: "#a8b2d1",
+                          transition: "all 0.3s ease",
+                          cursor: "pointer",
+                          position: "relative",
+                          marginTop: "0px",
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCardClick(project.url);
+                        }}
+                      >
+                        {/* Arrow line */}
+                        <path 
+                          className="arrow-line" 
+                          d="M7,17 L17,7" 
+                          strokeLinecap="round"
+                        />
+                        
+                        {/* 90 degree arrow head */}
+                        <path 
+                          className="arrow-head" 
+                          d="M17,7 L17,13 M17,7 L11,7" 
+                          strokeLinecap="round"
+                        />
+                        
+                        {/* Small box outline */}
+                        <rect 
+                          x="7" 
+                          y="7" 
+                          width="10" 
+                          height="10" 
+                          strokeWidth="1.5" 
+                          strokeOpacity="0.4"
+                          rx="1"
+                        />
+                      </svg>
+                    </span>
+                  </h3>
+                  
+                  <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
+                    fontSize: '0.7rem', 
+                    lineHeight: 1.3, 
+                    padding: "10px 0" 
+                  }}>
+                    {project.description}
+                  </p>
+                  
+                  <ul className="flex flex-wrap gap-2 mt-1" style={{ padding: "2px 0 10px 0" }}>
+                    {project.technologies.map((tech, techIndex) => (
+                      <li 
+                        key={techIndex}
+                        className="rounded tech-item"
+                        style={{ 
+                          fontSize: '0.65rem',
+                          padding: '2px 6px',
+                          margin: '2px',
+                          display: 'inline-block',
+                          backgroundColor: '#112240',
+                          color: '#a8b2d1',
+                          transition: "all 0.3s ease",
+                          borderRadius: "4px"
+                        }}
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          </ClickEffect>
         ))}
       </div>
 
