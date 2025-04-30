@@ -6,7 +6,7 @@ import React from 'react';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="pt-10 pb-16">
+    <section id="about" style={{ paddingTop: '0.5rem' }}>
       <div style={{ marginLeft: '0.85rem' }}>
         {/* Replace motion.div with regular div and remove animation properties */}
         <div className="flex items-center group mb-8 md:hidden">
@@ -30,15 +30,15 @@ export default function AboutSection() {
         </div>
         
         <div className="space-y-0">
-          <p className="pb-8 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
+          <p className="pb-2 text-light-slate" style={{ fontSize: '0.85rem' }}>
             I'm a full-stack developer with a passion for building intuitive and performant web applications. With over 5 years of experience in the industry, I've had the opportunity to work with a variety of technologies and frameworks to deliver impactful solutions.
           </p>
           
-          <p className="pb-8 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
+          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
             Currently, I'm focused on developing accessible, user-centered products at <a href="#" className="text-green hover:underline">Acme Corporation</a>, where I lead the frontend development team. My approach combines clean code principles with modern design patterns to create maintainable and scalable applications.
           </p>
           
-          <p className="pb-8 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
+          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
             My technical toolkit includes React, TypeScript, Node.js, and various cloud services. I'm particularly interested in performance optimization, state management strategies, and creating delightful user experiences.
           </p>
           

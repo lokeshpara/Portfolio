@@ -20,7 +20,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div 
-      className="flex flex-col overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 bg-white"
+      className="flex flex-col overflow-hidden rounded-lg dark:bg-gray-900 bg-white"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
     >

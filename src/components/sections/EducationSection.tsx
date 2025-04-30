@@ -1,7 +1,7 @@
 "use client";
 
+import React from 'react';
 import Link from 'next/link';
-import ClickEffect from '../ClickEffect';
 
 // Education data
 const education = [
@@ -76,37 +76,59 @@ const certifications = [
   }
 ];
 
-export default function EducationSection() {
+const EducationSection = () => {
   const handleCardClick = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    // Add ripple effect
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    document.body.appendChild(ripple);
+    
+    // Position ripple at click point
+    const rect = document.activeElement?.getBoundingClientRect();
+    if (rect) {
+      const size = Math.max(rect.width, rect.height);
+      const x = rect.left + rect.width / 2 - size / 2;
+      const y = rect.top + rect.height / 2 - size / 2;
+      
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+    }
+    
+    // Add active class for animation
+    ripple.classList.add('active');
+    
+    // Delay opening URL
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      // Remove ripple after animation
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    }, 300);
   };
 
   return (
-    <section id="education" className="py-8">
-      
-
-      {/* Certifications */}
-      <div className="mb-12">
-      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate">CERTIFICAATIONS</h2>
-      </div>
-        
-        <div 
-          className="space-y-3 certification-container"
-          onMouseLeave={() => {
-            // Reset all cards to full opacity when mouse leaves the container
-            document.querySelectorAll('.certification-card').forEach(card => {
-              (card as HTMLElement).style.opacity = '1';
-              (card as HTMLElement).style.filter = 'none';
-            });
-          }}
-        >
-          {certifications.map((cert, index) => (
-            <ClickEffect
-              key={index}
-              onClick={() => handleCardClick(cert.url)}
-            >
+    <section id="education">
+      <div className="text-light-slate">
+        {/* Certifications */}
+        <div>
+          <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+            <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>CERTIFICATIONS</h2>
+          </div>
+          <div 
+            className="space-y-3 certification-container"
+            onMouseLeave={() => {
+              // Reset all cards to full opacity when mouse leaves the container
+              document.querySelectorAll('.certification-card').forEach(card => {
+                (card as HTMLElement).style.opacity = '1';
+                (card as HTMLElement).style.filter = 'none';
+              });
+            }}
+          >
+            {certifications.map((cert, index) => (
               <div 
+                key={index}
                 className="rounded-lg overflow-hidden cursor-pointer certification-card"
                 style={{ 
                   padding: "10px",
@@ -212,6 +234,26 @@ export default function EducationSection() {
                     (el as HTMLElement).style.color = "#a8b2d1";
                     (el as HTMLElement).style.backgroundColor = "#112240";
                   });
+                }}
+                onClick={() => handleCardClick(cert.url)}
+                onTouchStart={(e) => {
+                  // Add ripple effect for mobile
+                  const ripple = document.createElement('div');
+                  ripple.className = 'ripple';
+                  e.currentTarget.appendChild(ripple);
+                  
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const size = Math.max(rect.width, rect.height);
+                  const x = e.touches[0].clientX - rect.left - size / 2;
+                  const y = e.touches[0].clientY - rect.top - size / 2;
+                  
+                  ripple.style.width = ripple.style.height = `${size}px`;
+                  ripple.style.left = `${x}px`;
+                  ripple.style.top = `${y}px`;
+                  
+                  setTimeout(() => {
+                    ripple.remove();
+                  }, 600);
                 }}
               >
                 {/* Flex container - creates two columns */}
@@ -334,32 +376,28 @@ export default function EducationSection() {
                   </div>
                 </div>
               </div>
-            </ClickEffect>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      
-      {/* Academic Education */}
-      <div style={{ marginTop: '5rem' }}>
-      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate">EDUCATION</h2>
-      </div>
-        <div 
-          className="space-y-3 education-container"
-          onMouseLeave={() => {
-            // Reset all cards to full opacity when mouse leaves the container
-            document.querySelectorAll('.education-card').forEach(card => {
-              (card as HTMLElement).style.opacity = '1';
-              (card as HTMLElement).style.filter = 'none';
-            });
-          }}
-        >
-          {education.map((edu, index) => (
-            <ClickEffect
-              key={index}
-              onClick={() => handleCardClick(edu.url)}
-            >
+        
+        {/* Academic Education */}
+        <div style={{ marginTop: '3rem' }}>
+          <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
+            <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>EDUCATION</h2>
+          </div>
+          <div 
+            className="space-y-3 education-container"
+            onMouseLeave={() => {
+              // Reset all cards to full opacity when mouse leaves the container
+              document.querySelectorAll('.education-card').forEach(card => {
+                (card as HTMLElement).style.opacity = '1';
+                (card as HTMLElement).style.filter = 'none';
+              });
+            }}
+          >
+            {education.map((edu, index) => (
               <div 
+                key={index}
                 className="rounded-lg overflow-hidden cursor-pointer education-card"
                 style={{ 
                   padding: "10px",
@@ -462,6 +500,26 @@ export default function EducationSection() {
                     (el as HTMLElement).style.backgroundColor = "#112240";
                   });
                 }}
+                onClick={() => handleCardClick(edu.url)}
+                onTouchStart={(e) => {
+                  // Add ripple effect for mobile
+                  const ripple = document.createElement('div');
+                  ripple.className = 'ripple';
+                  e.currentTarget.appendChild(ripple);
+                  
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const size = Math.max(rect.width, rect.height);
+                  const x = e.touches[0].clientX - rect.left - size / 2;
+                  const y = e.touches[0].clientY - rect.top - size / 2;
+                  
+                  ripple.style.width = ripple.style.height = `${size}px`;
+                  ripple.style.left = `${x}px`;
+                  ripple.style.top = `${y}px`;
+                  
+                  setTimeout(() => {
+                    ripple.remove();
+                  }, 600);
+                }}
               >
                 {/* Flex container - creates two columns */}
                 <div style={{ display: "flex", flexDirection: "row" }}>
@@ -554,10 +612,40 @@ export default function EducationSection() {
                   </div>
                 </div>
               </div>
-            </ClickEffect>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+      <style jsx>{`
+        .education-card,
+        .certification-card {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .ripple {
+          position: fixed;
+          border-radius: 50%;
+          background-color: rgba(100, 255, 218, 0.2);
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          pointer-events: none;
+          z-index: 9999;
+        }
+
+        .ripple.active {
+          animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+          to {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
-} 
+};
+
+export default EducationSection; 
