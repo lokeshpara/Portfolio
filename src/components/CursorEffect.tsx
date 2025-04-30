@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
+import minionCursor from '../../images/minion-cursor.png';
 
 export default function CursorEffect() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -200,7 +201,7 @@ export default function CursorEffect() {
     >
       <div className="w-8 h-8 relative">
         <Image
-          src="/minion-cursor.png"
+          src={minionCursor}
           alt="Minion cursor"
           fill
           className="object-contain"
