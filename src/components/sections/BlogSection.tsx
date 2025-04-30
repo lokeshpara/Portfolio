@@ -1,19 +1,20 @@
 "use client";
 
-import ClickEffect from '../ClickEffect';
-
+// Remove motion import
+// import { motion } from 'framer-motion';
 // import Link from 'next/link';
 
-// Blog post data with images
+import React from 'react';
+
 const blogPosts = [
   {
-    image: '/images/projects/ecommerce.jpg', // Using the downloaded image temporarily
+    image: '/images/projects/ecommerce.jpg',
     title: 'Building Performant Web Applications',
     category: 'Web Development',
     excerpt: 'Learn how to optimize your Next.js applications for maximum performance and user experience. This guide covers code splitting, image optimization, and server-side rendering techniques that can drastically improve your application loading times.',
     date: 'June 15, 2023',
     readTime: '8 min read',
-    slug: 'building-performant-web-applications-nextjs',
+    url: 'https://medium.com/@lokeshpatil/building-performant-web-applications-nextjs'
   },
   {
     image: '/images/portfolio-website.jpg',
@@ -22,7 +23,7 @@ const blogPosts = [
     excerpt: 'Discover how TypeScript can help you write more maintainable and error-free code in your projects. We explore type inference, interfaces, generics, and other advanced features that will level up your development workflow.',
     date: 'May 22, 2023',
     readTime: '6 min read',
-    slug: 'power-of-typescript-modern-frontend',
+    url: 'https://medium.com/@lokeshpatil/power-of-typescript-modern-frontend'
   },
   {
     image: '/images/task-management.jpg',
@@ -31,225 +32,312 @@ const blogPosts = [
     excerpt: 'A comprehensive guide to implementing beautiful and performant animations in React applications. Learn how to create complex animations that enhance user experience without sacrificing performance.',
     date: 'April 10, 2023',
     readTime: '10 min read',
-    slug: 'creating-animations-framer-motion',
+    url: 'https://medium.com/@lokeshpatil/creating-animations-framer-motion'
   },
 ];
 
-export default function BlogSection() {
-  const handleCardClick = (slug: string) => {
-    window.open(`/blog/${slug}`, '_blank', 'noopener,noreferrer');
+// Remove animation containers
+// const container = { ... };
+// const item = { ... };
+
+const BlogSection = () => {
+  const handleCardClick = (url: string, element: HTMLElement) => {
+    // Add ripple effect
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    document.body.appendChild(ripple);
+    
+    // Position ripple at click point
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = rect.left + rect.width / 2 - size / 2;
+    const y = rect.top + rect.height / 2 - size / 2;
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    
+    // Add active class for animation
+    ripple.classList.add('active');
+
+    // Apply hover effect
+    element.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+    element.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+    element.style.opacity = '1';
+    element.style.filter = 'none';
+    
+    const titleEl = element.querySelector(".title-text") as HTMLElement;
+    const categoryEl = element.querySelector(".category-text") as HTMLElement;
+    const dateEl = element.querySelector(".date-text") as HTMLElement;
+    const linkIcon = element.querySelector(".link-icon") as SVGElement;
+    const arrowLine = element.querySelector(".arrow-line") as SVGPathElement;
+    const arrowHead = element.querySelector(".arrow-head") as SVGPathElement;
+    const postImg = element.querySelector(".post-image") as HTMLImageElement;
+    
+    if (titleEl) titleEl.style.color = "#64ffda";
+    if (categoryEl) categoryEl.style.color = "rgba(100, 255, 218, 0.7)";
+    if (dateEl) dateEl.style.color = "rgba(100, 255, 218, 0.7)";
+    
+    if (postImg) {
+      postImg.style.transform = "scale(1.05)";
+      postImg.style.filter = "brightness(1.1)";
+    }
+     
+    if (linkIcon) {
+      linkIcon.style.color = "#64ffda";
+      linkIcon.style.opacity = "1";
+      linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
+      
+      if (arrowLine) {
+        arrowLine.style.strokeDasharray = "12";
+        arrowLine.style.strokeDashoffset = "12";
+        arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
+      }
+      
+      if (arrowHead) {
+        arrowHead.style.strokeDasharray = "12";
+        arrowHead.style.strokeDashoffset = "12";
+        arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
+      }
+    }
+    
+    // Delay opening URL
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      
+      // Reset styles after opening URL
+      setTimeout(() => {
+        element.style.backgroundColor = "transparent";
+        element.style.boxShadow = "none";
+        
+        if (titleEl) titleEl.style.color = "#ccd6f6";
+        if (categoryEl) categoryEl.style.color = "#a8b2d1";
+        if (dateEl) dateEl.style.color = "#a8b2d1";
+        
+        if (postImg) {
+          postImg.style.transform = "scale(1)";
+          postImg.style.filter = "brightness(1)";
+        }
+         
+        if (linkIcon) {
+          linkIcon.style.color = "#a8b2d1";
+          linkIcon.style.opacity = "0.6";
+          linkIcon.style.animation = "none";
+          
+          if (arrowLine) {
+            arrowLine.style.animation = "none";
+            arrowLine.style.strokeDashoffset = "12";
+          }
+          
+          if (arrowHead) {
+            arrowHead.style.animation = "none";
+            arrowHead.style.strokeDashoffset = "12";
+          }
+        }
+        
+        // Remove ripple after animation
+        ripple.remove();
+      }, 600);
+    }, 300);
   };
 
   return (
-    <section id="blog" className="py-8">
-      <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate">BLOG</h2>
+    <section id="projects">
+      <div className="mb-4 md:hidden" style={{ marginLeft: '0.95rem' }}>
+        <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>PROJECTS</h2>
       </div>
 
       <div 
-        className="space-y-3 blog-container"
+        className="space-y-3 projects-container"
         onMouseLeave={() => {
           // Reset all cards to full opacity when mouse leaves the container
-          document.querySelectorAll('.blog-card').forEach(card => {
+          document.querySelectorAll('.project-card').forEach(card => {
             (card as HTMLElement).style.opacity = '1';
             (card as HTMLElement).style.filter = 'none';
           });
         }}
       >
         {blogPosts.map((post, index) => (
-          <ClickEffect
+          <div 
             key={index}
-            onClick={() => handleCardClick(post.slug)}
+            className="rounded-lg overflow-hidden cursor-pointer project-card"
+            style={{ 
+              padding: "10px",
+              transition: "all 0.3s ease",
+              borderRadius: "15px",
+            }}
+            onClick={(e) => handleCardClick(post.url, e.currentTarget)}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              handleCardClick(post.url, e.currentTarget);
+            }}
+            onMouseEnter={(e) => {
+              // Make all other cards less visible
+              document.querySelectorAll('.project-card').forEach(card => {
+                if (card !== e.currentTarget) {
+                  (card as HTMLElement).style.opacity = '0.4';
+                  (card as HTMLElement).style.filter = 'grayscale(40%)';
+                }
+              });
+              
+              // Style current card
+              e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+              e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+              e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.filter = 'none';
+              
+              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
+              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
+              const techEls = e.currentTarget.querySelectorAll(".tech-item");
+              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
+              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
+              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
+              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
+              
+              if (titleEl) titleEl.style.color = "#64ffda";
+              if (projectImg) projectImg.style.transform = "scale(1.05)";
+              
+              if (linkIcon) {
+                linkIcon.style.color = "#64ffda";
+                linkIcon.style.opacity = "1";
+                
+                // Animation is already defined in the academic section
+                linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
+                
+                if (arrowLine) {
+                  arrowLine.style.strokeDasharray = "12";
+                  arrowLine.style.strokeDashoffset = "12";
+                  arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
+                }
+                
+                if (arrowHead) {
+                  arrowHead.style.strokeDasharray = "12";
+                  arrowHead.style.strokeDashoffset = "12";
+                  arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
+                }
+              }
+              
+              subtitleEls.forEach(el => {
+                (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
+              });
+              
+              techEls.forEach(el => {
+                (el as HTMLElement).style.color = "#64ffda";
+                (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
+              });
+            }}
+            onMouseLeave={(e) => {
+              // Reset this card styles (the container onMouseLeave will handle resetting all cards)
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.boxShadow = "none";
+              
+              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
+              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
+              const techEls = e.currentTarget.querySelectorAll(".tech-item");
+              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
+              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
+              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
+              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
+              
+              if (titleEl) titleEl.style.color = "#ccd6f6";
+              if (projectImg) projectImg.style.transform = "scale(1)";
+              
+              if (linkIcon) {
+                linkIcon.style.color = "#a8b2d1";
+                linkIcon.style.opacity = "0.6";
+                linkIcon.style.animation = "none";
+                
+                if (arrowLine) {
+                  arrowLine.style.animation = "none";
+                  arrowLine.style.strokeDashoffset = "12";
+                }
+                
+                if (arrowHead) {
+                  arrowHead.style.animation = "none";
+                  arrowHead.style.strokeDashoffset = "12";
+                }
+              }
+              
+              subtitleEls.forEach(el => {
+                (el as HTMLElement).style.color = "#a8b2d1";
+              });
+              
+              techEls.forEach(el => {
+                (el as HTMLElement).style.color = "#a8b2d1";
+                (el as HTMLElement).style.backgroundColor = "#112240";
+              });
+            }}
           >
-            <div 
-              className="rounded-lg overflow-hidden cursor-pointer blog-card"
-              style={{ 
-                padding: "10px",
-                transition: "all 0.3s ease",
-                borderRadius: "15px",
-              }}
-              onMouseEnter={(e) => {
-                // Make all other cards less visible
-                document.querySelectorAll('.blog-card').forEach(card => {
-                  if (card !== e.currentTarget) {
-                    (card as HTMLElement).style.opacity = '0.4';
-                    (card as HTMLElement).style.filter = 'grayscale(40%)';
-                  }
-                });
-                
-                // Style current card
-                e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-                e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.filter = 'none';
-                
-                const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                const postImg = e.currentTarget.querySelector(".post-image") as HTMLImageElement;
-                
-                if (titleEl) titleEl.style.color = "#64ffda";
-                if (postImg) postImg.style.transform = "scale(1.05)";
-                
-                if (linkIcon) {
-                  linkIcon.style.color = "#64ffda";
-                  linkIcon.style.opacity = "1";
-                  
-                  // Animation is already defined in the academic section
-                  linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
-                  
-                  if (arrowLine) {
-                    arrowLine.style.strokeDasharray = "12";
-                    arrowLine.style.strokeDashoffset = "12";
-                    arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                  }
-                  
-                  if (arrowHead) {
-                    arrowHead.style.strokeDasharray = "12";
-                    arrowHead.style.strokeDashoffset = "12";
-                    arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                  }
-                }
-                
-                subtitleEls.forEach(el => {
-                  (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-                });
-              }}
-              onMouseLeave={(e) => {
-                // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-                e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.boxShadow = "none";
-                
-                const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                const postImg = e.currentTarget.querySelector(".post-image") as HTMLImageElement;
-                
-                if (titleEl) titleEl.style.color = "#ccd6f6";
-                if (postImg) postImg.style.transform = "scale(1)";
-                
-                if (linkIcon) {
-                  linkIcon.style.color = "#a8b2d1";
-                  linkIcon.style.opacity = "0.6";
-                  linkIcon.style.animation = "none";
-                  
-                  if (arrowLine) {
-                    arrowLine.style.animation = "none";
-                    arrowLine.style.strokeDashoffset = "12";
-                  }
-                  
-                  if (arrowHead) {
-                    arrowHead.style.animation = "none";
-                    arrowHead.style.strokeDashoffset = "12";
-                  }
-                }
-                
-                subtitleEls.forEach(el => {
-                  (el as HTMLElement).style.color = "#a8b2d1";
-                });
-              }}
-            >
-              {/* Flex container - creates two columns */}
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                {/* Left column - Image */}
-                <div style={{ width: "165px", padding: "10px" }}>
-                  <div className="image-container" style={{ 
-                    overflow: "hidden", 
-                    borderRadius: "8px", 
-                    height: "100px",
+            {/* Flex container - creates two columns */}
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              {/* Left column - Project Image */}
+              <div style={{ width: "165px", padding: "10px" }}>
+                <div className="image-container" style={{ 
+                  overflow: "hidden", 
+                  borderRadius: "8px", 
+                  height: "100px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#112240"
+                }}>
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="project-image"
+                    style={{ 
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "cover",
+                      transition: "all 0.3s ease"
+                    }} 
+                  />
+                </div>
+              </div>
+              
+              {/* Right column - Content */}
+              <div style={{ flex: "1", padding: "8px" }}>
+                <h3 className="font-semibold m-0 p-0 flex items-center">
+                  <span className="title-text" style={{ 
+                    fontSize: "0.8rem", 
+                    color: "#ccd6f6",
+                    transition: "color 0.3s ease",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#112240"
+                    gap: "8px"
                   }}>
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      className="post-image"
-                      style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        objectFit: "cover",
-                        transition: "all 0.3s ease"
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Right column - Content */}
-                <div style={{ flex: "1", padding: "8px" }}>
-                  {/* Header with read time */}
-                  <div className="flex items-center justify-end mb-1">
-                    <span className="read-time" style={{ fontSize: "0.65rem", color: "rgb(168, 178, 209)", transition: "0.3s" }}>
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 
-                    className="title-text"
-                    style={{ 
-                      fontSize: "0.9rem", 
-                      fontWeight: "600", 
-                      color: "#ccd6f6",
-                      marginBottom: "5px",
-                      transition: "color 0.3s ease"
-                    }}
-                  >
                     {post.title}
-                  </h3>
-
-                  {/* Excerpt */}
-                  <p style={{ 
-                    fontSize: "0.8rem", 
-                    color: "#8892b0",
-                    lineHeight: "1.4",
-                    marginBottom: "10px"
-                  }}>
-                    {post.excerpt}
-                  </p>
-
-                  {/* Link icon */}
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <svg 
-                      className="link-icon"
+                      <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
                       width="18" 
                       height="18" 
                       viewBox="0 0 24 24" 
                       fill="none" 
-                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="currentColor" 
+                      strokeWidth="1.5" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      className="link-icon" 
                       style={{ 
+                        opacity: 0.6,
                         color: "#a8b2d1",
-                        opacity: "0.6",
                         transition: "all 0.3s ease",
                         cursor: "pointer",
                         position: "relative",
                         marginTop: "0px",
                       }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCardClick(post.slug);
-                      }}
                     >
                       {/* Arrow line */}
                       <path 
-                        className="arrow-line"
+                        className="arrow-line" 
                         d="M7,17 L17,7" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
                         strokeLinecap="round"
                       />
                       
                       {/* 90 degree arrow head */}
                       <path 
-                        className="arrow-head"
+                        className="arrow-head" 
                         d="M17,7 L17,13 M17,7 L11,7" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
                         strokeLinecap="round"
                       />
                       
@@ -264,11 +352,67 @@ export default function BlogSection() {
                         rx="1"
                       />
                     </svg>
-                  </div>
-                </div>
+                  </span>
+                </h3>
+                
+                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
+                  fontSize: '0.7rem', 
+                  lineHeight: 1.3, 
+                  padding: "10px 0" 
+                }}>
+                  {post.excerpt}
+                </p>
+                
+                <ul className="flex flex-wrap gap-2 mt-1" style={{ padding: "2px 0 10px 0" }}>
+                  <li 
+                    className="rounded tech-item"
+                    style={{ 
+                      fontSize: '0.65rem',
+                      padding: '2px 6px',
+                      margin: '2px',
+                      display: 'inline-block',
+                      backgroundColor: '#112240',
+                      color: '#a8b2d1',
+                      transition: "all 0.3s ease",
+                      borderRadius: "4px"
+                    }}
+                  >
+                    {post.category}
+                  </li>
+                  <li 
+                    className="rounded tech-item"
+                    style={{ 
+                      fontSize: '0.65rem',
+                      padding: '2px 6px',
+                      margin: '2px',
+                      display: 'inline-block',
+                      backgroundColor: '#112240',
+                      color: '#a8b2d1',
+                      transition: "all 0.3s ease",
+                      borderRadius: "4px"
+                    }}
+                  >
+                    {post.date}
+                  </li>
+                  <li 
+                    className="rounded tech-item"
+                    style={{ 
+                      fontSize: '0.65rem',
+                      padding: '2px 6px',
+                      margin: '2px',
+                      display: 'inline-block',
+                      backgroundColor: '#112240',
+                      color: '#a8b2d1',
+                      transition: "all 0.3s ease",
+                      borderRadius: "4px"
+                    }}
+                  >
+                    {post.readTime}
+                  </li>
+                </ul>
               </div>
             </div>
-          </ClickEffect>
+          </div>
         ))}
       </div>
 
@@ -290,7 +434,7 @@ export default function BlogSection() {
             100% { background-position: 200% 0; }
           }
           
-          .blog-btn {
+          .projects-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
@@ -305,7 +449,7 @@ export default function BlogSection() {
             cursor: pointer;
           }
           
-          .blog-btn::before {
+          .projects-btn::before {
             content: "";
             position: absolute;
             top: 0;
@@ -330,16 +474,16 @@ export default function BlogSection() {
             animation: borderRotate 4s ease infinite;
           }
           
-          .blog-btn:hover {
+          .projects-btn:hover {
             background-color: rgba(100, 255, 218, 0.05);
             transform: translateY(-2px);
           }
           
-          .blog-btn:hover::before {
+          .projects-btn:hover::before {
             animation: borderRotate 2s ease infinite;
           }
           
-          .blog-btn:hover .btn-text {
+          .projects-btn:hover .btn-text {
             background-position: 100% 0;
           }
           
@@ -358,33 +502,54 @@ export default function BlogSection() {
             transition: all 0.3s ease;
           }
           
-          .article-icon {
+          .folder-icon {
             transition: all 0.3s ease;
             transform-origin: center;
           }
           
-          .blog-btn:hover .article-icon {
+          .projects-btn:hover .folder-icon {
             transform: translateY(-2px) scale(1.1);
             filter: drop-shadow(0 2px 2px rgba(100, 255, 218, 0.3));
           }
           
-          @keyframes articleRipple {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
+          @keyframes folderOpen {
+            0% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); }
+            100% { transform: scaleY(1); }
           }
           
-          .blog-btn:hover .article-ripple {
-            animation: articleRipple 1.5s infinite ease-in-out;
+          .projects-btn:hover .folder-top {
+            animation: folderOpen 1.5s infinite ease-in-out;
+          }
+          
+          .ripple {
+            position: fixed;
+            border-radius: 50%;
+            background-color: rgba(100, 255, 218, 0.2);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+            z-index: 9999;
+          }
+
+          .ripple.active {
+            animation: ripple 0.6s linear;
+          }
+
+          @keyframes ripple {
+            to {
+              transform: scale(4);
+              opacity: 0;
+            }
           }
         `}</style>
         <a 
-          href="/blog"
-          className="blog-btn"
+          href="/projects"
+          className="projects-btn"
         >
-          <span className="btn-text">View All Articles</span>
+          <span className="btn-text">View All Projects</span>
           <svg 
-            className="article-icon" 
+            className="folder-icon" 
             width="16" 
             height="16" 
             viewBox="0 0 24 24" 
@@ -394,11 +559,13 @@ export default function BlogSection() {
             strokeLinecap="round" 
             strokeLinejoin="round"
           >
-            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
-            <path className="article-ripple" d="M7 7h10M7 12h10M7 17h7" />
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            <path className="folder-top" d="M2 10h20" />
           </svg>
         </a>
       </div>
     </section>
   );
-} 
+};
+
+export default BlogSection; 

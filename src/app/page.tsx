@@ -133,21 +133,25 @@ export default function Home() {
       observerRef.current.disconnect();
     }
     
-    // Create options for the observer with larger thresholds and margins
+    // Create options for the observer with optimized thresholds and margins
     const options = {
       root: rightColumnRef.current,
-      rootMargin: '-10% 0px -10% 0px', // Less restrictive margin for better detection
-      threshold: [0.15, 0.25, 0.5, 0.75] // More gradual thresholds for smoother detection
+      rootMargin: '-20% 0px -20% 0px', // More restrictive margin to reduce false positives
+      threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] // More granular thresholds
     };
     
     // Track which sections are in view with their visibility ratios
     const visibleSections = new Map();
     let lastActiveSection = activeSection;
     let debounceTimer: NodeJS.Timeout | null = null;
+    let lastScrollTime = Date.now();
     
-    // Create new observer with debounced section changes
+    // Create new observer with improved section detection
     observerRef.current = new IntersectionObserver((entries) => {
       if (isScrollingRef.current) return; // Skip during programmatic scrolling
+      
+      const currentTime = Date.now();
+      const timeSinceLastScroll = currentTime - lastScrollTime;
       
       // Update which sections are visible with their intersection ratios
       entries.forEach(entry => {
@@ -165,7 +169,7 @@ export default function Home() {
       // If we have visible sections, find the one with highest visibility ratio
       if (visibleSections.size > 0) {
         // Apply a minimum threshold to prevent flickering
-        const VISIBILITY_THRESHOLD = 0.15; // Lower threshold for easier detection
+        const VISIBILITY_THRESHOLD = 0.2; // Higher threshold for more stable detection
         let highestRatio = 0;
         let mostVisibleSection = lastActiveSection;
         
@@ -184,11 +188,13 @@ export default function Home() {
             clearTimeout(debounceTimer);
           }
           
-          // Set a new debounce timer
+          // Set a new debounce timer with dynamic delay based on scroll speed
+          const debounceDelay = Math.min(Math.max(timeSinceLastScroll, 100), 300);
           debounceTimer = setTimeout(() => {
             setActiveSection(mostVisibleSection);
             lastActiveSection = mostVisibleSection;
-          }, 100); // Reduced debounce time for better responsiveness
+            lastScrollTime = currentTime;
+          }, debounceDelay);
         }
       }
     }, options);
@@ -236,7 +242,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-
+    
     return () => clearTimeout(timer);
   }, []);
 
@@ -262,77 +268,72 @@ export default function Home() {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Function to update active section based on scroll position (fallback method)
-  const updateActiveSection = () => {
-    if (!rightColumnRef.current || isScrollingRef.current) return;
-    
-    const scrollPos = rightColumnRef.current.scrollTop;
-    const viewportHeight = rightColumnRef.current.clientHeight;
-    const scrollBottom = scrollPos + viewportHeight;
-    
-    // Get all section positions
-    const sections = [
-      { id: 'about', top: aboutRef.current?.offsetTop || 0 },
-      { id: 'experience', top: experienceRef.current?.offsetTop || 0 },
-      { id: 'projects', top: projectsRef.current?.offsetTop || 0 },
-      { id: 'blog', top: blogRef.current?.offsetTop || 0 },
-      { id: 'education', top: educationRef.current?.offsetTop || 0 }
-    ];
-    
-    console.log("Scroll position:", scrollPos, "ViewportHeight:", viewportHeight);
-    console.log("Section positions:", sections.map(s => `${s.id}: ${s.top}`).join(', '));
-    
-    // Sort sections by position to ensure correct order
-    sections.sort((a, b) => a.top - b.top);
-    
-    // Find the section that's currently in view
-    let current = sections[0].id; // Default to first section
-    
-    // Check which section is most visible
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i];
-      const nextSection = sections[i + 1];
-      
-      // If this is the last section or we're before the next section's top
-      if (!nextSection || scrollPos < nextSection.top - viewportHeight * 0.2) { // Improved threshold
-        if (scrollPos >= section.top - viewportHeight * 0.2) { // Improved threshold
-          current = section.id;
-          break;
-        }
-      }
-    }
-    
-    console.log("Detected section by scroll:", current);
-    
-    // Update active section if different
-    if (current !== activeSection) {
-      setActiveSection(current);
-    }
-  };
-
-  // Add a fallback scroll handler for browsers without Intersection Observer
+  // Simple scroll-based section detection using IntersectionObserver
   useEffect(() => {
-    if (isLoading) return;
-    
-    // Add scroll event listener as fallback
-    const handleScroll = () => {
-      // Use requestAnimationFrame to throttle scroll events
-      requestAnimationFrame(updateActiveSection);
+    if (isLoading || !rightColumnRef.current) return;
+
+    let isScrolling = false;
+    let scrollTimeout: NodeJS.Timeout | null = null;
+
+    // Create options for the observer
+    const options = {
+      root: rightColumnRef.current,
+      rootMargin: '-45% 0px -45% 0px', // Only trigger when section is significantly in view
+      threshold: [0.5] // Only trigger when section is 50% visible
     };
-    
-    if (rightColumnRef.current) {
-      rightColumnRef.current.addEventListener('scroll', handleScroll);
-      
-      // Initial check
-      setTimeout(updateActiveSection, 500);
-    }
-    
+
+    // Create new observer
+    const observer = new IntersectionObserver((entries) => {
+      if (!isScrolling) return; // Only change sections while scrolling
+
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section');
+          if (sectionId) {
+            setActiveSection(sectionId);
+          }
+        }
+      });
+    }, options);
+
+    // Observe all sections
+    Object.values(sectionRefs).forEach(ref => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    // Handle scroll events
+    const handleScroll = () => {
+      if (!rightColumnRef.current || isScrollingRef.current) return;
+
+      // Set scrolling state
+      isScrolling = true;
+
+      // Clear any existing timeout
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+
+      // Set a timeout to detect when scrolling has stopped
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
+    };
+
+    // Add scroll event listener
+    rightColumnRef.current.addEventListener('scroll', handleScroll);
+
     return () => {
+      observer.disconnect();
       if (rightColumnRef.current) {
         rightColumnRef.current.removeEventListener('scroll', handleScroll);
       }
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
     };
-  }, [isLoading, activeSection]);
+  }, [isLoading]);
 
   // Get the currently active section based on scroll position - enhanced version
   const getActiveSection = () => {
@@ -575,14 +576,14 @@ export default function Home() {
               {/* Profile section - reduce margin */}
               <div className="relative mb-4" style={{ marginTop: '2rem' }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10"/>
-                <div className="p-3">
+                <div>
                   <div className="flex items-start">
                     <div>
-                      <h1 className="font-bold text-lightest-slate mb-2 tracking-tight" style={{ fontSize: 'xxx-large' }}>
+                      <h1 className="font-bold text-lightest-slate tracking-tight" style={{ fontSize: 'xxx-large' }}>
                         Lokesh Para
                       </h1>
-                      <div className="flex items-center gap-1 mb-4">
-                        <p className="text-green font-bold font-mono tracking-tight" style={{ fontSize: 'large' }}>
+                      <div className="flex items-cente mb-4">
+                        <p className="text-green opacity-70 font-bold font-mono tracking-tight" style={{ fontSize: 'large' }}>
                           Full Stack Developer
                         </p>
                       </div>
@@ -713,9 +714,9 @@ export default function Home() {
               
               {/* Social links with icons instead of text */}
               <SocialMedia />
-            </div>
-          </div>
-
+        </div>
+      </div>
+      
           {/* Scrollable Right Column */}
           <div 
             ref={rightColumnRef} 
@@ -1175,9 +1176,9 @@ export default function Home() {
               overflow: 'hidden'
             }}>
               <div 
-                className="bg-slate-900/50 rounded-lg shadow-lg backdrop-blur-sm"
+                className="bg-slate-900/50 rounded-lg backdrop-blur-sm"
               >
-                <div className="px-6 py-12">
+                <div>
                   <section {...aboutProps}>
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">About</h2>
@@ -1223,7 +1224,7 @@ export default function Home() {
           </div>
         </>
       )}
-    </div>
+      </div>
   );
 }
 

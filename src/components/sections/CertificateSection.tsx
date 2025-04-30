@@ -30,7 +30,7 @@ export default function CertificateSection() {
   };
 
   return (
-    <section id="certificates" className="py-8">
+    <section id="certificates">
       <div className="mb-4 md:hidden" style={{ marginLeft: '1rem' }}>
         <h2 className="text-lg font-semibold text-lightest-slate">Certificates</h2>
       </div>
