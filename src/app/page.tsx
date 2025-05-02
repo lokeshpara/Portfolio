@@ -7,7 +7,6 @@ import ProjectsSection from '@/components/sections/ProjectsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import EducationSection from '@/components/sections/EducationSection';
 import LoadingScreen from '@/components/LoadingScreen';
-import SocialLinks from '@/components/SocialLinks';
 import SocialMediaMobile from '@/components/SocialMediaMobile';
 import SocialMedia from '@/components/SocialMedia';
 
