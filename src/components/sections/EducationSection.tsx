@@ -118,6 +118,10 @@ const EducationSection = () => {
           </div>
           <div 
             className="space-y-3 certification-container"
+            style={{
+              position: 'relative',
+              zIndex: 1,
+            }}
             onMouseLeave={() => {
               // Reset all cards to full opacity when mouse leaves the container
               document.querySelectorAll('.certification-card').forEach(card => {
@@ -134,6 +138,13 @@ const EducationSection = () => {
                   padding: "10px",
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
+                  position: "relative",
+                  touchAction: "none",
+                  WebkitTapHighlightColor: "transparent",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                  perspective: "1000px",
+                  willChange: "transform",
                 }}
                 onMouseEnter={(e) => {
                   // Make all other cards less visible
@@ -236,30 +247,25 @@ const EducationSection = () => {
                   });
                 }}
                 onClick={() => handleCardClick(cert.url)}
-                onTouchStart={(e) => {
-                  // Add ripple effect for mobile
-                  const ripple = document.createElement('div');
-                  ripple.className = 'ripple';
-                  e.currentTarget.appendChild(ripple);
-                  
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const size = Math.max(rect.width, rect.height);
-                  const x = e.touches[0].clientX - rect.left - size / 2;
-                  const y = e.touches[0].clientY - rect.top - size / 2;
-                  
-                  ripple.style.width = ripple.style.height = `${size}px`;
-                  ripple.style.left = `${x}px`;
-                  ripple.style.top = `${y}px`;
-                  
-                  setTimeout(() => {
-                    ripple.remove();
-                  }, 600);
-                }}
+                
               >
                 {/* Flex container - creates two columns */}
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ 
+                  display: "flex", 
+                  flexDirection: "row",
+                  flexShrink: 0,
+                  flexGrow: 0,
+                  flexBasis: "auto",
+                }}>
                   {/* Left column - Certificate Image */}
-                  <div style={{ width: "165px", padding: "10px", position: "relative", overflow: "hidden", borderRadius: "8px" }}>
+                  <div style={{ 
+                    width: "165px", 
+                    padding: "10px", 
+                    position: "relative", 
+                    overflow: "hidden", 
+                    borderRadius: "8px",
+                    flexShrink: 0,
+                  }}>
                     <div className="img-overlay" style={{ 
                       position: "absolute", 
                       top: 0, 
@@ -299,7 +305,12 @@ const EducationSection = () => {
                   </div>
                   
                   {/* Right column - Content */}
-                  <div style={{ flex: "1", padding: "8px" }}>
+                  <div style={{ 
+                    flex: "1", 
+                    padding: "8px",
+                    flexShrink: 1,
+                    minWidth: 0,
+                  }}>
                     <h3 className="font-semibold m-0 p-0 flex items-center">
                       <span className="title-text" style={{ 
                         fontSize: "0.8rem", 
@@ -387,6 +398,10 @@ const EducationSection = () => {
           </div>
           <div 
             className="space-y-3 education-container"
+            style={{
+              position: 'relative',
+              zIndex: 1,
+            }}
             onMouseLeave={() => {
               // Reset all cards to full opacity when mouse leaves the container
               document.querySelectorAll('.education-card').forEach(card => {
@@ -403,6 +418,13 @@ const EducationSection = () => {
                   padding: "10px",
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
+                  position: "relative",
+                  touchAction: "none",
+                  WebkitTapHighlightColor: "transparent",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                  perspective: "1000px",
+                  willChange: "transform",
                 }}
                 onMouseEnter={(e) => {
                   // Make all other cards less visible
@@ -501,30 +523,22 @@ const EducationSection = () => {
                   });
                 }}
                 onClick={() => handleCardClick(edu.url)}
-                onTouchStart={(e) => {
-                  // Add ripple effect for mobile
-                  const ripple = document.createElement('div');
-                  ripple.className = 'ripple';
-                  e.currentTarget.appendChild(ripple);
-                  
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const size = Math.max(rect.width, rect.height);
-                  const x = e.touches[0].clientX - rect.left - size / 2;
-                  const y = e.touches[0].clientY - rect.top - size / 2;
-                  
-                  ripple.style.width = ripple.style.height = `${size}px`;
-                  ripple.style.left = `${x}px`;
-                  ripple.style.top = `${y}px`;
-                  
-                  setTimeout(() => {
-                    ripple.remove();
-                  }, 600);
-                }}
+                
               >
                 {/* Flex container - creates two columns */}
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ 
+                  display: "flex", 
+                  flexDirection: "row",
+                  flexShrink: 0,
+                  flexGrow: 0,
+                  flexBasis: "auto",
+                }}>
                   {/* Left column - Time period */}
-                  <div style={{ width: "165px", padding: "10px" }}>
+                  <div style={{ 
+                    width: "165px", 
+                    padding: "10px",
+                    flexShrink: 0,
+                  }}>
                     <div className="font-mono period-text" style={{ 
                       fontSize: "0.75rem", 
                       color: "#a8b2d1",
@@ -535,7 +549,12 @@ const EducationSection = () => {
                   </div>
                   
                   {/* Right column - Content */}
-                  <div style={{ flex: "1", padding: "8px" }}>
+                  <div style={{ 
+                    flex: "1", 
+                    padding: "8px",
+                    flexShrink: 1,
+                    minWidth: 0,
+                  }}>
                     <h3 className="font-semibold m-0 p-0 flex items-center">
                       <span className="title-text" style={{ 
                         fontSize: "0.8rem", 
@@ -621,10 +640,16 @@ const EducationSection = () => {
         .certification-card {
           position: relative;
           overflow: hidden;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: none;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          perspective: 1000px;
+          will-change: transform;
         }
 
         .ripple {
-          position: fixed;
+          position: absolute;
           border-radius: 50%;
           background-color: rgba(100, 255, 218, 0.2);
           transform: scale(0);
@@ -641,6 +666,16 @@ const EducationSection = () => {
           to {
             transform: scale(4);
             opacity: 0;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .education-card,
+          .certification-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+            will-change: transform;
           }
         }
       `}</style>

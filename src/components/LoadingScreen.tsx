@@ -29,17 +29,37 @@ export default function LoadingScreen() {
       setFadeIn(true);
     }, 10);
 
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setCounter(prev => {
-        if (prev < 100) return prev + 1;
-        clearInterval(interval);
-        return 100;
-      });
-    }, 15);
+    // Simulate loading progress with easing
+    let startTime: number;
+    let animationFrame: number;
+    
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      
+      // Use smoother easing function
+      const easeOutExpo = (x: number): number => {
+        return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+      };
+      
+      const progressPercent = Math.min(progress / 2500, 1); // 2.5 seconds total
+      const easedProgress = easeOutExpo(progressPercent);
+      const newCounter = Math.min(Math.floor(easedProgress * 100), 100); // Ensure we don't exceed 100
+      
+      setCounter(newCounter);
+      
+      if (progress < 2500) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        // Ensure we reach 100% at the end
+        setCounter(100);
+      }
+    };
+    
+    animationFrame = requestAnimationFrame(animate);
 
     return () => {
-      clearInterval(interval);
+      cancelAnimationFrame(animationFrame);
       clearTimeout(initialTimer);
       if (typeof window !== 'undefined') {
         window.removeEventListener('resize', checkMobile);
@@ -152,7 +172,7 @@ export default function LoadingScreen() {
           <div style={{ 
             flexGrow: 1, 
             overflowY: 'auto',
-            marginBottom: '12px',
+            marginBottom: '0',
             fontSize: isMobile ? '12px' : '13px',
             lineHeight: isMobile ? '1.4' : '1.5',
           }}>
@@ -164,32 +184,46 @@ export default function LoadingScreen() {
               flexWrap: 'wrap',
               gap: '5px',
               rowGap: isMobile ? '6px' : '5px',
+              marginBottom: '0',
+              width: '100%', // Ensure full width on mobile
             }}>
               <span style={{ color: '#64ffda', marginRight: '5px' }}>$</span>
               <span className="terminal-cursor">Progress: </span>
               <div style={{ 
-                width: '60%',
-                maxWidth: '200px',
+                width: isMobile ? '100%' : '60%', // Full width on mobile
+                maxWidth: isMobile ? 'none' : '200px', // Remove max-width on mobile
                 height: isMobile ? '8px' : '10px',
                 backgroundColor: '#1e293b',
                 borderRadius: '5px',
                 overflow: 'hidden',
                 border: '1px solid #2d3748',
                 flexGrow: 1,
+                position: 'relative',
+                marginBottom: '0',
               }}>
-                <div style={{
-                  width: `${counter}%`,
-                  height: '100%',
-                  backgroundColor: '#64ffda',
-                  boxShadow: '0 0 5px rgba(100, 255, 218, 0.5)',
-                  transition: 'width 0.1s linear',
-                }}></div>
+                <div 
+                  className="loading-bar" 
+                  style={{
+                    width: `${counter}%`,
+                    height: '100%',
+                    backgroundColor: '#64ffda',
+                    boxShadow: '0 0 5px rgba(100, 255, 218, 0.5)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    marginBottom: '0',
+                    transition: 'width 0.1s linear', // Faster, linear transition for accuracy
+                  }}
+                >
+                  <div className="loading-bar-shine"></div>
+                </div>
               </div>
               <span style={{ 
                 color: '#64ffda', 
                 fontWeight: 'bold',
                 fontSize: isMobile ? '12px' : 'inherit',
-                marginLeft: isMobile ? 'auto' : undefined
+                marginLeft: isMobile ? 'auto' : undefined,
+                minWidth: isMobile ? '40px' : undefined, // Ensure consistent width for percentage
+                textAlign: isMobile ? 'right' : undefined, // Right align on mobile
               }}>
                 {counter}%
               </span>
@@ -225,10 +259,55 @@ export default function LoadingScreen() {
           vertical-align: middle;
         }
         
+        .loading-bar {
+          will-change: width;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+        
+        .loading-bar-shine {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+          );
+          animation: shine 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+        
+        @keyframes shine {
+          0% { 
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          20% {
+            opacity: 1;
+          }
+          80% {
+            opacity: 1;
+          }
+          100% { 
+            transform: translateX(200%);
+            opacity: 0;
+          }
+        }
+        
         @media (max-width: 600px) {
           .terminal-cursor::after {
             height: 11px;
             width: 6px;
+          }
+          
+          .loading-bar {
+            transition: width 0.05s linear; /* Even faster transition on mobile */
           }
         }
         
