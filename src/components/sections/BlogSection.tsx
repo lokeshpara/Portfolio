@@ -5,35 +5,48 @@
 // import Link from 'next/link';
 
 import React from 'react';
-
+// import Image from 'next/image';
+import blog1 from '../../../images/blog1.png';
+import blog2 from '../../../images/blog2.png';
+import blog3 from '../../../images/blog3.png';
+import blog4 from '../../../images/blog4.png';
 const blogPosts = [
   {
-    image: '/images/projects/ecommerce.jpg',
-    title: 'Building Performant Web Applications',
-    category: 'Web Development',
-    excerpt: 'Learn how to optimize your Next.js applications for maximum performance and user experience. This guide covers code splitting, image optimization, and server-side rendering techniques that can drastically improve your application loading times.',
-    date: 'June 15, 2023',
-    readTime: '8 min read',
-    url: 'https://medium.com/@lokeshpatil/building-performant-web-applications-nextjs'
-  },
-  {
-    image: '/images/portfolio-website.jpg',
-    title: 'The Power of TypeScript',
-    category: 'TypeScript',
-    excerpt: 'Discover how TypeScript can help you write more maintainable and error-free code in your projects. We explore type inference, interfaces, generics, and other advanced features that will level up your development workflow.',
-    date: 'May 22, 2023',
-    readTime: '6 min read',
-    url: 'https://medium.com/@lokeshpatil/power-of-typescript-modern-frontend'
-  },
-  {
-    image: '/images/task-management.jpg',
-    title: 'Creating Stunning Animations',
-    category: 'Animation',
-    excerpt: 'A comprehensive guide to implementing beautiful and performant animations in React applications. Learn how to create complex animations that enhance user experience without sacrificing performance.',
-    date: 'April 10, 2023',
+    image: blog1.src,
+    title: 'Fine-tuning Language Models: SFT, IFT, RLHF, and PEFT Demystified',
+    category: 'Machine Learning',
+    excerpt: 'A comprehensive guide to understanding different fine-tuning techniques for language models, including Supervised Fine-Tuning (SFT), Instruction Fine-Tuning (IFT), Reinforcement Learning from Human Feedback (RLHF), and Parameter-Efficient Fine-Tuning (PEFT).',
+    date: 'March 15, 2024',
     readTime: '10 min read',
-    url: 'https://medium.com/@lokeshpatil/creating-animations-framer-motion'
+    url: 'https://medium.com/@lokeshpara17/fine-tuning-language-models-sft-ift-rlhf-and-peft-demystified-efda0184567b'
   },
+  {
+    image: blog2.src,
+    title: 'Understanding Chinchilla Scaling Laws: How We Predict the Power of AI Models',
+    category: 'AI Research',
+    excerpt: 'An in-depth exploration of Chinchilla scaling laws and their role in predicting the capabilities and performance of AI models. Learn how these laws help us understand model scaling and optimization.',
+    date: 'March 10, 2024',
+    readTime: '8 min read',
+    url: 'https://medium.com/@lokeshpara17/understanding-chinchilla-scaling-laws-how-we-predict-the-power-of-ai-models-eba6d69d3de7'
+  },
+  {
+    image: blog3.src,
+    title: 'Tiny ImageNet Using PyTorch',
+    category: 'Deep Learning',
+    excerpt: 'A practical guide to implementing and training models on the Tiny ImageNet dataset using PyTorch. Learn about data preprocessing, model architecture, and training techniques for image classification.',
+    date: 'March 5, 2024',
+    readTime: '12 min read',
+    url: 'https://medium.com/@lokeshpara17/tiny-imagenet-using-pytorch-42a3f2ee3c9d'
+  },
+  {
+    image: blog4.src,
+    title: 'Python Interpreter',
+    category: 'Programming',
+    excerpt: 'A detailed look at how Python interpreters work, including bytecode compilation, virtual machine execution, and memory management. Understand the inner workings of Python execution.',
+    date: 'March 1, 2024',
+    readTime: '9 min read',
+    url: 'https://medium.com/@lokeshpara17/python-interpreter-a4d3b7e9170f'
+  }
 ];
 
 // Remove animation containers
@@ -41,14 +54,38 @@ const blogPosts = [
 // const item = { ... };
 
 const BlogSection = () => {
-  const handleCardClick = (url: string, element: HTMLElement) => {
+  const [activeCard, setActiveCard] = React.useState<number | null>(null);
+
+  const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Get the target element, handling both mouse and touch events
+    let target: HTMLElement;
+    if ('touches' in e) {
+      // Touch event
+      const touchEvent = e as React.TouchEvent;
+      if (touchEvent.touches && touchEvent.touches.length > 0) {
+        target = touchEvent.touches[0].target as HTMLElement;
+      } else {
+        target = e.target as HTMLElement;
+      }
+    } else {
+      // Mouse event
+      target = e.target as HTMLElement;
+    }
+    
+    // Get the card element
+    const card = target.closest('.blog-card') as HTMLElement;
+    if (!card) return;
+
     // Add ripple effect
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
     
-    // Position ripple at click point
-    const rect = element.getBoundingClientRect();
+    // Position ripple at click/touch point
+    const rect = card.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = rect.left + rect.width / 2 - size / 2;
     const y = rect.top + rect.height / 2 - size / 2;
@@ -60,218 +97,179 @@ const BlogSection = () => {
     // Add active class for animation
     ripple.classList.add('active');
 
-    // Apply hover effect
-    element.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-    element.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-    element.style.opacity = '1';
-    element.style.filter = 'none';
-    
-    const titleEl = element.querySelector(".title-text") as HTMLElement;
-    const categoryEl = element.querySelector(".category-text") as HTMLElement;
-    const dateEl = element.querySelector(".date-text") as HTMLElement;
-    const linkIcon = element.querySelector(".link-icon") as SVGElement;
-    const arrowLine = element.querySelector(".arrow-line") as SVGPathElement;
-    const arrowHead = element.querySelector(".arrow-head") as SVGPathElement;
-    const postImg = element.querySelector(".post-image") as HTMLImageElement;
-    
-    if (titleEl) titleEl.style.color = "#64ffda";
-    if (categoryEl) categoryEl.style.color = "rgba(100, 255, 218, 0.7)";
-    if (dateEl) dateEl.style.color = "rgba(100, 255, 218, 0.7)";
-    
-    if (postImg) {
-      postImg.style.transform = "scale(1.05)";
-      postImg.style.filter = "brightness(1.1)";
-    }
-     
-    if (linkIcon) {
-      linkIcon.style.color = "#64ffda";
-      linkIcon.style.opacity = "1";
-      linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
-      
-      if (arrowLine) {
-        arrowLine.style.strokeDasharray = "12";
-        arrowLine.style.strokeDashoffset = "12";
-        arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-      }
-      
-      if (arrowHead) {
-        arrowHead.style.strokeDasharray = "12";
-        arrowHead.style.strokeDashoffset = "12";
-        arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-      }
-    }
+    // Get elements to change color
+    const titleElClick = card.querySelector(".title-text") as HTMLElement;
+    const listEls = card.querySelectorAll("li");
+    const periodEl = card.querySelector(".period-text") as HTMLElement;
+
+    // Change colors
+    if (titleElClick) titleElClick.style.color = "#64ffda";
+    if (periodEl) periodEl.style.color = "#64ffda";
+    listEls.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+    });
     
     // Delay opening URL
     setTimeout(() => {
       window.open(url, '_blank', 'noopener,noreferrer');
-      
-      // Reset styles after opening URL
+      // Remove ripple after animation
       setTimeout(() => {
-        element.style.backgroundColor = "transparent";
-        element.style.boxShadow = "none";
-        
-        if (titleEl) titleEl.style.color = "#ccd6f6";
-        if (categoryEl) categoryEl.style.color = "#a8b2d1";
-        if (dateEl) dateEl.style.color = "#a8b2d1";
-        
-        if (postImg) {
-          postImg.style.transform = "scale(1)";
-          postImg.style.filter = "brightness(1)";
-        }
-         
-        if (linkIcon) {
-          linkIcon.style.color = "#a8b2d1";
-          linkIcon.style.opacity = "0.6";
-          linkIcon.style.animation = "none";
-          
-          if (arrowLine) {
-            arrowLine.style.animation = "none";
-            arrowLine.style.strokeDashoffset = "12";
-          }
-          
-          if (arrowHead) {
-            arrowHead.style.animation = "none";
-            arrowHead.style.strokeDashoffset = "12";
-          }
-        }
-        
-        // Remove ripple after animation
         ripple.remove();
+        // Reset colors
+        if (titleElClick) titleElClick.style.color = "#ccd6f6";
+        if (periodEl) periodEl.style.color = "#a8b2d1";
+        listEls.forEach((el: Element) => {
+          const element = el as HTMLElement;
+          element.style.color = "#a8b2d1";
+        });
       }, 600);
     }, 300);
   };
 
+  const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) return;
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.blog-card') as HTMLElement;
+    if (!card) return;
+
+    // Make all other cards less visible
+    document.querySelectorAll('.blog-card').forEach(c => {
+      if (c !== card) {
+        (c as HTMLElement).style.opacity = '0.4';
+      }
+    });
+
+    // Style current card
+    card.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+    card.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+    card.style.opacity = '1';
+
+    // Change text colors
+    const titleElHover = card.querySelector(".title-text") as HTMLElement;
+    const listElsHover = card.querySelectorAll("li");
+    const periodElHover = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleElHover) titleElHover.style.color = "#64ffda";
+    if (periodElHover) periodElHover.style.color = "#64ffda";
+    listElsHover.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+    });
+  };
+
+  const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) return;
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.blog-card') as HTMLElement;
+    if (!card) return;
+
+    // Reset all cards to full opacity
+    document.querySelectorAll('.blog-card').forEach(c => {
+      (c as HTMLElement).style.opacity = '1';
+    });
+
+    // Reset current card styles
+    card.style.backgroundColor = "transparent";
+    card.style.boxShadow = "none";
+
+    // Reset text colors
+    const titleElLeave = card.querySelector(".title-text") as HTMLElement;
+    const listElsLeave = card.querySelectorAll("li");
+    const periodElLeave = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleElLeave) titleElLeave.style.color = "#ccd6f6";
+    if (periodElLeave) periodElLeave.style.color = "#a8b2d1";
+    listElsLeave.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#a8b2d1";
+    });
+  };
+
   return (
-    <section id="projects">
+    <section id="blog">
       <div className="mb-4 md:hidden" style={{ marginLeft: '0.95rem' }}>
-        <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>PROJECTS</h2>
+        <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>BLOG</h2>
       </div>
 
       <div 
-        className="space-y-3 projects-container"
+        className="space-y-3 blog-container"
         onMouseLeave={() => {
-          // Reset all cards to full opacity when mouse leaves the container
-          document.querySelectorAll('.project-card').forEach(card => {
-            (card as HTMLElement).style.opacity = '1';
-            (card as HTMLElement).style.filter = 'none';
-          });
+          setActiveCard(null);
         }}
       >
         {blogPosts.map((post, index) => (
-          <div 
+          <a 
             key={index}
-            className="rounded-lg overflow-hidden cursor-pointer project-card"
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg overflow-hidden cursor-pointer blog-card"
             style={{ 
               padding: "10px",
               transition: "all 0.3s ease",
               borderRadius: "15px",
+              position: "relative",
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              perspective: "1000px",
+              willChange: "transform",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              cursor: "pointer",
+              userSelect: "none",
+              textDecoration: "none",
+              color: "inherit",
+              ...(activeCard === index && {
+                backgroundColor: "rgba(100, 146, 255, 0.05)",
+                boxShadow: "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)",
+                opacity: '1',
+                filter: 'none'
+              })
             }}
-            onClick={(e) => handleCardClick(post.url, e.currentTarget)}
-            onTouchEnd={(e) => {
+            onClick={(e) => handleCardClick(post.url, e)}
+            onMouseEnter={handleCardInteraction}
+            onTouchStart={handleCardInteraction}
+            onMouseLeave={handleCardLeave}
+            onTouchEnd={(e: React.TouchEvent) => {
               e.preventDefault();
-              handleCardClick(post.url, e.currentTarget);
-            }}
-            onMouseEnter={(e) => {
-              // Make all other cards less visible
-              document.querySelectorAll('.project-card').forEach(card => {
-                if (card !== e.currentTarget) {
-                  (card as HTMLElement).style.opacity = '0.4';
-                  (card as HTMLElement).style.filter = 'grayscale(40%)';
-                }
-              });
-              
-              // Style current card
-              e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-              e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-              e.currentTarget.style.opacity = '1';
-              e.currentTarget.style.filter = 'none';
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
-              
-              if (titleEl) titleEl.style.color = "#64ffda";
-              if (projectImg) projectImg.style.transform = "scale(1.05)";
-              
-              if (linkIcon) {
-                linkIcon.style.color = "#64ffda";
-                linkIcon.style.opacity = "1";
-                
-                // Animation is already defined in the academic section
-                linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
-                
-                if (arrowLine) {
-                  arrowLine.style.strokeDasharray = "12";
-                  arrowLine.style.strokeDashoffset = "12";
-                  arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                }
-                
-                if (arrowHead) {
-                  arrowHead.style.strokeDasharray = "12";
-                  arrowHead.style.strokeDashoffset = "12";
-                  arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                }
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#64ffda";
-                (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
-              });
-            }}
-            onMouseLeave={(e) => {
-              // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-              e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.boxShadow = "none";
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              const projectImg = e.currentTarget.querySelector(".project-image") as HTMLImageElement;
-              
-              if (titleEl) titleEl.style.color = "#ccd6f6";
-              if (projectImg) projectImg.style.transform = "scale(1)";
-              
-              if (linkIcon) {
-                linkIcon.style.color = "#a8b2d1";
-                linkIcon.style.opacity = "0.6";
-                linkIcon.style.animation = "none";
-                
-                if (arrowLine) {
-                  arrowLine.style.animation = "none";
-                  arrowLine.style.strokeDashoffset = "12";
-                }
-                
-                if (arrowHead) {
-                  arrowHead.style.animation = "none";
-                  arrowHead.style.strokeDashoffset = "12";
-                }
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-                (el as HTMLElement).style.backgroundColor = "#112240";
-              });
+              handleCardLeave(e);
+              handleCardClick(post.url, e);
             }}
           >
             {/* Flex container - creates two columns */}
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {/* Left column - Project Image */}
-              <div style={{ width: "165px", padding: "10px" }}>
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "row",
+              flexShrink: 0,
+              flexGrow: 0,
+              flexBasis: "auto",
+              width: "100%",
+              height: "100%"
+            }}>
+              {/* Left column - Blog Image */}
+              <div style={{ 
+                width: "165px", 
+                padding: "10px",
+                flexShrink: 0,
+                height: "100%"
+              }}>
                 <div className="image-container" style={{ 
                   overflow: "hidden", 
                   borderRadius: "8px", 
@@ -279,35 +277,53 @@ const BlogSection = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#112240"
+                  backgroundColor: "#112240",
+                  width: "100%"
                 }}>
                   <img 
                     src={post.image} 
-                    alt={post.title} 
-                    className="project-image"
+                    alt={post.title}
                     style={{ 
-                      width: "100%", 
-                      height: "100%", 
+                      width: "100%",
+                      height: "100%",
                       objectFit: "cover",
                       transition: "all 0.3s ease"
-                    }} 
+                    }}
                   />
                 </div>
               </div>
-              
+
               {/* Right column - Content */}
-              <div style={{ flex: "1", padding: "8px" }}>
-                <h3 className="font-semibold m-0 p-0 flex items-center">
+              <div style={{ 
+                flex: "1", 
+                padding: "8px",
+                flexShrink: 1,
+                minWidth: 0,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between"
+              }}>
+                <h3 
+                  className="font-semibold m-0 p-0 flex items-center cursor-pointer"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "flex-start"
+                  }}
+                >
                   <span className="title-text" style={{ 
                     fontSize: "0.8rem", 
                     color: "#ccd6f6",
                     transition: "color 0.3s ease",
                     display: "flex",
                     alignItems: "center",
-                    gap: "8px"
+                    gap: "8px",
+                    width: "100%"
                   }}>
                     {post.title}
-                      <svg 
+                    <svg 
                       xmlns="http://www.w3.org/2000/svg" 
                       width="18" 
                       height="18" 
@@ -322,35 +338,11 @@ const BlogSection = () => {
                         opacity: 0.6,
                         color: "#a8b2d1",
                         transition: "all 0.3s ease",
-                        cursor: "pointer",
-                        position: "relative",
-                        marginTop: "0px",
+                        flexShrink: 0
                       }}
                     >
-                      {/* Arrow line */}
-                      <path 
-                        className="arrow-line" 
-                        d="M7,17 L17,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* 90 degree arrow head */}
-                      <path 
-                        className="arrow-head" 
-                        d="M17,7 L17,13 M17,7 L11,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* Small box outline */}
-                      <rect 
-                        x="7" 
-                        y="7" 
-                        width="10" 
-                        height="10" 
-                        strokeWidth="1.5" 
-                        strokeOpacity="0.4"
-                        rx="1"
-                      />
+                      <path className="arrow-line" d="M7 7l10 10" />
+                      <path className="arrow-head" d="M7 17V7h10" />
                     </svg>
                   </span>
                 </h3>
@@ -358,14 +350,18 @@ const BlogSection = () => {
                 <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
                   fontSize: '0.7rem', 
                   lineHeight: 1.3, 
-                  padding: "10px 0" 
+                  padding: "10px 0",
+                  flex: 1
                 }}>
                   {post.excerpt}
                 </p>
                 
-                <ul className="flex flex-wrap gap-2 mt-1" style={{ padding: "2px 0 10px 0" }}>
+                <ul className="flex flex-wrap gap-2 mt-1" style={{ 
+                  padding: "2px 0 10px 0",
+                  width: "100%"
+                }}>
                   <li 
-                    className="rounded tech-item"
+                    className="rounded tech-item category-text"
                     style={{ 
                       fontSize: '0.65rem',
                       padding: '2px 6px',
@@ -380,7 +376,7 @@ const BlogSection = () => {
                     {post.category}
                   </li>
                   <li 
-                    className="rounded tech-item"
+                    className="rounded tech-item date-text"
                     style={{ 
                       fontSize: '0.65rem',
                       padding: '2px 6px',
@@ -412,7 +408,7 @@ const BlogSection = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -434,7 +430,7 @@ const BlogSection = () => {
             100% { background-position: 200% 0; }
           }
           
-          .projects-btn {
+          .blog-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
@@ -449,7 +445,7 @@ const BlogSection = () => {
             cursor: pointer;
           }
           
-          .projects-btn::before {
+          .blog-btn::before {
             content: "";
             position: absolute;
             top: 0;
@@ -474,16 +470,16 @@ const BlogSection = () => {
             animation: borderRotate 4s ease infinite;
           }
           
-          .projects-btn:hover {
+          .blog-btn:hover {
             background-color: rgba(100, 255, 218, 0.05);
             transform: translateY(-2px);
           }
           
-          .projects-btn:hover::before {
+          .blog-btn:hover::before {
             animation: borderRotate 2s ease infinite;
           }
           
-          .projects-btn:hover .btn-text {
+          .blog-btn:hover .btn-text {
             background-position: 100% 0;
           }
           
@@ -507,7 +503,7 @@ const BlogSection = () => {
             transform-origin: center;
           }
           
-          .projects-btn:hover .folder-icon {
+          .blog-btn:hover .folder-icon {
             transform: translateY(-2px) scale(1.1);
             filter: drop-shadow(0 2px 2px rgba(100, 255, 218, 0.3));
           }
@@ -518,8 +514,14 @@ const BlogSection = () => {
             100% { transform: scaleY(1); }
           }
           
-          .projects-btn:hover .folder-top {
+          .blog-btn:hover .folder-top {
             animation: folderOpen 1.5s infinite ease-in-out;
+          }
+          
+          @keyframes iconPulse {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
           }
           
           .ripple {
@@ -544,10 +546,10 @@ const BlogSection = () => {
           }
         `}</style>
         <a 
-          href="/projects"
-          className="projects-btn"
+          href="/blog"
+          className="blog-btn"
         >
-          <span className="btn-text">View All Projects</span>
+          <span className="btn-text">View All Posts</span>
           <svg 
             className="folder-icon" 
             width="16" 

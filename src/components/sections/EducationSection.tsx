@@ -77,26 +77,137 @@ const certifications = [
 ];
 
 const EducationSection = () => {
-  const handleCardClick = (url: string) => {
+  const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) {
+      return; // Don't apply any effects on touch devices
+    }
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.education-card, .certification-card') as HTMLElement;
+    if (!card) return;
+
+    // Make all other cards less visible
+    document.querySelectorAll('.education-card, .certification-card').forEach(c => {
+      if (c !== card) {
+        (c as HTMLElement).style.opacity = '0.4';
+      }
+    });
+
+    // Style current card
+    card.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+    card.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+    card.style.opacity = '1';
+
+    // Change text colors
+    const titleEl = card.querySelector(".title-text") as HTMLElement;
+    const listEls = card.querySelectorAll(".achieve-item, .tech-item");
+    const periodEl = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleEl) titleEl.style.color = "#64ffda";
+    if (periodEl) periodEl.style.color = "#64ffda";
+    listEls.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+      element.style.backgroundColor = "rgba(100, 255, 218, 0.1)";
+    });
+  };
+
+  const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) {
+      return; // Don't apply any effects on touch devices
+    }
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.education-card, .certification-card') as HTMLElement;
+    if (!card) return;
+
+    // Reset all cards to full opacity
+    document.querySelectorAll('.education-card, .certification-card').forEach(c => {
+      (c as HTMLElement).style.opacity = '1';
+    });
+
+    // Reset current card styles
+    card.style.backgroundColor = "transparent";
+    card.style.boxShadow = "none";
+
+    // Reset text colors
+    const titleEl = card.querySelector(".title-text") as HTMLElement;
+    const listEls = card.querySelectorAll(".achieve-item, .tech-item");
+    const periodEl = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleEl) titleEl.style.color = "#ccd6f6";
+    if (periodEl) periodEl.style.color = "#a8b2d1";
+    listEls.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#a8b2d1";
+      element.style.backgroundColor = "#112240";
+    });
+  };
+
+  const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Get the target element, handling both mouse and touch events
+    let target: HTMLElement;
+    if ('touches' in e) {
+      // Touch event
+      const touchEvent = e as React.TouchEvent;
+      if (touchEvent.touches && touchEvent.touches.length > 0) {
+        target = touchEvent.touches[0].target as HTMLElement;
+      } else {
+        target = e.target as HTMLElement;
+      }
+    } else {
+      // Mouse event
+      target = e.target as HTMLElement;
+    }
+    
+    // Get the card element
+    const card = target.closest('.education-card, .certification-card') as HTMLElement;
+    if (!card) return;
+
     // Add ripple effect
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
     
-    // Position ripple at click point
-    const rect = document.activeElement?.getBoundingClientRect();
-    if (rect) {
-      const size = Math.max(rect.width, rect.height);
-      const x = rect.left + rect.width / 2 - size / 2;
-      const y = rect.top + rect.height / 2 - size / 2;
-      
-      ripple.style.width = ripple.style.height = `${size}px`;
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-    }
+    // Position ripple at click/touch point
+    const rect = card.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = rect.left + rect.width / 2 - size / 2;
+    const y = rect.top + rect.height / 2 - size / 2;
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
     
     // Add active class for animation
     ripple.classList.add('active');
+
+    // Get elements to change color
+    const titleEl = card.querySelector(".title-text") as HTMLElement;
+    const listEls = card.querySelectorAll(".achieve-item, .tech-item");
+    const periodEl = card.querySelector(".period-text") as HTMLElement;
+
+    // Change colors
+    if (titleEl) titleEl.style.color = "#64ffda";
+    if (periodEl) periodEl.style.color = "#64ffda";
+    listEls.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+      element.style.backgroundColor = "rgba(100, 255, 218, 0.1)";
+    });
     
     // Delay opening URL
     setTimeout(() => {
@@ -104,6 +215,14 @@ const EducationSection = () => {
       // Remove ripple after animation
       setTimeout(() => {
         ripple.remove();
+        // Reset colors
+        if (titleEl) titleEl.style.color = "#ccd6f6";
+        if (periodEl) periodEl.style.color = "#a8b2d1";
+        listEls.forEach((el: Element) => {
+          const element = el as HTMLElement;
+          element.style.color = "#a8b2d1";
+          element.style.backgroundColor = "#112240";
+        });
       }, 600);
     }, 300);
   };
@@ -139,115 +258,68 @@ const EducationSection = () => {
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
                   position: "relative",
-                  touchAction: "none",
+                  touchAction: "pan-y",
                   WebkitTapHighlightColor: "transparent",
                   transform: "translateZ(0)",
                   backfaceVisibility: "hidden",
                   perspective: "1000px",
                   willChange: "transform",
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                  userSelect: "none",
+                  WebkitUserSelect: "none",
+                  MozUserSelect: "none",
+                  msUserSelect: "none",
+                  WebkitTouchCallout: "none",
+                  WebkitOverflowScrolling: "touch",
                 }}
-                onMouseEnter={(e) => {
-                  // Make all other cards less visible
-                  document.querySelectorAll('.certification-card').forEach(card => {
-                    if (card !== e.currentTarget) {
-                      (card as HTMLElement).style.opacity = '0.4';
-                      (card as HTMLElement).style.filter = 'grayscale(40%)';
-                    }
-                  });
+                onMouseEnter={handleCardInteraction}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  card.dataset.touchStartY = e.touches[0].clientY.toString();
+                }}
+                onTouchMove={(e) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  const startY = parseFloat(card.dataset.touchStartY || '0');
+                  const currentY = e.touches[0].clientY;
                   
-                  // Style current card
-                  e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-                  e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-                  e.currentTarget.style.opacity = '1';
-                  e.currentTarget.style.filter = 'none';
-                  
-                  const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                  const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                  const techEls = e.currentTarget.querySelectorAll(".tech-item");
-                  const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                  const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                  const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                  const certImg = e.currentTarget.querySelector(".cert-image") as HTMLImageElement;
-                  const imgOverlay = e.currentTarget.querySelector(".img-overlay") as HTMLDivElement;
-                  
-                  if (titleEl) titleEl.style.color = "#64ffda";
-                  if (certImg) certImg.style.transform = "scale(1.05)";
-                  if (imgOverlay) imgOverlay.style.backgroundColor = "rgba(100, 255, 218, 0.1)";
-                  
-                  if (linkIcon) {
-                    linkIcon.style.color = "#64ffda";
-                    linkIcon.style.opacity = "1";
+                  if (Math.abs(currentY - startY) > 5) {
+                    card.dataset.isScrolling = 'true';
+                    // Reset all styles immediately
+                    card.style.backgroundColor = "transparent";
+                    card.style.boxShadow = "none";
+                    card.style.opacity = '1';
                     
-                    // Animation is already defined in the academic section
-                    linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
+                    // Reset text colors
+                    const titleEl = card.querySelector(".title-text") as HTMLElement;
+                    const listEls = card.querySelectorAll(".achieve-item, .tech-item");
+                    const periodEl = card.querySelector(".period-text") as HTMLElement;
                     
-                    if (arrowLine) {
-                      arrowLine.style.strokeDasharray = "12";
-                      arrowLine.style.strokeDashoffset = "12";
-                      arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                    }
-                    
-                    if (arrowHead) {
-                      arrowHead.style.strokeDasharray = "12";
-                      arrowHead.style.strokeDashoffset = "12";
-                      arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                    }
+                    if (titleEl) titleEl.style.color = "#ccd6f6";
+                    if (periodEl) periodEl.style.color = "#a8b2d1";
+                    listEls.forEach((el: Element) => {
+                      const element = el as HTMLElement;
+                      element.style.color = "#a8b2d1";
+                      element.style.backgroundColor = "#112240";
+                    });
+                  }
+                }}
+                onMouseLeave={handleCardLeave}
+                onTouchEnd={(e: React.TouchEvent) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  
+                  if (card.dataset.isScrolling !== 'true') {
+                    handleCardClick(cert.url, e);
                   }
                   
-                  subtitleEls.forEach(el => {
-                    (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-                  });
-                  
-                  techEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#64ffda";
-                    (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
-                  });
+                  // Clean up
+                  delete card.dataset.touchStartY;
+                  delete card.dataset.isScrolling;
                 }}
-                onMouseLeave={(e) => {
-                  // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.boxShadow = "none";
-                  
-                  const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                  const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                  const techEls = e.currentTarget.querySelectorAll(".tech-item");
-                  const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                  const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                  const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                  const certImg = e.currentTarget.querySelector(".cert-image") as HTMLImageElement;
-                  const imgOverlay = e.currentTarget.querySelector(".img-overlay") as HTMLDivElement;
-                  
-                  if (titleEl) titleEl.style.color = "#ccd6f6";
-                  if (certImg) certImg.style.transform = "scale(1)";
-                  if (imgOverlay) imgOverlay.style.backgroundColor = "rgba(17, 34, 64, 0.7)";
-                  
-                  if (linkIcon) {
-                    linkIcon.style.color = "#a8b2d1";
-                    linkIcon.style.opacity = "0.6";
-                    linkIcon.style.animation = "none";
-                    
-                    if (arrowLine) {
-                      arrowLine.style.animation = "none";
-                      arrowLine.style.strokeDashoffset = "12";
-                    }
-                    
-                    if (arrowHead) {
-                      arrowHead.style.animation = "none";
-                      arrowHead.style.strokeDashoffset = "12";
-                    }
-                  }
-                  
-                  subtitleEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#a8b2d1";
-                  });
-                  
-                  techEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#a8b2d1";
-                    (el as HTMLElement).style.backgroundColor = "#112240";
-                  });
-                }}
-                onClick={() => handleCardClick(cert.url)}
-                
+                onClick={(e) => handleCardClick(cert.url, e)}
               >
                 {/* Flex container - creates two columns */}
                 <div style={{ 
@@ -261,35 +333,17 @@ const EducationSection = () => {
                   <div style={{ 
                     width: "165px", 
                     padding: "10px", 
-                    position: "relative", 
-                    overflow: "hidden", 
-                    borderRadius: "8px",
-                    flexShrink: 0,
+                    flexShrink: 0
                   }}>
-                    <div className="img-overlay" style={{ 
-                      position: "absolute", 
-                      top: 0, 
-                      left: 0, 
-                      width: "100%", 
-                      height: "100%", 
-                      backgroundColor: "rgba(17, 34, 64, 0.7)",
-                      transition: "background-color 0.3s ease",
-                      zIndex: 1
-                    }}></div>
-                    <div style={{ 
-                      fontSize: "0.65rem", 
-                      position: "absolute", 
-                      bottom: "8px", 
-                      left: "8px", 
-                      padding: "2px 8px", 
-                      borderRadius: "4px", 
-                      backgroundColor: "rgba(100, 255, 218, 0.2)", 
-                      color: "#64ffda",
-                      zIndex: 2,
-                      fontFamily: "monospace"
+                    <div className="image-container" style={{ 
+                      overflow: "hidden", 
+                      borderRadius: "8px", 
+                      height: "100px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#112240"
                     }}>
-                      {cert.period}
-                    </div>
                     <img 
                       src={cert.image} 
                       alt={cert.name}
@@ -298,10 +352,10 @@ const EducationSection = () => {
                         width: "100%", 
                         height: "100%", 
                         objectFit: "cover",
-                        transition: "transform 0.3s ease",
-                        borderRadius: "4px"
+                          transition: "all 0.3s ease"
                       }}
                     />
+                    </div>
                   </div>
                   
                   {/* Right column - Content */}
@@ -311,40 +365,40 @@ const EducationSection = () => {
                     flexShrink: 1,
                     minWidth: 0,
                   }}>
-                    <h3 className="font-semibold m-0 p-0 flex items-center">
+                    <h3 
+                      className="font-semibold m-0 p-0 flex items-center cursor-pointer"
+                      onClick={(e) => handleCardClick(cert.url, e)}
+                    >
                       <span className="title-text" style={{ 
                         fontSize: "0.8rem", 
                         color: "#ccd6f6",
                         transition: "color 0.3s ease",
                         display: "flex",
                         alignItems: "center",
+                        gap: "8px"
                       }}>
-                        {cert.name}
+                        {cert.name} - {cert.issuer}
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="18" 
+                          height="18" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="1.5" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          className="link-icon" 
+                          style={{ 
+                            opacity: 0.6,
+                            color: "#a8b2d1",
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          <path className="arrow-line" d="M7 7l10 10" />
+                          <path className="arrow-head" d="M7 17V7h10" />
+                        </svg>
                       </span>
-                      
-                      {/* External link arrow icon */}
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="18" 
-                        height="18" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="link-icon ml-2" 
-                        style={{ 
-                          opacity: 0.6,
-                          color: "#a8b2d1",
-                          transition: "all 0.3s ease",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <path d="M7,17 L17,7" className="arrow-line" strokeLinecap="round" />
-                        <path d="M17,7 L17,13 M17,7 L11,7" className="arrow-head" strokeLinecap="round" />
-                        <rect x="7" y="7" width="10" height="10" strokeWidth="1.5" strokeOpacity="0.4" rx="1" />
-                      </svg>
                     </h3>
                     
                     <div className="mt-1 mb-2">
@@ -419,111 +473,69 @@ const EducationSection = () => {
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
                   position: "relative",
-                  touchAction: "none",
+                  touchAction: "pan-y",
                   WebkitTapHighlightColor: "transparent",
                   transform: "translateZ(0)",
                   backfaceVisibility: "hidden",
                   perspective: "1000px",
                   willChange: "transform",
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                  userSelect: "none",
+                  WebkitUserSelect: "none",
+                  MozUserSelect: "none",
+                  msUserSelect: "none",
+                  WebkitTouchCallout: "none",
+                  WebkitOverflowScrolling: "touch",
+                  overscrollBehavior: "contain",
                 }}
-                onMouseEnter={(e) => {
-                  // Make all other cards less visible
-                  document.querySelectorAll('.education-card').forEach(card => {
-                    if (card !== e.currentTarget) {
-                      (card as HTMLElement).style.opacity = '0.4';
-                      (card as HTMLElement).style.filter = 'grayscale(40%)';
-                    }
-                  });
+                onMouseEnter={handleCardInteraction}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  card.dataset.touchStartY = e.touches[0].clientY.toString();
+                }}
+                onTouchMove={(e) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  const startY = parseFloat(card.dataset.touchStartY || '0');
+                  const currentY = e.touches[0].clientY;
                   
-                  // Style current card
-                  e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-                  e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-                  e.currentTarget.style.opacity = '1';
-                  e.currentTarget.style.filter = 'none';
-                  
-                  const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                  const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                  const achieveEls = e.currentTarget.querySelectorAll(".achieve-item");
-                  const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                  const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                  const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                  const periodEl = e.currentTarget.querySelector(".period-text") as HTMLElement;
-                  
-                  if (titleEl) titleEl.style.color = "#64ffda";
-                  if (periodEl) periodEl.style.color = "#64ffda";
-                  
-                  if (linkIcon) {
-                    linkIcon.style.color = "#64ffda";
-                    linkIcon.style.opacity = "1";
+                  if (Math.abs(currentY - startY) > 5) {
+                    card.dataset.isScrolling = 'true';
+                    // Reset all styles immediately
+                    card.style.backgroundColor = "transparent";
+                    card.style.boxShadow = "none";
+                    card.style.opacity = '1';
                     
-                    // Animation is already defined in the academic section
-                    linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
+                    // Reset text colors
+                    const titleEl = card.querySelector(".title-text") as HTMLElement;
+                    const listEls = card.querySelectorAll(".achieve-item, .tech-item");
+                    const periodEl = card.querySelector(".period-text") as HTMLElement;
                     
-                    if (arrowLine) {
-                      arrowLine.style.strokeDasharray = "12";
-                      arrowLine.style.strokeDashoffset = "12";
-                      arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                    }
-                    
-                    if (arrowHead) {
-                      arrowHead.style.strokeDasharray = "12";
-                      arrowHead.style.strokeDashoffset = "12";
-                      arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                    }
+                    if (titleEl) titleEl.style.color = "#ccd6f6";
+                    if (periodEl) periodEl.style.color = "#a8b2d1";
+                    listEls.forEach((el: Element) => {
+                      const element = el as HTMLElement;
+                      element.style.color = "#a8b2d1";
+                      element.style.backgroundColor = "#112240";
+                    });
+                  }
+                }}
+                onMouseLeave={handleCardLeave}
+                onTouchEnd={(e: React.TouchEvent) => {
+                  e.stopPropagation();
+                  const card = e.currentTarget as HTMLElement;
+                  
+                  if (card.dataset.isScrolling !== 'true') {
+                    handleCardClick(edu.url, e);
                   }
                   
-                  subtitleEls.forEach(el => {
-                    (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-                  });
-                  
-                  achieveEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#64ffda";
-                    (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
-                  });
+                  // Clean up
+                  delete card.dataset.touchStartY;
+                  delete card.dataset.isScrolling;
                 }}
-                onMouseLeave={(e) => {
-                  // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.boxShadow = "none";
-                  
-                  const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-                  const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-                  const achieveEls = e.currentTarget.querySelectorAll(".achieve-item");
-                  const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-                  const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-                  const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-                  const periodEl = e.currentTarget.querySelector(".period-text") as HTMLElement;
-                  
-                  if (titleEl) titleEl.style.color = "#ccd6f6";
-                  if (periodEl) periodEl.style.color = "#a8b2d1";
-                  
-                  if (linkIcon) {
-                    linkIcon.style.color = "#a8b2d1";
-                    linkIcon.style.opacity = "0.6";
-                    linkIcon.style.animation = "none";
-                    
-                    if (arrowLine) {
-                      arrowLine.style.animation = "none";
-                      arrowLine.style.strokeDashoffset = "12";
-                    }
-                    
-                    if (arrowHead) {
-                      arrowHead.style.animation = "none";
-                      arrowHead.style.strokeDashoffset = "12";
-                    }
-                  }
-                  
-                  subtitleEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#a8b2d1";
-                  });
-                  
-                  achieveEls.forEach(el => {
-                    (el as HTMLElement).style.color = "#a8b2d1";
-                    (el as HTMLElement).style.backgroundColor = "#112240";
-                  });
-                }}
-                onClick={() => handleCardClick(edu.url)}
-                
+                onClick={(e) => handleCardClick(edu.url, e)}
               >
                 {/* Flex container - creates two columns */}
                 <div style={{ 
@@ -555,40 +567,40 @@ const EducationSection = () => {
                     flexShrink: 1,
                     minWidth: 0,
                   }}>
-                    <h3 className="font-semibold m-0 p-0 flex items-center">
+                    <h3 
+                      className="font-semibold m-0 p-0 flex items-center cursor-pointer"
+                      onClick={(e) => handleCardClick(edu.url, e)}
+                    >
                       <span className="title-text" style={{ 
                         fontSize: "0.8rem", 
                         color: "#ccd6f6",
                         transition: "color 0.3s ease",
                         display: "flex",
                         alignItems: "center",
+                        gap: "8px"
                       }}>
                         {edu.degree}
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="18" 
+                          height="18" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="1.5" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          className="link-icon" 
+                          style={{ 
+                            opacity: 0.6,
+                            color: "#a8b2d1",
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          <path className="arrow-line" d="M7 7l10 10" />
+                          <path className="arrow-head" d="M7 17V7h10" />
+                        </svg>
                       </span>
-                      
-                      {/* External link arrow icon */}
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="18" 
-                        height="18" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="link-icon ml-2" 
-                        style={{ 
-                          opacity: 0.6,
-                          color: "#a8b2d1",
-                          transition: "all 0.3s ease",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <path d="M7,17 L17,7" className="arrow-line" strokeLinecap="round" />
-                        <path d="M17,7 L17,13 M17,7 L11,7" className="arrow-head" strokeLinecap="round" />
-                        <rect x="7" y="7" width="10" height="10" strokeWidth="1.5" strokeOpacity="0.4" rx="1" />
-                      </svg>
                     </h3>
                     
                     <div className="mt-1 mb-2">
@@ -641,15 +653,33 @@ const EducationSection = () => {
           position: relative;
           overflow: hidden;
           -webkit-tap-highlight-color: transparent;
-          touch-action: none;
+          touch-action: pan-y;
           transform: translateZ(0);
           backface-visibility: hidden;
           perspective: 1000px;
           will-change: transform;
+          background-color: transparent;
+          box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+          .education-card,
+          .certification-card {
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+            background-color: transparent !important;
+            box-shadow: none !important;
+          }
+        }
+
+        @keyframes iconPulse {
+          0% { transform: translateX(0); }
+          50% { transform: translateX(4px); }
+          100% { transform: translateX(0); }
         }
 
         .ripple {
-          position: absolute;
+          position: fixed;
           border-radius: 50%;
           background-color: rgba(100, 255, 218, 0.2);
           transform: scale(0);
@@ -669,7 +699,7 @@ const EducationSection = () => {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 1200px) {
           .education-card,
           .certification-card {
             transform: translateZ(0);
