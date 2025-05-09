@@ -37,19 +37,19 @@ export default function AboutSection() {
         
         <div className="space-y-0">
           <p className="pb-2 text-light-slate" style={{ fontSize: '0.80rem' }}>
-            I'm a <span className="highlight">Software Engineer specializing in AI & Full Stack Development</span> with hands-on experience building applications that involve backend systems, AI tools, and user-facing interfaces. I like working on projects that solve real problems, whether it's recognizing handwritten digits, helping people improve their resumes, or building a clean and interactive personal website. I care about writing code that works, is easy to understand, and serves a clear purpose.
+            I'm a <span className="highlight">Full Stack AI Developer</span> who builds applications that combine web development with machine learning. My work includes browser extensions for learning and computer vision systems for image processing. I focus on writing clean code and making complex technologies accessible to users.
           </p>
           
           <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.80rem' }}>
-            In terms of skills, I've used <span className="highlight">Python</span>, <span className="highlight">JavaScript</span>, and <span className="highlight">Java</span> to build different types of applications. I've worked with <span className="highlight">Flask</span>, <span className="highlight">React</span>, and <span className="highlight">Next.js</span>, and I'm comfortable building and connecting APIs, creating user interfaces, and handling data. My projects often include a mix of frontend and backend logic, along with tools like <span className="highlight">PyTorch</span> for deep learning and <span className="highlight">Docker</span> for deployment.
+            As a <span className="highlight">Full Stack Developer</span>, I build applications using <span className="highlight">Next.js</span> and <span className="highlight">React</span>, creating responsive user interfaces. For machine learning, I've built several systems, including a custom ResNet model that achieved <span className="highlight">92.22% test accuracy</span> on CIFAR-10, surpassing the target by 2.22%. I've also built a YOLOv3-based system for object detection in video streams. My backend work uses <span className="highlight">Python</span> and <span className="highlight">Flask</span> to create APIs that serve machine learning models.
           </p>
           
           <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.8rem' }}>
-            One of my recent interests is working with <span className="highlight">large language models</span> and automation. I've explored AI fine-tuning techniques like <span className="highlight">SFT</span>, <span className="highlight">IFT</span>, <span className="highlight">RLHF</span>, and <span className="highlight">PEFT</span>, and I've built a Chrome extension that uses OpenAI's API to analyze and generate documents like resumes and cover letters. I've also developed a CNN-based web app for MNIST digit recognition, experimenting with different regularization methods and visualizing model performance.
+            I've built three Chrome extensions: a <span className="highlight">News Analysis tool</span> that uses Google's Gemini AI to summarize articles and extract key points, a <span className="highlight">Word Explainer</span> that helps students understand concepts with visual aids, and an <span className="highlight">ATS Optimize</span> that helps job seekers improve their resumes by analyzing job descriptions. I've also built a handwritten digit recognition system that achieves <span className="highlight">99.2% accuracy</span> on MNIST while using only <span className="highlight">13,000 parameters</span>.
           </p>
           
           <p className="text-light-slate" style={{ fontSize: '0.8rem' }}>
-            I'm currently looking for a role where I can apply these skills to real problems—especially in <span className="highlight">backend development</span>, <span className="highlight">applied AI</span>, or <span className="highlight">data-driven applications</span>. I enjoy building tools that are useful, well-structured, and easy to maintain, and I'm interested in joining a team where I can keep learning while contributing in a meaningful way.
+            I build applications that solve real problems by combining web technologies and machine learning. I work well in teams where I can use my experience in both full-stack development and AI to build solutions. I focus on making models perform well, keeping response times fast, and creating clear user interfaces to deliver reliable applications.
           </p>
         </div>
       </div>

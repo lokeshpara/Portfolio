@@ -13,28 +13,76 @@ interface Project {
 
 const projects = [
   {
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features smooth animations, dark mode, and a clean design.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    url: "https://github.com/yourusername/portfolio",
+    title: "CIFAR-10 Image Classification",
+    description: "Implemented a custom ResNet architecture achieving 92.22% test accuracy on CIFAR-10 dataset. Features include One Cycle Policy, dynamic learning rate scheduling, and advanced data augmentation using Albumentations library.",
+    technologies: ["PyTorch", "ResNet", "Computer Vision", "Deep Learning", "Data Augmentation"],
+    url: "https://github.com/yourusername/cifar10-resnet",
     period: "2024",
-    image: "/images/portfolio.png"
+    image: "/images/cifar10.png"
   },
   {
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce platform with features like user authentication, product management, shopping cart, and payment integration.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    url: "https://github.com/yourusername/ecommerce",
-    period: "2023",
-    image: "/images/ecommerce.png"
+    title: "Deep Learning Image Processing",
+    description: "Built a deep learning-based image processing system for dog image classification using custom CNNs and optimized 3×3 kernels. Implemented efficient feature extraction, edge detection, and pattern recognition with batch processing capabilities.",
+    technologies: ["PyTorch", "CNN", "OpenCV", "NumPy", "Computer Vision"],
+    url: "https://github.com/yourusername/deep-learning-image-processing",
+    period: "2024",
+    image: "/images/image-processing.png"
   },
   {
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    technologies: ["React", "Firebase", "Material-UI", "Redux"],
-    url: "https://github.com/yourusername/task-manager",
-    period: "2023",
-    image: "/images/task-manager.png"
+    title: "YOLOv3 Object Detection",
+    description: "Implemented YOLOv3 for real-time object detection with both pre-trained and custom training capabilities. Features include video processing, GPU acceleration, and custom dataset training with >90% detection accuracy.",
+    technologies: ["PyTorch", "YOLOv3", "OpenCV", "CUDA", "Computer Vision"],
+    url: "https://github.com/yourusername/yolov3-object-detection",
+    period: "2024",
+    image: "/images/yolov3.png"
+  },
+  {
+    title: "MNIST Digit Recognition Web App",
+    description: "Built an interactive web application for handwritten digit recognition using CNNs with various regularization techniques. Achieved 98.7% accuracy using L1+L2 regularization and features real-time recognition through drawing or image upload.",
+    technologies: ["PyTorch", "Flask", "Python", "CNN", "Web Development"],
+    url: "https://github.com/lokeshpara/MNIST",
+    period: "2024",
+    image: "/images/mnist.png"
+  },
+  {
+    title: "News Analysis Chrome Extension",
+    description: "Developed a Chrome extension using Google's Gemini AI for analyzing news articles. Features include smart summarization, headline extraction, and sentiment analysis. Built with a Flask backend and modern UI for real-time article processing.",
+    technologies: ["Python", "Flask", "Chrome Extension", "Gemini AI", "JavaScript"],
+    url: "https://github.com/yourusername/news-analysis-extension",
+    period: "2024",
+    image: "/images/news-analysis.png"
+  },
+  {
+    title: "ATS Optimize Chrome Extension",
+    description: "Created a Chrome extension for optimizing resumes and cover letters for ATS systems. Features include ATS compatibility scoring, keyword analysis, and AI-powered document generation. Built with Flask backend and OpenAI integration.",
+    technologies: ["Python", "Flask", "Chrome Extension", "OpenAI API", "JavaScript"],
+    url: "https://github.com/yourusername/ats-optimize",
+    period: "2024",
+    image: "/images/ats.png"
+  },
+  {
+    title: "Word Explainer Chrome Extension",
+    description: "Built a Chrome extension powered by Google's Gemini AI for comprehensive learning assistance. Features include concept explanation, web page summarization, study notes generation, concept mapping, and interactive quiz creation.",
+    technologies: ["JavaScript", "Chrome Extension", "Gemini AI", "Mermaid.js", "HTML/CSS"],
+    url: "https://github.com/yourusername/word-explainer",
+    period: "2024",
+    image: "/images/word-explainer.png"
+  },
+  {
+    title: "Cloud IT Resources Website",
+    description: "Developed a modern, responsive website for Cloud IT Resources using Next.js. Features include interactive animations, glassmorphism UI, parallax effects, and comprehensive service showcases. Built with TypeScript and SCSS modules.",
+    technologies: ["Next.js", "TypeScript", "SCSS", "Framer Motion", "React"],
+    url: "https://github.com/yourusername/cloud-it-resources",
+    period: "2024",
+    image: "/images/cloudit.png"
+  },
+  {
+    title: "Vehicle Rental Management System",
+    description: "Built a full-stack vehicle rental application using Java EE. Features include secure user authentication, role-based access control, real-time vehicle management, and comprehensive booking analytics. Implemented with MVC architecture.",
+    technologies: ["Java EE", "JSP", "MVC", "Log4j", "Enterprise Architecture"],
+    url: "https://github.com/yourusername/vehicle-rental",
+    period: "2024",
+    image: "/images/vehicle-rental.png"
   }
 ];
 
@@ -81,7 +129,7 @@ const ProjectSection = () => {
     
     // Add active class for animation
     ripple.classList.add('active');
-
+    
     // Get elements to change color
     const titleElClick = card.querySelector(".title-text") as HTMLElement;
     const listEls = card.querySelectorAll("li");
@@ -98,9 +146,9 @@ const ProjectSection = () => {
     // Delay opening URL
     setTimeout(() => {
       window.open(url, '_blank', 'noopener,noreferrer');
-      // Remove ripple after animation
-      setTimeout(() => {
-        ripple.remove();
+    // Remove ripple after animation
+    setTimeout(() => {
+      ripple.remove();
         // Reset colors
         if (titleElClick) titleElClick.style.color = "#ccd6f6";
         if (periodEl) periodEl.style.color = "#a8b2d1";
@@ -108,12 +156,12 @@ const ProjectSection = () => {
           const element = el as HTMLElement;
           element.style.color = "#a8b2d1";
         });
-      }, 600);
+    }, 600);
     }, 300);
   };
 
   const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault();
+      e.preventDefault();
     e.stopPropagation();
     
     // Only apply hover effects for desktop
@@ -150,7 +198,7 @@ const ProjectSection = () => {
   };
 
   const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault();
+      e.preventDefault();
     e.stopPropagation();
     
     // Only apply hover effects for desktop

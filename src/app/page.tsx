@@ -537,7 +537,7 @@ export default function Home() {
                 className="font-semibold text-lightest-slate mb-2 tracking-tight"
                 style={{ fontSize: 'medium' }}
               >
-                Full Stack Engineer | AI Specialist
+                Full Stack Developer | AI Specialist
               </p>
             </div>
             
