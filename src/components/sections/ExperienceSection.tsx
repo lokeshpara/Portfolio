@@ -68,26 +68,59 @@ const experiences = [
 ];
 
 const ExperienceSection = () => {
-  const handleCardClick = (url: string) => {
+  const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Get the target element, handling both mouse and touch events
+    let target: HTMLElement;
+    if ('touches' in e) {
+      // Touch event
+      const touchEvent = e as React.TouchEvent;
+      if (touchEvent.touches && touchEvent.touches.length > 0) {
+        target = touchEvent.touches[0].target as HTMLElement;
+      } else {
+        target = e.target as HTMLElement;
+      }
+    } else {
+      // Mouse event
+      target = e.target as HTMLElement;
+    }
+    
+    // Get the card element
+    const card = target.closest('.experience-card') as HTMLElement;
+    if (!card) return;
+
     // Add ripple effect
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
     
-    // Position ripple at click point
-    const rect = document.activeElement?.getBoundingClientRect();
-    if (rect) {
-      const size = Math.max(rect.width, rect.height);
-      const x = rect.left + rect.width / 2 - size / 2;
-      const y = rect.top + rect.height / 2 - size / 2;
-      
-      ripple.style.width = ripple.style.height = `${size}px`;
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-    }
+    // Position ripple at click/touch point
+    const rect = card.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = rect.left + rect.width / 2 - size / 2;
+    const y = rect.top + rect.height / 2 - size / 2;
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
     
     // Add active class for animation
     ripple.classList.add('active');
+
+    // Get elements to change color
+    const titleElClick = card.querySelector(".title-text") as HTMLElement;
+    const listEls = card.querySelectorAll("li");
+    const periodEl = card.querySelector(".period-text") as HTMLElement;
+
+    // Change colors
+    if (titleElClick) titleElClick.style.color = "#64ffda";
+    if (periodEl) periodEl.style.color = "#64ffda";
+    listEls.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+    });
     
     // Delay opening URL
     setTimeout(() => {
@@ -95,8 +128,86 @@ const ExperienceSection = () => {
       // Remove ripple after animation
       setTimeout(() => {
         ripple.remove();
+        // Reset colors
+        if (titleElClick) titleElClick.style.color = "#ccd6f6";
+        if (periodEl) periodEl.style.color = "#a8b2d1";
+        listEls.forEach((el: Element) => {
+          const element = el as HTMLElement;
+          element.style.color = "#a8b2d1";
+        });
       }, 600);
     }, 300);
+  };
+
+  const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) return;
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.experience-card') as HTMLElement;
+    if (!card) return;
+
+    // Make all other cards less visible
+    document.querySelectorAll('.experience-card').forEach(c => {
+      if (c !== card) {
+        (c as HTMLElement).style.opacity = '0.4';
+      }
+    });
+
+    // Style current card
+    card.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
+    card.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
+    card.style.opacity = '1';
+
+    // Change text colors
+    const titleElHover = card.querySelector(".title-text") as HTMLElement;
+    const listElsHover = card.querySelectorAll("li");
+    const periodElHover = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleElHover) titleElHover.style.color = "#64ffda";
+    if (periodElHover) periodElHover.style.color = "#64ffda";
+    listElsHover.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#64ffda";
+    });
+  };
+
+  const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Only apply hover effects for desktop
+    if ('touches' in e) return;
+    
+    // Get the target element
+    const target = e.target as HTMLElement;
+    const card = target.closest('.experience-card') as HTMLElement;
+    if (!card) return;
+
+    // Reset all cards to full opacity
+    document.querySelectorAll('.experience-card').forEach(c => {
+      (c as HTMLElement).style.opacity = '1';
+    });
+
+    // Reset current card styles
+    card.style.backgroundColor = "transparent";
+    card.style.boxShadow = "none";
+
+    // Reset text colors
+    const titleElLeave = card.querySelector(".title-text") as HTMLElement;
+    const listElsLeave = card.querySelectorAll("li");
+    const periodElLeave = card.querySelector(".period-text") as HTMLElement;
+
+    if (titleElLeave) titleElLeave.style.color = "#ccd6f6";
+    if (periodElLeave) periodElLeave.style.color = "#a8b2d1";
+    listElsLeave.forEach((el: Element) => {
+      const element = el as HTMLElement;
+      element.style.color = "#a8b2d1";
+    });
   };
 
   return (
@@ -109,11 +220,12 @@ const ExperienceSection = () => {
         className="space-y-3 experience-container"
         onMouseLeave={() => {
           // Reset all cards to full opacity when mouse leaves the container
-          document.querySelectorAll('.experience-card').forEach(card => {
-            (card as HTMLElement).style.opacity = '1';
-            (card as HTMLElement).style.filter = 'none';
-          });
-        }}
+          document.querySelectorAll('.experience-card').forEach((card: Element) => {
+            const cardElement = card as HTMLElement;
+            cardElement.style.opacity = '1';
+            cardElement.style.filter = 'none';
+                });
+              }}
       >
         {experiences.map((exp, index) => (
           <div 
@@ -123,225 +235,159 @@ const ExperienceSection = () => {
               padding: "10px",
               transition: "all 0.3s ease",
               borderRadius: "15px",
+              position: "relative",
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              perspective: "1000px",
+              willChange: "transform",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              cursor: "pointer",
+              userSelect: "none"
             }}
-            onMouseEnter={(e) => {
-              // Make all other cards less visible
-              document.querySelectorAll('.experience-card').forEach(card => {
-                if (card !== e.currentTarget) {
-                  (card as HTMLElement).style.opacity = '0.4';
-                  (card as HTMLElement).style.filter = 'grayscale(40%)';
-                }
-              });
-              
-              // Style current card
-              e.currentTarget.style.backgroundColor = "rgba(100, 146, 255, 0.05)";
-              e.currentTarget.style.boxShadow = "0 0 0 1px rgba(100, 255, 218, 0.2), 0 4px 8px rgba(2, 12, 27, 0)";
-              e.currentTarget.style.opacity = '1';
-              e.currentTarget.style.filter = 'none';
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              
-              if (titleEl) titleEl.style.color = "#64ffda";
-              
-              if (linkIcon) {
-                linkIcon.style.color = "#64ffda";
-                linkIcon.style.opacity = "1";
-                
-                // Animation is already defined in the academic section
-                linkIcon.style.animation = "iconPulse 1.5s infinite ease-in-out";
-                
-                if (arrowLine) {
-                  arrowLine.style.strokeDasharray = "12";
-                  arrowLine.style.strokeDashoffset = "12";
-                  arrowLine.style.animation = "arrowLineDraw 0.5s forwards ease-in-out";
-                }
-                
-                if (arrowHead) {
-                  arrowHead.style.strokeDasharray = "12";
-                  arrowHead.style.strokeDashoffset = "12";
-                  arrowHead.style.animation = "arrowHeadDraw 0.5s 0.2s forwards ease-in-out, arrowOut 1.5s 0.7s infinite ease-in-out";
-                }
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "rgba(100, 255, 218, 0.7)";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#64ffda";
-                (el as HTMLElement).style.backgroundColor = "rgba(100, 136, 255, 0.1)";
-              });
+            onMouseEnter={handleCardInteraction}
+            onTouchStart={handleCardInteraction}
+            onMouseLeave={handleCardLeave}
+            onTouchEnd={(e: React.TouchEvent) => {
+              e.preventDefault();
+              handleCardLeave(e);
+              handleCardClick(exp.url, e);
             }}
-            onMouseLeave={(e) => {
-              // Reset this card styles (the container onMouseLeave will handle resetting all cards)
-              e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.boxShadow = "none";
-              
-              const titleEl = e.currentTarget.querySelector(".title-text") as HTMLElement;
-              const subtitleEls = e.currentTarget.querySelectorAll(".subtitle-text");
-              const techEls = e.currentTarget.querySelectorAll(".tech-item");
-              const linkIcon = e.currentTarget.querySelector(".link-icon") as SVGElement;
-              const arrowLine = e.currentTarget.querySelector(".arrow-line") as SVGPathElement;
-              const arrowHead = e.currentTarget.querySelector(".arrow-head") as SVGPathElement;
-              
-              if (titleEl) titleEl.style.color = "#ccd6f6";
-              
-              if (linkIcon) {
-                linkIcon.style.color = "#a8b2d1";
-                linkIcon.style.opacity = "0.6";
-                linkIcon.style.animation = "none";
-                
-                if (arrowLine) {
-                  arrowLine.style.animation = "none";
-                  arrowLine.style.strokeDashoffset = "12";
-                }
-                
-                if (arrowHead) {
-                  arrowHead.style.animation = "none";
-                  arrowHead.style.strokeDashoffset = "12";
-                }
-              }
-              
-              subtitleEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-              });
-              
-              techEls.forEach(el => {
-                (el as HTMLElement).style.color = "#a8b2d1";
-                (el as HTMLElement).style.backgroundColor = "#112240";
-              });
-            }}
-            onClick={() => handleCardClick(exp.url)}
-          >
-            {/* Flex container - creates two columns */}
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {/* Left column - Time period */}
-              <div style={{ width: "165px", padding: "10px" }}>
-                <div className="font-mono period-text" style={{ 
-                  fontSize: "0.75rem", 
-                  color: "#a8b2d1",
-                  transition: "color 0.3s ease"
-                }}>
-                  {exp.period}
-                </div>
-              </div>
-              
-              {/* Right column - Content */}
-              <div style={{ flex: "1", padding: "8px" }}>
-                <h3 className="font-semibold m-0 p-0 flex items-center">
-                  <span className="title-text" style={{ 
-                    fontSize: "0.8rem", 
-                    color: "#ccd6f6",
-                    transition: "color 0.3s ease",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px"
+            onClick={(e: React.MouseEvent) => handleCardClick(exp.url, e)}
+            >
+              {/* Flex container - creates two columns */}
+            <div style={{ 
+              display: "flex", 
+              flexDirection: "row",
+              width: "100%",
+              height: "100%"
+            }}>
+                {/* Left column - Time period */}
+              <div style={{ 
+                width: "165px", 
+                padding: "10px",
+                flexShrink: 0
+              }}>
+                  <div className="font-mono period-text" style={{ 
+                    fontSize: "0.75rem", 
+                    color: "#a8b2d1",
+                    transition: "color 0.3s ease"
                   }}>
-                    {exp.positions[0]} - {exp.company}
-                      <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="18" 
-                      height="18" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="1.5" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      className="link-icon" 
-                      style={{ 
-                        opacity: 0.6,
-                        color: "#a8b2d1",
-                        transition: "all 0.3s ease",
-                        cursor: "pointer",
-                        position: "relative",
-                        marginTop: "0px",
+                    {exp.period}
+                  </div>
+                </div>
+                
+                {/* Right column - Content */}
+              <div style={{ 
+                flex: "1", 
+                padding: "8px",
+                flexShrink: 1,
+                minWidth: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between"
+              }}>
+                <h3 
+                  className="font-semibold m-0 p-0 flex items-center cursor-pointer"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "flex-start"
+                  }}
+                >
+                    <span className="title-text" style={{ 
+                      fontSize: "0.8rem", 
+                      color: "#ccd6f6",
+                      transition: "color 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                    gap: "8px",
+                    width: "100%"
+                    }}>
+                      {exp.positions[0]} - {exp.company}
+                        <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="18" 
+                        height="18" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="1.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="link-icon" 
+                        style={{ 
+                          opacity: 0.6,
+                          color: "#a8b2d1",
+                          transition: "all 0.3s ease",
+                        flexShrink: 0
                       }}
                     >
-                      {/* Arrow line */}
-                      <path 
-                        className="arrow-line" 
-                        d="M7,17 L17,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* 90 degree arrow head */}
-                      <path 
-                        className="arrow-head" 
-                        d="M17,7 L17,13 M17,7 L11,7" 
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* Small box outline */}
-                      <rect 
-                        x="7" 
-                        y="7" 
-                        width="10" 
-                        height="10" 
-                        strokeWidth="1.5" 
-                        strokeOpacity="0.4"
-                        rx="1"
-                      />
-                    </svg>
-                  </span>
+                      <path className="arrow-line" d="M7 7l10 10" />
+                      <path className="arrow-head" d="M7 17V7h10" />
+                      </svg>
+                    </span>
+                  </h3>
                   
-                </h3>
-                
-                {exp.positions.length > 1 && (
-                  <div className="mt-0.5 mb-0.5">
-                    {exp.positions.slice(1).map((position, posIndex) => (
-                      <div 
-                        key={posIndex} 
-                        className="text-xs opacity-80 subtitle-text" 
+                  {exp.positions.length > 1 && (
+                    <div className="mt-0.5 mb-0.5">
+                      {exp.positions.slice(1).map((position, posIndex) => (
+                        <div 
+                          key={posIndex} 
+                          className="text-xs opacity-80 subtitle-text" 
+                          style={{ 
+                            fontSize: '0.7rem', 
+                            padding: "0.5px 0",
+                            color: "#a8b2d1",
+                            transition: "color 0.3s ease"
+                          }}
+                        >
+                          {position}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
+                    fontSize: '0.7rem', 
+                    lineHeight: 1.3, 
+                  padding: "10px 0",
+                  flex: 1
+                  }}>
+                    {exp.description}
+                  </p>
+                  
+                <ul className="flex flex-wrap gap-2 mt-1" style={{ 
+                  padding: "2px 0 10px 0",
+                  width: "100%"
+                }}>
+                    {exp.technologies.map((tech, techIndex) => (
+                      <li 
+                        key={techIndex}
+                        className="rounded tech-item"
                         style={{ 
-                          fontSize: '0.7rem', 
-                          padding: "0.5px 0",
-                          color: "#a8b2d1",
-                          transition: "color 0.3s ease"
+                          fontSize: '0.65rem',
+                          padding: '2px 6px',
+                          margin: '2px',
+                          display: 'inline-block',
+                          backgroundColor: '#112240',
+                          color: '#a8b2d1',
+                          transition: "all 0.3s ease",
+                          borderRadius: "4px"
                         }}
                       >
-                        {position}
-                      </div>
+                        {tech}
+                      </li>
                     ))}
-                  </div>
-                )}
-                
-                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
-                  fontSize: '0.7rem', 
-                  lineHeight: 1.3, 
-                  padding: "10px 0" 
-                }}>
-                  {exp.description}
-                </p>
-                
-                <ul className="flex flex-wrap gap-2 mt-1" style={{ padding: "2px 0 10px 0" }}>
-                  {exp.technologies.map((tech, techIndex) => (
-                    <li 
-                      key={techIndex}
-                      className="rounded tech-item"
-                      style={{ 
-                        fontSize: '0.65rem',
-                        padding: '2px 6px',
-                        margin: '2px',
-                        display: 'inline-block',
-                        backgroundColor: '#112240',
-                        color: '#a8b2d1',
-                        transition: "all 0.3s ease",
-                        borderRadius: "4px"
-                      }}
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
         ))}
       </div>
 
@@ -448,6 +494,12 @@ const ExperienceSection = () => {
           
           .review-btn:hover .page-element {
             animation: pageFlip 1.5s infinite ease-in-out;
+          }
+          
+          @keyframes iconPulse {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
           }
           
           .ripple {

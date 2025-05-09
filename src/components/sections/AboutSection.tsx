@@ -29,21 +29,27 @@ export default function AboutSection() {
           </a>
         </div>
         
+        <style jsx>{`
+          .highlight {
+            color: #64ffda;
+          }
+        `}</style>
+        
         <div className="space-y-0">
-          <p className="pb-2 text-light-slate" style={{ fontSize: '0.85rem' }}>
-            I'm a full-stack developer with a passion for building intuitive and performant web applications. With over 5 years of experience in the industry, I've had the opportunity to work with a variety of technologies and frameworks to deliver impactful solutions.
+          <p className="pb-2 text-light-slate" style={{ fontSize: '0.80rem' }}>
+            I'm a <span className="highlight">Software Engineer specializing in AI & Full Stack Development</span> with hands-on experience building applications that involve backend systems, AI tools, and user-facing interfaces. I like working on projects that solve real problems, whether it's recognizing handwritten digits, helping people improve their resumes, or building a clean and interactive personal website. I care about writing code that works, is easy to understand, and serves a clear purpose.
           </p>
           
-          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
-            Currently, I'm focused on developing accessible, user-centered products at <a href="#" className="text-green hover:underline">Acme Corporation</a>, where I lead the frontend development team. My approach combines clean code principles with modern design patterns to create maintainable and scalable applications.
+          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.80rem' }}>
+            In terms of skills, I've used <span className="highlight">Python</span>, <span className="highlight">JavaScript</span>, and <span className="highlight">Java</span> to build different types of applications. I've worked with <span className="highlight">Flask</span>, <span className="highlight">React</span>, and <span className="highlight">Next.js</span>, and I'm comfortable building and connecting APIs, creating user interfaces, and handling data. My projects often include a mix of frontend and backend logic, along with tools like <span className="highlight">PyTorch</span> for deep learning and <span className="highlight">Docker</span> for deployment.
           </p>
           
-          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.85rem' }}>
-            My technical toolkit includes React, TypeScript, Node.js, and various cloud services. I'm particularly interested in performance optimization, state management strategies, and creating delightful user experiences.
+          <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.8rem' }}>
+            One of my recent interests is working with <span className="highlight">large language models</span> and automation. I've explored AI fine-tuning techniques like <span className="highlight">SFT</span>, <span className="highlight">IFT</span>, <span className="highlight">RLHF</span>, and <span className="highlight">PEFT</span>, and I've built a Chrome extension that uses OpenAI's API to analyze and generate documents like resumes and cover letters. I've also developed a CNN-based web app for MNIST digit recognition, experimenting with different regularization methods and visualizing model performance.
           </p>
           
-          <p className="text-light-slate" style={{ fontSize: '0.85rem' }}>
-            When I'm not coding, you can find me hiking in the mountains, experimenting with new recipes, or contributing to open-source projects that align with my values of making technology accessible to everyone.
+          <p className="text-light-slate" style={{ fontSize: '0.8rem' }}>
+            I'm currently looking for a role where I can apply these skills to real problems—especially in <span className="highlight">backend development</span>, <span className="highlight">applied AI</span>, or <span className="highlight">data-driven applications</span>. I enjoy building tools that are useful, well-structured, and easy to maintain, and I'm interested in joining a team where I can keep learning while contributing in a meaningful way.
           </p>
         </div>
       </div>

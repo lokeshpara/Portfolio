@@ -295,7 +295,7 @@ export default function SocialMedia() {
           display: none;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1199px) {
           .social-list {
             display: none;
           }

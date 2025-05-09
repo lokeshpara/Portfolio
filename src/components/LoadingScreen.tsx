@@ -12,7 +12,7 @@ export default function LoadingScreen() {
     // Check if we're on mobile
     const checkMobile = () => {
       if (typeof window !== 'undefined') {
-        setIsMobile(window.innerWidth < 600);
+        setIsMobile(window.innerWidth < 1200);
       }
     };
     
@@ -29,11 +29,14 @@ export default function LoadingScreen() {
       setFadeIn(true);
     }, 10);
 
+    // Wait for fonts to load
+    const fontLoadingPromise = document.fonts.ready;
+
     // Simulate loading progress with easing
     let startTime: number;
     let animationFrame: number;
     
-    const animate = (timestamp: number) => {
+    const animate = async (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
       
@@ -42,7 +45,7 @@ export default function LoadingScreen() {
         return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
       };
       
-      const progressPercent = Math.min(progress / 2500, 1); // 2.5 seconds total
+      const progressPercent = Math.min(progress / 2500, 1); // Reduced from 4000ms to 2500ms
       const easedProgress = easeOutExpo(progressPercent);
       const newCounter = Math.min(Math.floor(easedProgress * 100), 100); // Ensure we don't exceed 100
       
@@ -51,7 +54,8 @@ export default function LoadingScreen() {
       if (progress < 2500) {
         animationFrame = requestAnimationFrame(animate);
       } else {
-        // Ensure we reach 100% at the end
+        // Wait for fonts to load before reaching 100%
+        await fontLoadingPromise;
         setCounter(100);
       }
     };
@@ -231,7 +235,7 @@ export default function LoadingScreen() {
           </div>
         </div>
       </div>
-
+      
       <style jsx>{`
         .loading-initial-line, .loading-command-line {
           margin-bottom: 4px;
@@ -300,7 +304,7 @@ export default function LoadingScreen() {
           }
         }
         
-        @media (max-width: 600px) {
+        @media (max-width: 1200px) {
           .terminal-cursor::after {
             height: 11px;
             width: 6px;

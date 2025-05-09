@@ -81,7 +81,7 @@ export default function Home() {
     const offset = 40;
     const top = element.offsetTop - offset;
     
-    // Simple, direct scrolling
+    // Smoother scrolling with better timing
     rightColumnRef.current.scrollTo({
       top,
       behavior: 'smooth'
@@ -93,7 +93,7 @@ export default function Home() {
     }
     scrollTimeoutRef.current = setTimeout(() => {
       isScrollingRef.current = false;
-    }, 500); // Increased timeout for smoother transitions
+    }, 800); // Increased timeout for smoother transitions
   };
 
   // Function to scroll to a specific section - minimal processing
@@ -117,7 +117,7 @@ export default function Home() {
           // Remove it after animation completes
           setTimeout(() => {
             link.classList.remove('animate-on-scroll');
-          }, 1000); // slightly longer than animation duration
+          }, 1200); // Increased timeout for smoother animation
         }
       });
     }
@@ -218,7 +218,7 @@ export default function Home() {
   // Handle screen size changes
   useEffect(() => {
     const checkScreenSize = () => {
-      const newIsMobile = window.innerWidth < 800;
+      const newIsMobile = window.innerWidth < 1200;
       setIsMobile(newIsMobile);
       console.log("Screen width:", window.innerWidth, "isMobile:", newIsMobile);
     };
@@ -237,12 +237,18 @@ export default function Home() {
 
   // Handle initial loading
   useEffect(() => {
-    // Simulate a minimum loading time to ensure the animation completes
-    const timer = setTimeout(() => {
+    // Wait for fonts to load and ensure minimum loading time
+    const loadContent = async () => {
+      // Wait for fonts to load
+      await document.fonts.ready;
+      
+      // Additional delay to ensure smooth transition
+      await new Promise(resolve => setTimeout(resolve, 2500)); // Reduced from 4000ms to 2500ms
+      
       setIsLoading(false);
-    }, 1500);
-    
-    return () => clearTimeout(timer);
+    };
+
+    loadContent();
   }, []);
 
   // Debug useEffect to check if refs are properly initialized
@@ -528,10 +534,10 @@ export default function Home() {
               className="flex items-center gap-1 mb-4"
             >
               <p 
-                className="font-bold text-lightest-slate mb-2 tracking-tight"
+                className="font-semibold text-lightest-slate mb-2 tracking-tight"
                 style={{ fontSize: 'medium' }}
               >
-                Full Stack Developer
+                Full Stack Engineer | AI Specialist
               </p>
             </div>
             
@@ -539,7 +545,7 @@ export default function Home() {
               className="text-light-slate opacity-70 font-light tracking-wide mb-8"
               style={{ fontSize: 'small' }}
             >
-              Building digital experiences that matter
+              Transforming ideas into intelligent applications
             </p>
             
             <SocialMediaMobile />
@@ -582,12 +588,12 @@ export default function Home() {
                         Lokesh Para
                       </h1>
                       <div className="flex items-cente mb-4">
-                        <p className="text-green opacity-70 font-bold font-mono tracking-tight" style={{ fontSize: 'large' }}>
-                          Full Stack Developer
+                        <p className="text-green opacity-70 font-semibold tracking-tight" style={{ fontSize: 'medium' }}>
+                          Full Stack Engineer | AI Specialist
                         </p>
                       </div>
                       <p className="text-light-slate opacity-70 font-light tracking-wide mb-8" style={{ fontSize: 'small' }}>
-                        Building digital experiences that matter
+                        Transforming ideas into intelligent applications
                       </p>
                     </div>
                   </div>
@@ -733,7 +739,7 @@ export default function Home() {
             }}
           >
             <style jsx global>{`
-              @media (min-width: 800px) {
+              @media (min-width: 1200px) {
                 .lg\\:block {
                   display: block;
                 }
@@ -741,7 +747,7 @@ export default function Home() {
                   display: none;
                 }
               }
-              @media (max-width: 799px) {
+              @media (max-width: 1199px) {
                 .hidden.lg\\:block {
                   display: none;
                 }
@@ -999,7 +1005,7 @@ export default function Home() {
               }
 
               /* Mobile social media enhancements */
-              @media (max-width: 799px) {
+              @media (max-width: 1199px) {
                 .mobile-social-container {
                   display: flex;
                   justify-content: center;

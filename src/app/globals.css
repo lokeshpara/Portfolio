@@ -118,3 +118,9 @@ a {
 .mb-24 {
   margin-bottom: 1rem;
 }
+
+@media (max-width: 600px) {
+  body {
+    zoom: 0.75;
+  }
+}
