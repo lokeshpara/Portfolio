@@ -3,6 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 
+import deepLearning from '../../../images/deep-learning.png';
+import udemy from '../../../images/udemy.png';
+import eva from '../../../images/eva.png';
+import jovian from '../../../images/jovian.png';
+
 // Education data
 const education = [
   {
@@ -48,31 +53,82 @@ const education = [
 // Certifications
 const certifications = [
   {
-    period: "2022",
-    name: "AWS Certified Developer - Associate",
-    issuer: "Amazon Web Services",
-    description: "Validated expertise in developing, deploying, and debugging cloud-based applications using AWS. Mastered AWS core services, best practices for application development, and CI/CD workflows.",
-    technologies: ["Amazon EC2", "AWS Lambda", "Amazon S3", "Amazon DynamoDB", "AWS IAM"],
-    image: '/images/projects/ecommerce.jpg',
-    url: "https://aws.amazon.com/certification/"
+    period: "May 30, 2023",
+    name: "Deep Learning Fundamentals",
+    issuer: "Cognitive Class",
+    description: "Comprehensive course covering the fundamentals of deep learning and neural networks. Mastered core concepts including backpropagation, activation functions, and optimization algorithms. Implemented various neural network architectures and learned best practices for model training and evaluation. Developed practical skills in building and deploying deep learning models for real-world applications.",
+    technologies: [
+      "Neural Networks",
+      "Backpropagation",
+      "Activation Functions",
+      "Optimization Algorithms",
+      "Model Training",
+      "Deep Learning Frameworks"
+    ],
+    topics: [
+      "Introduction to Deep Learning",
+      "Neural Network Architecture",
+      "Backpropagation and Gradient Descent",
+      "Activation Functions and Their Properties",
+      "Loss Functions and Optimization",
+      "Regularization Techniques",
+      "Model Evaluation and Validation",
+      "Hyperparameter Tuning",
+      "Practical Implementation"
+    ],
+    image: deepLearning.src,
+    url: "https://courses.cognitiveclass.ai/certificates/25820c11dbc04b3ab827ad74eb552109"
   },
   {
-    period: "2021",
-    name: "Professional Scrum Master I (PSM I)",
-    issuer: "Scrum.org",
-    description: "Demonstrated understanding of Scrum framework, values, practices, and applications. Developed skills in facilitating team collaboration, addressing impediments, and coaching on effective Scrum implementation.",
-    technologies: ["Agile Methodologies", "Sprint Planning", "Backlog Management", "Servant Leadership", "Empirical Process Control"],
-    image: '/images/portfolio-website.jpg',
-    url: "https://www.scrum.org/professional-scrum-certifications"
+    period: "May 2023",
+    name: "JavaScript: The Advanced Concepts",
+    issuer: "Andrei Neagoie, Udemy",
+    description: "Comprehensive course covering advanced JavaScript concepts and modern development practices. Mastered core JavaScript engine internals, memory management, and performance optimization. Implemented advanced programming paradigms including OOP, Functional Programming, and modern ES6+ features. Developed expertise in asynchronous programming, error handling, and module systems.",
+    technologies: [
+      "JavaScript Engine & Runtime",
+      "Memory Management",
+      "ES6+ Features",
+      "OOP & FP",
+      "Async Programming",
+      "Error Handling",
+      "Module Systems"
+    ],
+    topics: [
+      "Javascript Engine, Runtime, Interpreter, Compiler, JIT Compiler",
+      "Call Stack + Memory Heap, Stack Overflow + Memory Leaks, Garbage Collection",
+      "Node.js, ES6-ES2022 features, Single Threaded Model",
+      "Execution Context, Lexical Environment, Scope Chain, Hoisting",
+      "Function Invocation, Scope, Dynamic vs Lexical Scope",
+      "this: call(), apply(), bind(), IIFEs, Context vs Scope",
+      "Types: Static vs Dynamic, Primitive Types, Pass by Reference/Value",
+      "Arrays, Functions, Objects, Closures, Prototypal Inheritance",
+      "OOP: Class Inheritance, Private vs Public Properties",
+      "Functional Programming: Immutability, Pure Functions, Composition",
+      "Advanced Concepts: Currying, Partial Application, Compose, Pipe",
+      "Asynchronous JavaScript: Callbacks, Promises, Async/Await",
+      "Event Loop, Callback Queue, Task Queue, Microtask Queue",
+      "Concurrency + Parallelism, Modules in Javascript"
+    ],
+    image: udemy.src,
+    url: "https://drive.google.com/file/d/1p0DYlxkk8neaUi_rEUllihbwJxjCVGBU/view?usp=sharing"
   },
   {
-    period: "2020",
-    name: "Google UX Design Professional Certificate",
-    issuer: "Google",
-    description: "Comprehensive training in UX design process including research, wireframing, prototyping, and testing. Developed skills in creating user-centered designs and solving complex design challenges.",
-    technologies: ["User Research", "Wireframing", "Prototyping", "Figma", "Usability Testing"],
-    image: '/images/task-management.jpg',
-    url: "https://grow.google/certificates/ux-design/"
+    period: "May 2020",
+    name: "EXTENSIVE VISION AI PROGRAM 4.0",
+    issuer: "TSAI",
+    description: "Comprehensive program covering advanced computer vision concepts. Mastered neural architecture design principles, implemented state-of-the-art CNN architectures, and learned advanced techniques in receptive field calculations. Developed expertise in data augmentation strategies and computer vision applications. Successfully completed multiple projects including image classification, object detection, and semantic segmentation.",
+    technologies: ["Neural Architecture", "CNNs", "Receptive Fields", "Data Augmentation", "Computer Vision", "Image Processing", "Deep Learning"],
+    image: eva.src,
+    url: "https://drive.google.com/file/d/1srx66gKbi7e0YBRT9MQSi0lgWWlfAOZY/view"
+  },
+  {
+    period: "July 2020",
+    name: "DEEP LEARNING WITH PYTORCH: ZERO TO GANS",
+    issuer: "Jovian.ml",
+    description: "Intensive 6-week program covering the complete spectrum of deep learning. Started with fundamental concepts and progressed to advanced implementations. Built and trained various neural network architectures including feed-forward networks, CNNs, and GANs. Implemented transfer learning techniques and model optimization strategies. Completed hands-on projects in image classification, style transfer, and generative models.",
+    technologies: ["PyTorch", "Neural Networks", "CNNs", "Transfer Learning", "Deep Learning", "GANs", "Model Optimization"],
+    image: jovian.src,
+    url: "https://drive.google.com/file/d/1p_MB18YYn_qGQ5_XqtBB_vaPFiNYd91z/view"
   }
 ];
 

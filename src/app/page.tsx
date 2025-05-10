@@ -589,7 +589,7 @@ export default function Home() {
                       </h1>
                       <div className="flex items-cente mb-4">
                         <p className="text-green opacity-70 font-semibold tracking-tight" style={{ fontSize: 'medium' }}>
-                          Full Stack Engineer | AI Specialist
+                          Full Stack Developer | AI Specialist
                         </p>
                       </div>
                       <p className="text-light-slate opacity-70 font-light tracking-wide mb-8" style={{ fontSize: 'small' }}>

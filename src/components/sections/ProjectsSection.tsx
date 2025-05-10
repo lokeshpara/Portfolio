@@ -1,6 +1,16 @@
 "use client";
 
 import React from 'react';
+import cifar10 from '../../../images/cifar10.png';
+import imageProcessing from '../../../images/image-processing.png';
+import yolov3 from '../../../images/yolov3.png';
+import mnist from '../../../images/mnist.png';
+import newsAnalysis from '../../../images/news-analysis.png';
+import ats from '../../../images/ats.png';
+import wordExplainer from '../../../images/word-explainer.png';
+import cloudit from '../../../images/cloudit.png';
+import vehicleRental from '../../../images/vehicle-rental.png';
+
 
 interface Project {
   title: string;
@@ -16,73 +26,73 @@ const projects = [
     title: "CIFAR-10 Image Classification",
     description: "Implemented a custom ResNet architecture achieving 92.22% test accuracy on CIFAR-10 dataset. Features include One Cycle Policy, dynamic learning rate scheduling, and advanced data augmentation using Albumentations library.",
     technologies: ["PyTorch", "ResNet", "Computer Vision", "Deep Learning", "Data Augmentation"],
-    url: "https://github.com/yourusername/cifar10-resnet",
+    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/S11",
     period: "2024",
-    image: "/images/cifar10.png"
+    image: cifar10.src  
   },
   {
     title: "Deep Learning Image Processing",
     description: "Built a deep learning-based image processing system for dog image classification using custom CNNs and optimized 3×3 kernels. Implemented efficient feature extraction, edge detection, and pattern recognition with batch processing capabilities.",
     technologies: ["PyTorch", "CNN", "OpenCV", "NumPy", "Computer Vision"],
-    url: "https://github.com/yourusername/deep-learning-image-processing",
+    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/S12",
     period: "2024",
-    image: "/images/image-processing.png"
+    image: imageProcessing.src
   },
   {
     title: "YOLOv3 Object Detection",
     description: "Implemented YOLOv3 for real-time object detection with both pre-trained and custom training capabilities. Features include video processing, GPU acceleration, and custom dataset training with >90% detection accuracy.",
     technologies: ["PyTorch", "YOLOv3", "OpenCV", "CUDA", "Computer Vision"],
-    url: "https://github.com/yourusername/yolov3-object-detection",
+    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/S13",
     period: "2024",
-    image: "/images/yolov3.png"
+    image: yolov3.src
   },
   {
     title: "MNIST Digit Recognition Web App",
     description: "Built an interactive web application for handwritten digit recognition using CNNs with various regularization techniques. Achieved 98.7% accuracy using L1+L2 regularization and features real-time recognition through drawing or image upload.",
     technologies: ["PyTorch", "Flask", "Python", "CNN", "Web Development"],
-    url: "https://github.com/lokeshpara/MNIST",
+    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/s6",
     period: "2024",
-    image: "/images/mnist.png"
+    image: mnist.src
   },
   {
     title: "News Analysis Chrome Extension",
     description: "Developed a Chrome extension using Google's Gemini AI for analyzing news articles. Features include smart summarization, headline extraction, and sentiment analysis. Built with a Flask backend and modern UI for real-time article processing.",
     technologies: ["Python", "Flask", "Chrome Extension", "Gemini AI", "JavaScript"],
-    url: "https://github.com/yourusername/news-analysis-extension",
+    url: "https://github.com/lokeshpara/News_Analysis_chromo_extension",
     period: "2024",
-    image: "/images/news-analysis.png"
+    image: newsAnalysis.src
   },
   {
     title: "ATS Optimize Chrome Extension",
     description: "Created a Chrome extension for optimizing resumes and cover letters for ATS systems. Features include ATS compatibility scoring, keyword analysis, and AI-powered document generation. Built with Flask backend and OpenAI integration.",
     technologies: ["Python", "Flask", "Chrome Extension", "OpenAI API", "JavaScript"],
-    url: "https://github.com/yourusername/ats-optimize",
+    url: "https://github.com/lokeshpara/ATS_friendly_extension",
     period: "2024",
-    image: "/images/ats.png"
+    image: ats.src
   },
   {
     title: "Word Explainer Chrome Extension",
     description: "Built a Chrome extension powered by Google's Gemini AI for comprehensive learning assistance. Features include concept explanation, web page summarization, study notes generation, concept mapping, and interactive quiz creation.",
     technologies: ["JavaScript", "Chrome Extension", "Gemini AI", "Mermaid.js", "HTML/CSS"],
-    url: "https://github.com/yourusername/word-explainer",
+    url: "https://github.com/lokeshpara/Smart-Study-Assistant-using-gemini-API",
     period: "2024",
-    image: "/images/word-explainer.png"
+    image: wordExplainer.src
   },
   {
     title: "Cloud IT Resources Website",
     description: "Developed a modern, responsive website for Cloud IT Resources using Next.js. Features include interactive animations, glassmorphism UI, parallax effects, and comprehensive service showcases. Built with TypeScript and SCSS modules.",
     technologies: ["Next.js", "TypeScript", "SCSS", "Framer Motion", "React"],
-    url: "https://github.com/yourusername/cloud-it-resources",
+    url: "https://github.com/lokeshpara/cloud-it-resources",
     period: "2024",
-    image: "/images/cloudit.png"
+    image: cloudit.src
   },
   {
     title: "Vehicle Rental Management System",
     description: "Built a full-stack vehicle rental application using Java EE. Features include secure user authentication, role-based access control, real-time vehicle management, and comprehensive booking analytics. Implemented with MVC architecture.",
     technologies: ["Java EE", "JSP", "MVC", "Log4j", "Enterprise Architecture"],
-    url: "https://github.com/yourusername/vehicle-rental",
+    url: "https://drive.google.com/file/d/1EjT7ZhY67FmJGbBAwBcOaifEZ4dZUiBs/view",
     period: "2024",
-    image: "/images/vehicle-rental.png"
+    image: vehicleRental.src
   }
 ];
 

@@ -4,66 +4,14 @@ import React from 'react';
 
 const experiences = [
   {
-    period: "dec 2024 — Present",
+    period: "Aug 2021 — Oct 2021",
     positions: [
-      "Senior Frontend Engineer, Accessibility"
+      "AI Intern"
     ],
-    company: "Klaviyo",
-    description: "Build and maintain critical components used to construct Klaviyo's frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility.",
-    technologies: ["JavaScript", "TypeScript", "React", "Storybook"],
-    url: "https://www.klaviyo.com/"
-  },
-  {
-    period: "may 2018 — dec 2024",
-    positions: [
-      "Lead Engineer",
-      "Senior Engineer",
-      "Engineer"
-    ],
-    company: "Upstatement",
-    description: "Build, style, and ship high-quality websites, design systems, mobile apps, and digital experiences for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more. Provide leadership within engineering department through close collaboration, knowledge shares, and spearheading the development of internal tools.",
-    technologies: ["JavaScript", "TypeScript", "HTML & SCSS", "React", "Next.js", "React Native", "WordPress", "Contentful", "Node.js", "PHP"],
-    url: "https://www.upstatement.com/"
-  },
-  {
-    period: "July — Dec 2017",
-    positions: [
-      "UI Engineer Co-op"
-    ],
-    company: "Apple",
-    description: "Developed and styled interactive web apps for Apple Music, including the user interface of Apple Music's embeddable web player widget for in-browser user authorization and full song playback.",
-    technologies: ["MusicKit.js", "9to5Mac", "The Verge", "Ember", "SCSS", "JavaScript"],
-    url: "https://www.apple.com/"
-  },
-  {
-    period: "July 2016 — Dec 2017",
-    positions: [
-      "Developer"
-    ],
-    company: "Scout Studio",
-    description: "Collaborated with other student designers and engineers on pro-bono projects to create new brands, design systems, and websites for organizations in the community.",
-    technologies: ["Jekyll", "SCSS", "JavaScript", "WordPress"],
-    url: "https://scout.camd.northeastern.edu/"
-  },
-  {
-    period: "July 2015 — Dec 2016",
-    positions: [
-      "Software Engineer Co-op"
-    ],
-    company: "Starry",
-    description: "Worked with the UI team to engineer and improve major features of Starry's customer-facing Android app.",
-    technologies: ["Android App", "ScreenTime 2.0", "Cordova", "Backbone", "JavaScript", "CSS"],
-    url: "https://starry.com/"
-  },
-  {
-    period: "July 2015 — Dec 2015",
-    positions: [
-      "Creative Technologist Co-op"
-    ],
-    company: "MullenLowe U.S.",
-    description: "Developed, maintained, and shipped production code for client websites. Clients included JetBlue, Lovesac, U.S. Cellular, U.S. Department of Defense, and more.",
-    technologies: ["HTML", "CSS", "JavaScript", "jQuery"],
-    url: "https://us.mullenlowe.com/"
+    company: "SMARTKNOWER",
+    description: "Worked on Machine Learning and Deep Learning projects, focusing on image classification. Built and trained neural networks for the MNIST dataset, achieving 99.4% accuracy. Optimized model training time by 40% through better hyperparameter selection. Completed project with the team, including data preprocessing and model deployment.",
+    technologies: ["Machine Learning", "Deep Learning", "Data Analysis", "MNIST", "Python", "TensorFlow", "NumPy", "Pandas"],
+    url: "https://drive.google.com/file/d/1_pGgsi957FGUDVCiwm_9CvGokBa5fxp3/view"
   }
 ];
 
@@ -524,7 +472,7 @@ const ExperienceSection = () => {
           }
         `}</style>
         <a 
-          href="/resume.pdf" 
+          href="https://drive.google.com/file/d/1_pGgsi957FGUDVCiwm_9CvGokBa5fxp3/view" 
           target="_blank"
           rel="noopener noreferrer"
           className="review-btn"

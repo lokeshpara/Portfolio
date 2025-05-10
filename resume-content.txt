@@ -1,0 +1,118 @@
+LOKESH P
+Full Stack Developer & AI Enthusiast
+
+EDUCATION
+Bachelor of Technology in Computer Science
+2018 - 2022 | Bangalore, KA
+• CGPA: 8.5/10
+• Relevant Coursework: Data Structures, Algorithms, Machine Learning, Deep Learning, Web Development
+• Final Year Project: Real-time Object Detection using YOLOv3
+
+CERTIFICATIONS
+• Deep Learning Specialization - Coursera
+  - Neural Networks and Deep Learning
+  - Improving Deep Neural Networks
+  - Structuring Machine Learning Projects
+  - Convolutional Neural Networks
+  - Sequence Models
+
+• Machine Learning with Python - IBM
+  - Supervised Learning
+  - Unsupervised Learning
+  - Model Evaluation
+  - Feature Engineering
+
+• Full Stack Web Development - Udemy
+  - React.js
+  - Node.js
+  - MongoDB
+  - Express.js
+
+EXPERIENCE
+SMARTKNOWER | AI INTERN
+Aug 2021 - Oct 2021 | Bangalore, KA
+• Worked on Machine Learning and Deep Learning projects, focusing on image classification
+• Built and trained neural networks for the MNIST dataset, achieving 99.4% accuracy
+• Optimized model training time by 40% through better hyperparameter selection
+• Completed project with the team, including data preprocessing and model deployment
+Technologies: Machine Learning, Deep Learning, Data Analysis, MNIST, Python, TensorFlow, NumPy, Pandas
+
+PROJECTS
+1. CIFAR-10 Image Classification
+• Implemented custom ResNet architecture achieving 92.22% test accuracy
+• Features include One Cycle Policy, dynamic learning rate scheduling
+• Advanced data augmentation using Albumentations library
+Technologies: PyTorch, ResNet, Computer Vision, Deep Learning, Data Augmentation
+
+2. Deep Learning Image Processing
+• Built deep learning-based image processing system for dog image classification
+• Implemented efficient feature extraction, edge detection, and pattern recognition
+• Custom CNNs with optimized 3×3 kernels and batch processing capabilities
+Technologies: PyTorch, CNN, OpenCV, NumPy, Computer Vision
+
+3. YOLOv3 Object Detection
+• Implemented YOLOv3 for real-time object detection
+• Features include video processing and GPU acceleration
+• Custom dataset training with >90% detection accuracy
+Technologies: PyTorch, YOLOv3, OpenCV, CUDA, Computer Vision
+
+4. MNIST Digit Recognition Web App
+• Interactive web application for handwritten digit recognition
+• Achieved 98.7% accuracy using L1+L2 regularization
+• Real-time recognition through drawing or image upload
+Technologies: PyTorch, Flask, Python, CNN, Web Development
+
+5. News Analysis Chrome Extension
+• Chrome extension using Google's Gemini AI for news analysis
+• Features include smart summarization and sentiment analysis
+• Flask backend with modern UI for real-time processing
+Technologies: Python, Flask, Chrome Extension, Gemini AI, JavaScript
+
+6. ATS Optimize Chrome Extension
+• Chrome extension for optimizing resumes and cover letters
+• ATS compatibility scoring and keyword analysis
+• AI-powered document generation with OpenAI integration
+Technologies: Python, Flask, Chrome Extension, OpenAI API, JavaScript
+
+7. Word Explainer Chrome Extension
+• Chrome extension powered by Google's Gemini AI
+• Features include concept explanation and web page summarization
+• Study notes generation and interactive quiz creation
+Technologies: JavaScript, Chrome Extension, Gemini AI, Mermaid.js, HTML/CSS
+
+8. Cloud IT Resources Website
+• Modern, responsive website using Next.js
+• Interactive animations and glassmorphism UI
+• Comprehensive service showcases
+Technologies: Next.js, TypeScript, SCSS, Framer Motion, React
+
+9. Vehicle Rental Management System
+• Full-stack vehicle rental application using Java EE
+• Secure user authentication and role-based access
+• Real-time vehicle management and booking analytics
+Technologies: Java EE, JSP, MVC, Log4j, Enterprise Architecture
+
+BLOG & PUBLICATIONS
+• "Building Real-time Object Detection with YOLOv3" - Medium
+  - Detailed implementation guide
+  - Performance optimization techniques
+  - Real-world applications
+  - 500+ views, 50+ claps
+
+• "From MNIST to Production: A Journey in Deep Learning" - Dev.to
+  - Step-by-step tutorial
+  - Best practices for model deployment
+  - Common pitfalls and solutions
+  - 300+ views, 40+ reactions
+
+• "Chrome Extensions with AI: A Practical Guide" - Hashnode
+  - Integration of AI models in extensions
+  - Performance considerations
+  - User experience design
+  - 200+ views, 30+ reactions
+
+SKILLS
+• Programming Languages: Python, JavaScript, TypeScript, Java
+• Machine Learning: PyTorch, TensorFlow, Scikit-learn
+• Web Development: React, Next.js, Flask, HTML/CSS
+• Tools & Others: Git, Docker, AWS, Linux 
