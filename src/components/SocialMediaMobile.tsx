@@ -13,17 +13,27 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/lokeshpara',
+    url: 'https://www.linkedin.com/in/lokeshpara99/',
     icon: <FaLinkedinIn className="social-mobile-icon" size={25} />
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/lokeshpara',
-    icon: <FaXTwitter className="social-mobile-icon" size={25} />
+    name: 'LeetCode',
+    url: 'https://leetcode.com/u/lokeshp99/',
+    icon: (
+      
+      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  className="icon icon-tabler icons-tabler-outline icon-tabler-brand-leetcode">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M12 13h7.5" />
+      <path d="M9.424 7.268l4.999 -4.999" />
+      <path d="M16.633 16.644l-2.402 2.415a3.189 3.189 0 0 1 -4.524 0l-3.77 -3.787a3.223 3.223 0 0 1 0 -4.544l3.77 -3.787a3.189 3.189 0 0 1 4.524 0l2.302 2.313" />
+      </svg>
+
+
+    )
   },
   {
     name: 'Email',
-    url: 'mailto:lokeshpara@gmail.com',
+    url: 'mailto:paralokesh58@gmail.com',
     icon: <MdEmail className="social-mobile-icon" size={25} />
   }
 ];
