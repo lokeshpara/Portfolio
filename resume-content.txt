@@ -1,118 +1,306 @@
 LOKESH P
-Full Stack Developer & AI Enthusiast
 
-EDUCATION
-Bachelor of Technology in Computer Science
-2018 - 2022 | Bangalore, KA
-• CGPA: 8.5/10
-• Relevant Coursework: Data Structures, Algorithms, Machine Learning, Deep Learning, Web Development
-• Final Year Project: Real-time Object Detection using YOLOv3
+OBJECTIVE
+Passionate Full Stack Developer and AI enthusiast with 2+ years of experience in building intelligent applications and web solutions. Seeking opportunities to leverage my expertise in machine learning, deep learning, and web development to create innovative solutions that solve real-world problems. Proven track record in developing AI-powered applications, implementing computer vision solutions, and building scalable web applications.
 
-CERTIFICATIONS
-• Deep Learning Specialization - Coursera
-  - Neural Networks and Deep Learning
-  - Improving Deep Neural Networks
-  - Structuring Machine Learning Projects
-  - Convolutional Neural Networks
-  - Sequence Models
-
-• Machine Learning with Python - IBM
-  - Supervised Learning
-  - Unsupervised Learning
-  - Model Evaluation
-  - Feature Engineering
-
-• Full Stack Web Development - Udemy
-  - React.js
-  - Node.js
-  - MongoDB
-  - Express.js
+ABOUT ME
+• Full Stack Developer with 2+ years of experience in Python, JavaScript, and modern web technologies
+• Deep Learning specialist with focus on Computer Vision and Neural Networks
+• Experienced in building AI-powered applications and Chrome Extensions
+• Strong background in both frontend and backend development
+• Published technical articles on AI implementation and best practices
+• Passionate about creating user-friendly applications with cutting-edge technology
+• Proficient in implementing complex algorithms and data structures
+• Experienced in cloud deployment and microservices architecture
+• Strong problem-solving skills and analytical thinking
+• Excellent communication and team collaboration abilities
+• Continuous learner with focus on emerging technologies
+• Proven track record in delivering high-quality software solutions
 
 EXPERIENCE
 SMARTKNOWER | AI INTERN
 Aug 2021 - Oct 2021 | Bangalore, KA
-• Worked on Machine Learning and Deep Learning projects, focusing on image classification
-• Built and trained neural networks for the MNIST dataset, achieving 99.4% accuracy
-• Optimized model training time by 40% through better hyperparameter selection
-• Completed project with the team, including data preprocessing and model deployment
+• Led development of machine learning projects, focusing on image classification and neural networks
+• Built and trained neural networks for MNIST dataset, achieving 99.4% accuracy
+• Optimized model training time by 40% through advanced hyperparameter selection
+• Implemented data preprocessing pipelines and model deployment strategies
+• Collaborated with team on end-to-end project development and documentation
+• Developed custom data augmentation techniques for improved model performance
+• Created automated testing frameworks for model validation
+• Implemented model versioning and experiment tracking
+• Designed and executed A/B testing for model improvements
+• Optimized model inference time for production deployment
+• Created comprehensive documentation and training materials
+• Mentored junior team members in ML best practices
 Technologies: Machine Learning, Deep Learning, Data Analysis, MNIST, Python, TensorFlow, NumPy, Pandas
 
 PROJECTS
 1. CIFAR-10 Image Classification
 • Implemented custom ResNet architecture achieving 92.22% test accuracy
-• Features include One Cycle Policy, dynamic learning rate scheduling
-• Advanced data augmentation using Albumentations library
+• Developed advanced data augmentation pipeline using Albumentations library
+• Implemented One Cycle Policy and dynamic learning rate scheduling
+• Optimized model performance through hyperparameter tuning
+• Created custom loss functions for improved training stability
+• Implemented model pruning for reduced inference time
+• Developed visualization tools for model interpretability
+• Created automated model evaluation pipeline
+• Implemented distributed training capabilities
+• Optimized memory usage during training
+• Added support for multi-GPU training
+• Created comprehensive documentation and API
 Technologies: PyTorch, ResNet, Computer Vision, Deep Learning, Data Augmentation
 
 2. Deep Learning Image Processing
-• Built deep learning-based image processing system for dog image classification
-• Implemented efficient feature extraction, edge detection, and pattern recognition
-• Custom CNNs with optimized 3×3 kernels and batch processing capabilities
+• Built comprehensive image processing system for dog breed classification
+• Implemented efficient feature extraction and pattern recognition algorithms
+• Designed custom CNNs with optimized 3×3 kernels and batch processing
+• Achieved 95% accuracy in breed classification
+• Implemented transfer learning from pre-trained models
+• Created custom data augmentation pipeline
+• Developed real-time inference optimization
+• Implemented model quantization for mobile deployment
+• Created web interface for model testing
+• Added support for multiple image formats
+• Implemented caching for improved performance
+• Created automated testing suite
 Technologies: PyTorch, CNN, OpenCV, NumPy, Computer Vision
 
 3. YOLOv3 Object Detection
-• Implemented YOLOv3 for real-time object detection
-• Features include video processing and GPU acceleration
-• Custom dataset training with >90% detection accuracy
+• Implemented real-time object detection system using YOLOv3
+• Integrated video processing and GPU acceleration for improved performance
+• Trained model on custom dataset achieving >90% detection accuracy
+• Optimized inference time for real-time applications
+• Implemented multi-scale detection capabilities
+• Created custom annotation tools for dataset preparation
+• Developed real-time tracking algorithms
+• Implemented batch processing for video streams
+• Created visualization tools for detection results
+• Optimized memory usage for edge devices
+• Added support for multiple detection classes
+• Implemented confidence thresholding
 Technologies: PyTorch, YOLOv3, OpenCV, CUDA, Computer Vision
 
 4. MNIST Digit Recognition Web App
-• Interactive web application for handwritten digit recognition
-• Achieved 98.7% accuracy using L1+L2 regularization
-• Real-time recognition through drawing or image upload
+• Developed interactive web application for handwritten digit recognition
+• Implemented L1+L2 regularization achieving 98.7% accuracy
+• Created intuitive UI for real-time drawing and image upload
+• Optimized model for web deployment
+• Implemented real-time preprocessing pipeline
+• Created custom drawing interface
+• Added support for multiple input methods
+• Implemented result visualization
+• Created user feedback system
+• Added model confidence display
+• Implemented error handling
+• Created comprehensive documentation
 Technologies: PyTorch, Flask, Python, CNN, Web Development
 
 5. News Analysis Chrome Extension
-• Chrome extension using Google's Gemini AI for news analysis
-• Features include smart summarization and sentiment analysis
-• Flask backend with modern UI for real-time processing
+• Built AI-powered Chrome extension for news analysis
+• Implemented smart summarization and sentiment analysis features
+• Developed Flask backend with real-time processing capabilities
+• Created modern, responsive UI for enhanced user experience
+• Implemented caching for improved performance
+• Added support for multiple news sources
+• Created custom NLP pipelines
+• Implemented user preferences system
+• Added offline functionality
+• Created analytics dashboard
+• Implemented error handling
+• Added automated testing
 Technologies: Python, Flask, Chrome Extension, Gemini AI, JavaScript
 
 6. ATS Optimize Chrome Extension
-• Chrome extension for optimizing resumes and cover letters
-• ATS compatibility scoring and keyword analysis
-• AI-powered document generation with OpenAI integration
+• Developed Chrome extension for resume and cover letter optimization
+• Implemented ATS compatibility scoring and keyword analysis
+• Integrated OpenAI API for AI-powered document generation
+• Created user-friendly interface for document analysis
+• Implemented real-time feedback system
+• Added support for multiple document formats
+• Created custom scoring algorithms
+• Implemented keyword suggestions
+• Added document comparison features
+• Created export functionality
+• Implemented user profiles
+• Added automated updates
 Technologies: Python, Flask, Chrome Extension, OpenAI API, JavaScript
 
 7. Word Explainer Chrome Extension
-• Chrome extension powered by Google's Gemini AI
-• Features include concept explanation and web page summarization
-• Study notes generation and interactive quiz creation
+• Built AI-powered Chrome extension for concept explanation
+• Implemented web page summarization and study notes generation
+• Created interactive quiz generation feature
+• Integrated Mermaid.js for visual concept representation
+• Implemented real-time processing
+• Added support for multiple languages
+• Created custom NLP pipelines
+• Implemented user preferences
+• Added offline functionality
+• Created progress tracking
+• Implemented error handling
+• Added automated testing
 Technologies: JavaScript, Chrome Extension, Gemini AI, Mermaid.js, HTML/CSS
 
 8. Cloud IT Resources Website
-• Modern, responsive website using Next.js
-• Interactive animations and glassmorphism UI
-• Comprehensive service showcases
+• Developed modern, responsive website using Next.js
+• Implemented interactive animations and glassmorphism UI
+• Created comprehensive service showcase with dynamic content
+• Optimized performance and SEO
+• Implemented server-side rendering
+• Added dynamic routing
+• Created custom animations
+• Implemented responsive design
+• Added dark mode support
+• Created contact forms
+• Implemented analytics
+• Added automated testing
 Technologies: Next.js, TypeScript, SCSS, Framer Motion, React
 
 9. Vehicle Rental Management System
-• Full-stack vehicle rental application using Java EE
-• Secure user authentication and role-based access
-• Real-time vehicle management and booking analytics
+• Built full-stack vehicle rental application using Java EE
+• Implemented secure user authentication and role-based access
+• Developed real-time vehicle management and booking analytics
+• Created comprehensive reporting system
+• Implemented payment processing
+• Added vehicle tracking
+• Created booking management
+• Implemented user profiles
+• Added notification system
+• Created admin dashboard
+• Implemented security features
+• Added automated testing
 Technologies: Java EE, JSP, MVC, Log4j, Enterprise Architecture
 
 BLOG & PUBLICATIONS
-• "Building Real-time Object Detection with YOLOv3" - Medium
-  - Detailed implementation guide
+• "Fine-tuning Language Models: SFT, IFT, RLHF, and PEFT Demystified" - Medium
+  - Comprehensive guide to understanding different fine-tuning techniques
+  - Detailed explanation of Supervised Fine-Tuning (SFT)
+  - In-depth coverage of Instruction Fine-Tuning (IFT)
+  - Analysis of Reinforcement Learning from Human Feedback (RLHF)
+  - Implementation of Parameter-Efficient Fine-Tuning (PEFT)
+  - Practical examples and code implementations
+  - Performance comparison of different techniques
+  - Best practices for model fine-tuning
+  - Common challenges and solutions
+  - Future trends in language model fine-tuning
+  - Case studies and real-world applications
+  - Resource optimization strategies
+  - March 15, 2024 | 10 min read
+
+• "Understanding Chinchilla Scaling Laws: How We Predict the Power of AI Models" - Medium
+  - In-depth exploration of Chinchilla scaling laws
+  - Analysis of model capabilities and performance prediction
+  - Understanding model scaling and optimization
+  - Mathematical foundations of scaling laws
+  - Practical applications in model development
+  - Performance benchmarking methodologies
+  - Resource utilization optimization
+  - Cost-benefit analysis of model scaling
+  - Future implications for AI development
+  - Case studies of successful implementations
+  - Comparison with other scaling approaches
+  - Research findings and insights
+  - March 10, 2024 | 8 min read
+
+• "Tiny ImageNet Using PyTorch" - Medium
+  - Practical guide to implementing and training models
+  - Comprehensive data preprocessing techniques
+  - Model architecture design and implementation
+  - Training strategies and optimization
+  - Performance benchmarking and analysis
+  - Custom data augmentation pipelines
+  - Transfer learning implementations
+  - Model evaluation and validation
+  - Deployment strategies
   - Performance optimization techniques
-  - Real-world applications
-  - 500+ views, 50+ claps
+  - Code examples and implementations
+  - Best practices and tips
+  - March 5, 2024 | 12 min read
 
-• "From MNIST to Production: A Journey in Deep Learning" - Dev.to
-  - Step-by-step tutorial
-  - Best practices for model deployment
-  - Common pitfalls and solutions
-  - 300+ views, 40+ reactions
+• "Python Interpreter" - Medium
+  - Detailed look at Python interpreter internals
+  - Bytecode compilation process
+  - Virtual machine execution
+  - Memory management techniques
+  - Performance optimization strategies
+  - Garbage collection mechanisms
+  - Interpreter architecture
+  - Code execution flow
+  - Optimization techniques
+  - Debugging and profiling
+  - Implementation examples
+  - Best practices
+  - March 1, 2024 | 9 min read
 
-• "Chrome Extensions with AI: A Practical Guide" - Hashnode
-  - Integration of AI models in extensions
-  - Performance considerations
-  - User experience design
-  - 200+ views, 30+ reactions
+CERTIFICATIONS
+• Deep Learning Fundamentals
+  May 30, 2023 | Cognitive Class
+  • Comprehensive course covering the fundamentals of deep learning and neural networks
+  • Mastered core concepts including backpropagation, activation functions, and optimization algorithms
+  • Implemented various neural network architectures and learned best practices for model training
+  • Developed practical skills in building and deploying deep learning models
+  • Learned advanced techniques in model optimization and hyperparameter tuning
+  • Implemented custom loss functions and regularization methods
+  • Mastered data preprocessing and augmentation techniques
+  • Developed expertise in model evaluation and validation
+  • Learned deployment strategies for production environments
+  • Implemented distributed training and inference
+  • Created comprehensive documentation and testing
+  • Developed practical projects with real-world applications
+  Certificate: https://courses.cognitiveclass.ai/certificates/25820c11dbc04b3ab827ad74eb552109
+
+• JavaScript: The Advanced Concepts
+  May 2023 | Andrei Neagoie, Udemy
+  • Mastered core JavaScript engine internals and memory management
+  • Implemented advanced programming paradigms including OOP and Functional Programming
+  • Developed expertise in asynchronous programming and modern ES6+ features
+  • Covered topics: Engine & Runtime, Memory Management, ES6+ Features, OOP & FP, Async Programming
+  • Implemented advanced design patterns and architectural principles
+  • Mastered performance optimization techniques
+  • Developed expertise in error handling and debugging
+  • Learned advanced testing methodologies
+  • Implemented security best practices
+  • Created scalable application architectures
+  • Developed expertise in build tools and deployment
+  • Mastered modern JavaScript frameworks and libraries
+  Certificate: https://drive.google.com/file/d/1p0DYlxkk8neaUi_rEUllihbwJxjCVGBU/view?usp=sharing
+
+• EXTENSIVE VISION AI PROGRAM 4.0
+  May 2020 | TSAI
+  • Mastered neural architecture design principles and CNN architectures
+  • Learned advanced techniques in receptive field calculations
+  • Developed expertise in data augmentation and computer vision applications
+  • Completed projects in image classification, object detection, and semantic segmentation
+  • Implemented custom CNN architectures for specific use cases
+  • Developed expertise in transfer learning and fine-tuning
+  • Mastered advanced data augmentation techniques
+  • Implemented real-time inference optimization
+  • Created custom visualization tools
+  • Developed expertise in model deployment
+  • Implemented distributed training strategies
+  • Created comprehensive documentation
+  Certificate: https://drive.google.com/file/d/1srx66gKbi7e0YBRT9MQSi0lgWWlfAOZY/view
+
+• DEEP LEARNING WITH PYTORCH: ZERO TO GANS
+  July 2020 | Jovian.ml
+  • 6-week program covering complete spectrum of deep learning
+  • Built and trained various neural network architectures
+  • Implemented transfer learning and model optimization strategies
+  • Completed projects in image classification, style transfer, and generative models
+  • Developed expertise in PyTorch framework
+  • Implemented custom training loops
+  • Mastered advanced optimization techniques
+  • Created custom data loaders and transforms
+  • Implemented distributed training
+  • Developed expertise in model deployment
+  • Created comprehensive testing suite
+  • Implemented monitoring and logging
+  Certificate: https://drive.google.com/file/d/1p_MB18YYn_qGQ5_XqtBB_vaPFiNYd91z/view
+
 
 SKILLS
-• Programming Languages: Python, JavaScript, TypeScript, Java
-• Machine Learning: PyTorch, TensorFlow, Scikit-learn
-• Web Development: React, Next.js, Flask, HTML/CSS
-• Tools & Others: Git, Docker, AWS, Linux 
+• Programming Languages: Python, JavaScript, TypeScript, Java, C++, SQL, HTML/CSS
+• Machine Learning: PyTorch, TensorFlow, Scikit-learn, Keras, OpenCV, NumPy, Pandas
+• Web Development: React, Next.js, Flask, Node.js, Express.js, Django, REST APIs
+• Cloud & DevOps: AWS, Docker, Kubernetes, CI/CD, Git, Jenkins, Linux
+• Databases: MongoDB, PostgreSQL, MySQL, Redis, Firebase
+• Tools & Others: Git, Docker, AWS, Linux, JIRA, Agile, Scrum 

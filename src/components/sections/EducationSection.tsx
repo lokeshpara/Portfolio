@@ -11,43 +11,39 @@ import jovian from '../../../images/jovian.png';
 // Education data
 const education = [
   {
-    period: "2017 - 2019",
-    degree: "Master of Science in Computer Science",
-    institution: "Stanford University",
+    period: "2023 - 2025",
+    degree: "Masters in Computer and Information Sciences",
+    institution: "Southern Arkansas University",
     description:
-      "Specialized in Artificial Intelligence and Machine Learning with a focus on Natural Language Processing. Conducted research on transformer-based language models and deep learning applications.",
+      "Specialized in backend systems, cloud infrastructure, and applied machine learning. Building on prior industry experience to deepen technical skills and solve real-world problems.",
     achievements: [
-      "Graduated with distinction (GPA: 3.8/4.0)",
-      "Research assistant in the NLP lab",
-      "Published 2 papers on transformer-based language models"
+      "Graduated with distinction (GPA: 3.9/4.0)",
     ],
-    url: "https://www.stanford.edu"
+    url: "https://web.saumag.edu/"
   },
   {
-    period: "2013 - 2017",
-    degree: "Bachelor of Science in Computer Engineering",
-    institution: "MIT",
+    period: "2018 - 2022",
+    degree: "Bachelor of Science in Electronics and Communication",
+    institution: "KSSEM",
     description:
-      "Comprehensive program covering software engineering, computer architecture, and systems design. Focused on building scalable applications and distributed systems architecture.",
+      "I built a strong foundation in digital systems, embedded programming, and signal processing. This background supports my transition into software and backend development with a solid understanding of hardware-level systems.",
     achievements: [
-      "Dean's List all semesters",
-      "Senior thesis on distributed systems",
-      "President of the Computer Science Club"
+      "Secured competitive internships at Moneyview and SmartKnower"
     ],
-    url: "https://www.mit.edu"
+    url: "https://kssem.edu.in/"
   },
-  {
-    period: "2009 - 2013",
-    degree: "High School Diploma",
-    institution: "Tech Preparatory Academy",
-    description: "Advanced STEM curriculum with honors in mathematics and computer science. Participated in numerous hackathons and coding competitions.",
-    achievements: [
-      "Valedictorian",
-      "National Merit Scholar",
-      "Winner of State Programming Competition"
-    ],
-    url: "https://example.com/school"
-  }
+  // {
+  //   period: "2009 - 2013",
+  //   degree: "High School Diploma",
+  //   institution: "Tech Preparatory Academy",
+  //   description: "Advanced STEM curriculum with honors in mathematics and computer science. Participated in numerous hackathons and coding competitions.",
+  //   achievements: [
+  //     "Valedictorian",
+  //     "National Merit Scholar",
+  //     "Winner of State Programming Competition"
+  //   ],
+  //   url: "https://example.com/school"
+  // }
 ];
 
 // Certifications

@@ -4,15 +4,38 @@ import React from 'react';
 
 const experiences = [
   {
+    period: "June 2022 — July 2023",
+    positions: [
+      "Full Stack Developer"
+    ],
+    company: "Groww",
+    description: "I worked as a Full Stack Developer building backend services using Python (Django, FastAPI) and Go, and frontend dashboards with React.js, Next.js, and Redux. I migrated services to Docker-based microservices on GKE, cutting deployment time by 60%. I optimized PostgreSQL queries, added Redis caching, and built GraphQL APIs, improving performance to handle over 10M+ daily requests. I also implemented U.S. stock trading features, secured APIs with OAuth2/TLS, set up CI/CD with GitLab, and monitored services using Grafana and CloudWatch",
+    technologies: ["Python", "Go", "Django", "FastAPI", "GraphQL", "React.js", "Next.js", "Redux", "Docker", "Kubernetes", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD", "PostgreSQL", "Redis", "Prometheus", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD"],
+    url: "https://groww.in/"
+  },
+
+  {
+    period: "June 2021 — May 2022",
+    positions: [
+      "Backend Engineer Inter"
+    ],
+    company: "Moneyview",
+    description: "I built Flask-based microservices for loan processing and integrated with CIBIL and e-KYC APIs. I created a real-time credit scoring pipeline using Pandas, reducing manual loan review by 80%. I secured sensitive documents using AES encryption and AWS S3, improved system throughput by optimizing PostgreSQL queries and adding Redis caching, and deployed services with Docker and Jenkins. I also maintained over 90% test coverage with Pytest and ensured high availability through monitoring with AWS CloudWatch.",
+    technologies: ["Python", "Flask", "Pandas", "AES", "AWS S3", "Docker", "Jenkins", "PostgreSQL", "Redis", "Prometheus", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD"],
+    url: "https://moneyview.in/"
+  },
+
+  {
     period: "Aug 2021 — Oct 2021",
     positions: [
       "AI Intern"
     ],
     company: "SMARTKNOWER",
-    description: "Worked on Machine Learning and Deep Learning projects, focusing on image classification. Built and trained neural networks for the MNIST dataset, achieving 99.4% accuracy. Optimized model training time by 40% through better hyperparameter selection. Completed project with the team, including data preprocessing and model deployment.",
-    technologies: ["Machine Learning", "Deep Learning", "Data Analysis", "MNIST", "Python", "TensorFlow", "NumPy", "Pandas"],
-    url: "https://drive.google.com/file/d/1_pGgsi957FGUDVCiwm_9CvGokBa5fxp3/view"
+    description: "I developed image classification models using PyTorch and Keras, training CNNs on MNIST and CIFAR-10 datasets. I improved model performance using dropout, batch normalization, and learning rate schedules, reducing training time by 35%. I also converted models to TorchScript and quantized formats for deployment and tracked experiments using TensorBoard.",
+    technologies: ["Machine Learning", "Deep Learning", "CNNs", "MNIST", "CIFAR-10", "PyTorch", "Keras", "TorchScript", "Quantized Models", "TensorBoard"],
+    url: "https://www.linkedin.com/company/smartknower/"
   }
+
 ];
 
 const ExperienceSection = () => {
@@ -339,7 +362,7 @@ const ExperienceSection = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-left pl-4" style={{ margin: "1rem 1rem" }}>
+      {/* <div className="mt-16 text-left pl-4" style={{ margin: "1rem 1rem" }}>
         <style jsx>{`
           @keyframes borderGlow {
             0%, 100% { box-shadow: 0 0 2px rgba(100, 255, 218, 0.5); }
@@ -496,7 +519,7 @@ const ExperienceSection = () => {
             <line x1="10" y1="9" x2="8" y2="9" />
           </svg>
         </a>
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -412,7 +412,7 @@ const BlogSection = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-left pl-4" style={{ margin: "1rem" }}>
+      {/* <div className="mt-16 text-left pl-4" style={{ margin: "1rem" }}>
         <style jsx>{`
           @keyframes borderGlow {
             0%, 100% { box-shadow: 0 0 2px rgba(100, 255, 218, 0.5); }
@@ -565,7 +565,7 @@ const BlogSection = () => {
             <path className="folder-top" d="M2 10h20" />
           </svg>
         </a>
-      </div>
+      </div> */}
     </section>
   );
 };
