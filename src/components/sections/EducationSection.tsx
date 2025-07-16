@@ -7,6 +7,7 @@ import deepLearning from '../../../images/deep-learning.png';
 import udemy from '../../../images/udemy.png';
 import eva from '../../../images/eva.png';
 import jovian from '../../../images/jovian.png';
+import javaTraining from '../../../images/javaTraining.png';
 
 // Education data
 const education = [
@@ -48,6 +49,34 @@ const education = [
 
 // Certifications
 const certifications = [
+  {
+    period: "June 2023",
+    name: "Headstart Java Training Program",
+    issuer: "NTT DATA",
+    description: "Comprehensive training program focused on core and advanced Java development. Covered object-oriented programming, data structures, exception handling, and multithreading. Gained hands-on experience with building Java applications using JDBC for database access, and explored web application development using Spring Boot and MVC architecture. Learned best practices for clean code, debugging, and modular development.",
+    technologies: [
+      "Core Java",
+      "OOP (Object-Oriented Programming)",
+      "JDBC",
+      "Spring Boot",
+      "MVC Architecture",
+      "MySQL / RDBMS"
+    ],
+    topics: [
+      "Java Basics and Control Flow",
+      "Classes, Objects, and Inheritance",
+      "Exception Handling and Debugging",
+      "Collections and Generics",
+      "Multithreading and Concurrency",
+      "Database Access using JDBC",
+      "Building REST APIs with Spring Boot",
+      "MVC Pattern and Controller Logic",
+      "Project Deployment and Testing"
+    ],
+    image: javaTraining.src,
+    url: "https://drive.google.com/file/d/1hCz_1Px9wqOvAi7Jaxpeng8zx-quqI1g/view"
+  },
+
   {
     period: "May 30, 2023",
     name: "Deep Learning Fundamentals",
