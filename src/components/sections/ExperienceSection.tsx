@@ -4,36 +4,47 @@ import React from 'react';
 
 const experiences = [
   {
-    period: "June 2022 — July 2023",
+    period: "June 2025 — Present",
     positions: [
-      "Full Stack Developer"
+      "Java Full Stack Developer"
     ],
-    company: "Groww",
-    description: "I worked as a Full Stack Developer building backend services using Python (Django, FastAPI) and Go, and frontend dashboards with React.js, Next.js, and Redux. I migrated services to Docker-based microservices on GKE, cutting deployment time by 60%. I optimized PostgreSQL queries, added Redis caching, and built GraphQL APIs, improving performance to handle over 10M+ daily requests. I also implemented U.S. stock trading features, secured APIs with OAuth2/TLS, set up CI/CD with GitLab, and monitored services using Grafana and CloudWatch",
-    technologies: ["Python", "Go", "Django", "FastAPI", "GraphQL", "React.js", "Next.js", "Redux", "Docker", "Kubernetes", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD", "PostgreSQL", "Redis", "Prometheus", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD"],
-    url: "https://groww.in/"
+    company: "LPL Financial",
+    description: "Architected 15+ Spring Boot microservices with Spring Cloud components supporting $1.8T+ in assets for 29,000+ advisors, achieving 99.9% uptime and improving API response time by 78%. Engineered enterprise RESTful APIs and GraphQL services integrating 15+ financial data providers with OAuth2/JWT security, achieving SOC 2 compliance. Built event-driven architecture with Apache Kafka processing 2M+ portfolio and market events daily with sub-200ms latency. Optimized database performance with Redis caching (85% hit rate), HikariCP pooling across PostgreSQL Aurora and Oracle 12c, reducing query time by 60%. Developed React 18 dashboards with TypeScript, Redux Toolkit, and Chart.js, boosting advisor productivity by 30%. Deployed cloud-native microservices on AWS EKS with Horizontal Pod Autoscaling, reducing infrastructure costs by 25%.",
+    technologies: ["Java", "Spring Boot", "Spring Cloud", "Spring Security", "REST APIs", "GraphQL", "Apache Kafka", "PostgreSQL", "Oracle", "Redis", "React 18", "TypeScript", "Redux Toolkit", "AWS EKS", "Docker", "Kubernetes", "Jenkins", "Terraform", "Prometheus", "Grafana"],
+    url: "https://www.lpl.com/"
   },
 
   {
-    period: "June 2021 — May 2022",
+    period: "August 2024 — May 2025",
     positions: [
-      "Backend Engineer Inter"
+      "Java Full Stack Developer"
     ],
-    company: "Moneyview",
-    description: "I built Flask-based microservices for loan processing and integrated with CIBIL and e-KYC APIs. I created a real-time credit scoring pipeline using Pandas, reducing manual loan review by 80%. I secured sensitive documents using AES encryption and AWS S3, improved system throughput by optimizing PostgreSQL queries and adding Redis caching, and deployed services with Docker and Jenkins. I also maintained over 90% test coverage with Pytest and ensured high availability through monitoring with AWS CloudWatch.",
-    technologies: ["Python", "Flask", "Pandas", "AES", "AWS S3", "Docker", "Jenkins", "PostgreSQL", "Redis", "Prometheus", "Grafana", "CloudWatch", "GitLab", "OAuth2", "TLS", "CI/CD"],
-    url: "https://moneyview.in/"
+    company: "Athenahealth",
+    description: "Spearheaded HIPAA-compliant healthcare platform with Spring Boot microservices and React/Angular on Azure AKS, serving 50,000+ providers processing 100M+ patient records daily with 99.95% uptime. Architected HL7 FHIR R4 compliant APIs using HAPI FHIR and GraphQL, integrating 8 major hospital systems transforming data synchronization from 24 hours to real-time under 5 seconds. Designed auto-scaling Azure infrastructure handling 200% patient surge during COVID-19 while maintaining sub-3s page loads. Optimized PostgreSQL and Cosmos DB with Hibernate second-level caching, improving query performance by 55%. Fortified security with Spring Security 5, OAuth2, JWT, Azure AD SSO achieving SOC 2 and HITRUST certification. Developed patient portal using React 17 and Angular 14 with WebSocket real-time updates, reducing page load time by 45%.",
+    technologies: ["Java", "Spring Boot", "HL7 FHIR", "HAPI FHIR", "GraphQL", "Azure AKS", "React 17", "Angular 14", "PostgreSQL", "Cosmos DB", "Spring Security", "OAuth2", "Docker", "Kubernetes", "GitLab CI/CD", "Terraform"],
+    url: "https://www.athenahealth.com/"
   },
 
   {
-    period: "Aug 2021 — Oct 2021",
+    period: "November 2021 — July 2023",
     positions: [
-      "AI Intern"
+      "Java Full Stack Developer"
     ],
-    company: "SMARTKNOWER",
-    description: "I developed image classification models using PyTorch and Keras, training CNNs on MNIST and CIFAR-10 datasets. I improved model performance using dropout, batch normalization, and learning rate schedules, reducing training time by 35%. I also converted models to TorchScript and quantized formats for deployment and tracked experiments using TensorBoard.",
-    technologies: ["Machine Learning", "Deep Learning", "CNNs", "MNIST", "CIFAR-10", "PyTorch", "Keras", "TorchScript", "Quantized Models", "TensorBoard"],
-    url: "https://www.linkedin.com/company/smartknower/"
+    company: "YES Bank",
+    description: "Engineered core banking microservices with Spring Boot and Hibernate processing $500M+ daily transactions across 2.5M accounts with 99.92% uptime using ACID guarantees. Developed payment APIs integrating Visa Direct, Mastercard Send, ACH, and SWIFT, reducing processing time by 35% while processing 2M monthly ACH transactions with 99.98% success rate. Built real-time fraud detection with Kafka Streams using windowed aggregations and ML integration, detecting fraud 96% faster with 99.9% accuracy, preventing $5M+ losses annually. Optimized Oracle 12c with range/hash partitioning, Redis caching (85% hit rate) supporting 1000+ concurrent connections, reducing response time by 55%. Created React banking platform with Redux Toolkit, WebSocket real-time updates reducing page load by 50%. Achieved PCI-DSS Level 1 compliance with Spring Security OAuth2, JWT, HashiCorp Vault passing audit with zero critical findings.",
+    technologies: ["Java", "Spring Boot", "Hibernate", "Oracle 12c", "Redis", "Apache Kafka", "React", "Redux Toolkit", "Spring Security", "OAuth2", "JWT", "Docker", "Kubernetes", "Jenkins", "AWS", "HashiCorp Vault"],
+    url: "https://www.yesbank.in/"
+  },
+
+  {
+    period: "May 2020 — October 2021",
+    positions: [
+      "Java Developer"
+    ],
+    company: "Comcast Corporation",
+    description: "Developed customer service platform with Spring Boot, Hibernate, and PostgreSQL/MongoDB managing 5M+ subscribers with 99.7% uptime, supporting 100K concurrent users during peak events. Architected JAX-RS RESTful and Apache CXF SOAP services connecting customer portal with billing, Salesforce CRM, and SAP ERP, reducing service activation by 92% from 48hrs to 4hrs. Optimized database operations using Spring Data JPA, Hibernate with second-level caching, and HikariCP pooling across MySQL, Oracle, PostgreSQL, and MongoDB, improving query performance by 40%. Built responsive Angular 11 self-service portal with TypeScript, NgRx, RxJS achieving 95% cross-browser compatibility and WCAG 2.1 compliance, reducing support tickets by 30%. Established CI/CD automation with Jenkins, Docker, Kubernetes, Maven, and Selenium reducing build time by 60%.",
+    technologies: ["Java", "Spring Boot", "Hibernate", "JAX-RS", "Apache CXF", "PostgreSQL", "MongoDB", "Angular 11", "TypeScript", "NgRx", "Spring Security", "Docker", "Kubernetes", "Jenkins", "Maven", "Selenium"],
+    url: "https://corporate.comcast.com/"
   }
 
 ];
@@ -42,7 +53,7 @@ const ExperienceSection = () => {
   const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Get the target element, handling both mouse and touch events
     let target: HTMLElement;
     if ('touches' in e) {
@@ -57,7 +68,7 @@ const ExperienceSection = () => {
       // Mouse event
       target = e.target as HTMLElement;
     }
-    
+
     // Get the card element
     const card = target.closest('.experience-card') as HTMLElement;
     if (!card) return;
@@ -66,17 +77,17 @@ const ExperienceSection = () => {
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
-    
+
     // Position ripple at click/touch point
     const rect = card.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = rect.left + rect.width / 2 - size / 2;
     const y = rect.top + rect.height / 2 - size / 2;
-    
+
     ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
-    
+
     // Add active class for animation
     ripple.classList.add('active');
 
@@ -92,7 +103,7 @@ const ExperienceSection = () => {
       const element = el as HTMLElement;
       element.style.color = "#64ffda";
     });
-    
+
     // Delay opening URL
     setTimeout(() => {
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -113,10 +124,10 @@ const ExperienceSection = () => {
   const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) return;
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.experience-card') as HTMLElement;
@@ -150,10 +161,10 @@ const ExperienceSection = () => {
   const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) return;
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.experience-card') as HTMLElement;
@@ -187,7 +198,7 @@ const ExperienceSection = () => {
         <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>EXPERIENCE</h2>
       </div>
 
-      <div 
+      <div
         className="space-y-3 experience-container"
         onMouseLeave={() => {
           // Reset all cards to full opacity when mouse leaves the container
@@ -195,14 +206,14 @@ const ExperienceSection = () => {
             const cardElement = card as HTMLElement;
             cardElement.style.opacity = '1';
             cardElement.style.filter = 'none';
-                });
-              }}
+          });
+        }}
       >
         {experiences.map((exp, index) => (
-          <div 
+          <div
             key={index}
             className="rounded-lg overflow-hidden cursor-pointer experience-card"
-            style={{ 
+            style={{
               padding: "10px",
               transition: "all 0.3s ease",
               borderRadius: "15px",
@@ -229,32 +240,32 @@ const ExperienceSection = () => {
               handleCardClick(exp.url, e);
             }}
             onClick={(e: React.MouseEvent) => handleCardClick(exp.url, e)}
-            >
-              {/* Flex container - creates two columns */}
-            <div style={{ 
-              display: "flex", 
+          >
+            {/* Flex container - creates two columns */}
+            <div style={{
+              display: "flex",
               flexDirection: "row",
               width: "100%",
               height: "100%"
             }}>
-                {/* Left column - Time period */}
-              <div style={{ 
-                width: "165px", 
+              {/* Left column - Time period */}
+              <div style={{
+                width: "165px",
                 padding: "10px",
                 flexShrink: 0
               }}>
-                  <div className="font-mono period-text" style={{ 
-                    fontSize: "0.75rem", 
-                    color: "#a8b2d1",
-                    transition: "color 0.3s ease"
-                  }}>
-                    {exp.period}
-                  </div>
+                <div className="font-mono period-text" style={{
+                  fontSize: "0.75rem",
+                  color: "#a8b2d1",
+                  transition: "color 0.3s ease"
+                }}>
+                  {exp.period}
                 </div>
-                
-                {/* Right column - Content */}
-              <div style={{ 
-                flex: "1", 
+              </div>
+
+              {/* Right column - Content */}
+              <div style={{
+                flex: "1",
                 padding: "8px",
                 flexShrink: 1,
                 minWidth: 0,
@@ -262,7 +273,7 @@ const ExperienceSection = () => {
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}>
-                <h3 
+                <h3
                   className="font-semibold m-0 p-0 flex items-center cursor-pointer"
                   style={{
                     width: "100%",
@@ -271,94 +282,94 @@ const ExperienceSection = () => {
                     alignItems: "flex-start"
                   }}
                 >
-                    <span className="title-text" style={{ 
-                      fontSize: "0.8rem", 
-                      color: "#ccd6f6",
-                      transition: "color 0.3s ease",
-                      display: "flex",
-                      alignItems: "center",
+                  <span className="title-text" style={{
+                    fontSize: "0.8rem",
+                    color: "#ccd6f6",
+                    transition: "color 0.3s ease",
+                    display: "flex",
+                    alignItems: "center",
                     gap: "8px",
                     width: "100%"
-                    }}>
-                      {exp.positions[0]} - {exp.company}
-                        <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="18" 
-                        height="18" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        className="link-icon" 
-                        style={{ 
-                          opacity: 0.6,
-                          color: "#a8b2d1",
-                          transition: "all 0.3s ease",
+                  }}>
+                    {exp.positions[0]} - {exp.company}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="link-icon"
+                      style={{
+                        opacity: 0.6,
+                        color: "#a8b2d1",
+                        transition: "all 0.3s ease",
                         flexShrink: 0
                       }}
                     >
                       <path className="arrow-line" d="M7 7l10 10" />
                       <path className="arrow-head" d="M7 17V7h10" />
-                      </svg>
-                    </span>
-                  </h3>
-                  
-                  {exp.positions.length > 1 && (
-                    <div className="mt-0.5 mb-0.5">
-                      {exp.positions.slice(1).map((position, posIndex) => (
-                        <div 
-                          key={posIndex} 
-                          className="text-xs opacity-80 subtitle-text" 
-                          style={{ 
-                            fontSize: '0.7rem', 
-                            padding: "0.5px 0",
-                            color: "#a8b2d1",
-                            transition: "color 0.3s ease"
-                          }}
-                        >
-                          {position}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
-                    fontSize: '0.7rem', 
-                    lineHeight: 1.3, 
+                    </svg>
+                  </span>
+                </h3>
+
+                {exp.positions.length > 1 && (
+                  <div className="mt-0.5 mb-0.5">
+                    {exp.positions.slice(1).map((position, posIndex) => (
+                      <div
+                        key={posIndex}
+                        className="text-xs opacity-80 subtitle-text"
+                        style={{
+                          fontSize: '0.7rem',
+                          padding: "0.5px 0",
+                          color: "#a8b2d1",
+                          transition: "color 0.3s ease"
+                        }}
+                      >
+                        {position}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{
+                  fontSize: '0.7rem',
+                  lineHeight: 1.3,
                   padding: "10px 0",
                   flex: 1
-                  }}>
-                    {exp.description}
-                  </p>
-                  
-                <ul className="flex flex-wrap gap-2 mt-1" style={{ 
+                }}>
+                  {exp.description}
+                </p>
+
+                <ul className="flex flex-wrap gap-2 mt-1" style={{
                   padding: "2px 0 10px 0",
                   width: "100%"
                 }}>
-                    {exp.technologies.map((tech, techIndex) => (
-                      <li 
-                        key={techIndex}
-                        className="rounded tech-item"
-                        style={{ 
-                          fontSize: '0.65rem',
-                          padding: '2px 6px',
-                          margin: '2px',
-                          display: 'inline-block',
-                          backgroundColor: '#112240',
-                          color: '#a8b2d1',
-                          transition: "all 0.3s ease",
-                          borderRadius: "4px"
-                        }}
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  {exp.technologies.map((tech, techIndex) => (
+                    <li
+                      key={techIndex}
+                      className="rounded tech-item"
+                      style={{
+                        fontSize: '0.65rem',
+                        padding: '2px 6px',
+                        margin: '2px',
+                        display: 'inline-block',
+                        backgroundColor: '#112240',
+                        color: '#a8b2d1',
+                        transition: "all 0.3s ease",
+                        borderRadius: "4px"
+                      }}
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
+          </div>
         ))}
       </div>
 
@@ -524,4 +535,4 @@ const ExperienceSection = () => {
   );
 };
 
-export default ExperienceSection; 
+export default ExperienceSection;

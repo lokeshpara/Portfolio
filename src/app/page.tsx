@@ -34,7 +34,7 @@ const SectionReference = ({ id, title, onSectionClick }: { id: string; title: st
   };
 
   return (
-    <a 
+    <a
       href={`#${id}`}
       onClick={handleClick}
       className="text-green hover:text-lightest-slate transition-colors duration-200 ml-2"
@@ -55,7 +55,7 @@ export default function Home() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
   const blogRef = useRef<HTMLDivElement>(null);
-  
+
   // Track whether we need to process scroll events
   const isScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -73,20 +73,20 @@ export default function Home() {
   // Simplified, lightweight smooth scroll function
   const smoothScrollTo = (element: HTMLElement) => {
     if (!element || !rightColumnRef.current) return;
-    
+
     // Temporarily disable scroll handling during programmatic scrolling
     isScrollingRef.current = true;
-    
+
     // Use minimal calculation for better performance
     const offset = 40;
     const top = element.offsetTop - offset;
-    
+
     // Smoother scrolling with better timing
     rightColumnRef.current.scrollTo({
       top,
       behavior: 'smooth'
     });
-    
+
     // Re-enable scroll handling after animation completes
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
@@ -99,21 +99,21 @@ export default function Home() {
   // Function to scroll to a specific section - minimal processing
   const scrollToSection = (sectionId: string) => {
     const ref = sectionRefs[sectionId as keyof typeof sectionRefs];
-    
+
     if (ref?.current && rightColumnRef.current) {
       // Update active section immediately for responsive UI
       setActiveSection(sectionId);
-      
+
       // Call the scroll function
       smoothScrollTo(ref.current);
-      
+
       // Add a class to trigger animation and remove it after animation completes
       const navLinks = document.querySelectorAll('.navlink');
       navLinks.forEach(link => {
         if (link.getAttribute('data-section') === sectionId) {
           // Add animation trigger class
           link.classList.add('animate-on-scroll');
-          
+
           // Remove it after animation completes
           setTimeout(() => {
             link.classList.remove('animate-on-scroll');
@@ -126,37 +126,37 @@ export default function Home() {
   // Modify the IntersectionObserver setup to reduce toggling
   useEffect(() => {
     if (isLoading || typeof IntersectionObserver === 'undefined') return;
-    
+
     // Clean up any existing observer
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
-    
+
     // Create options for the observer with optimized thresholds and margins
     const options = {
       root: rightColumnRef.current,
       rootMargin: '-20% 0px -20% 0px', // More restrictive margin to reduce false positives
       threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] // More granular thresholds
     };
-    
+
     // Track which sections are in view with their visibility ratios
     const visibleSections = new Map();
     let lastActiveSection = activeSection;
     let debounceTimer: NodeJS.Timeout | null = null;
     let lastScrollTime = Date.now();
-    
+
     // Create new observer with improved section detection
     observerRef.current = new IntersectionObserver((entries) => {
       if (isScrollingRef.current) return; // Skip during programmatic scrolling
-      
+
       const currentTime = Date.now();
       const timeSinceLastScroll = currentTime - lastScrollTime;
-      
+
       // Update which sections are visible with their intersection ratios
       entries.forEach(entry => {
         const sectionId = entry.target.getAttribute('data-section');
         if (!sectionId) return;
-        
+
         if (entry.isIntersecting) {
           // Store intersection ratio for visible sections
           visibleSections.set(sectionId, entry.intersectionRatio);
@@ -164,14 +164,14 @@ export default function Home() {
           visibleSections.delete(sectionId);
         }
       });
-      
+
       // If we have visible sections, find the one with highest visibility ratio
       if (visibleSections.size > 0) {
         // Apply a minimum threshold to prevent flickering
         const VISIBILITY_THRESHOLD = 0.2; // Higher threshold for more stable detection
         let highestRatio = 0;
         let mostVisibleSection = lastActiveSection;
-        
+
         visibleSections.forEach((ratio, sectionId) => {
           // Only consider sections with significant visibility
           if (ratio > highestRatio && ratio >= VISIBILITY_THRESHOLD) {
@@ -179,14 +179,14 @@ export default function Home() {
             mostVisibleSection = sectionId;
           }
         });
-        
+
         // Debounce the section change to prevent rapid toggling
         if (mostVisibleSection !== lastActiveSection && mostVisibleSection !== activeSection) {
           // Clear any existing debounce timer
           if (debounceTimer) {
             clearTimeout(debounceTimer);
           }
-          
+
           // Set a new debounce timer with dynamic delay based on scroll speed
           const debounceDelay = Math.min(Math.max(timeSinceLastScroll, 100), 300);
           debounceTimer = setTimeout(() => {
@@ -197,14 +197,14 @@ export default function Home() {
         }
       }
     }, options);
-    
+
     // Observe all sections
     Object.values(sectionRefs).forEach(ref => {
       if (ref.current) {
         observerRef.current?.observe(ref.current);
       }
     });
-    
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
@@ -222,13 +222,13 @@ export default function Home() {
       setIsMobile(newIsMobile);
       console.log("Screen width:", window.innerWidth, "isMobile:", newIsMobile);
     };
-    
+
     // Check on initial render
     checkScreenSize();
-    
+
     // Add event listener for window resize
     window.addEventListener('resize', checkScreenSize);
-    
+
     // Cleanup
     return () => {
       window.removeEventListener('resize', checkScreenSize);
@@ -241,10 +241,10 @@ export default function Home() {
     const loadContent = async () => {
       // Wait for fonts to load
       await document.fonts.ready;
-      
+
       // Additional delay to ensure smooth transition
       await new Promise(resolve => setTimeout(resolve, 2500)); // Reduced from 4000ms to 2500ms
-      
+
       setIsLoading(false);
     };
 
@@ -269,7 +269,7 @@ export default function Home() {
         });
       }
     }, 500);
-    
+
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -343,11 +343,11 @@ export default function Home() {
   // Get the currently active section based on scroll position - enhanced version
   const getActiveSection = () => {
     if (!rightColumnRef.current) return 'about'; // Default to first section
-    
+
     const scrollTop = rightColumnRef.current.scrollTop;
     const containerHeight = rightColumnRef.current.clientHeight;
     const scrollCenter = scrollTop + (containerHeight / 2);
-    
+
     // Calculate the position of each section relative to the scroll container
     const sectionPositions = Object.entries(sectionRefs).map(([id, ref]) => {
       const offsetTop = ref.current?.offsetTop || 0;
@@ -356,10 +356,10 @@ export default function Home() {
       const distance = Math.abs(scrollCenter - center);
       return { id, offsetTop, center, distance };
     });
-    
+
     // Sort by vertical distance from the center of the viewport
     sectionPositions.sort((a, b) => a.distance - b.distance);
-    
+
     // The closest section to the center is our active section
     return sectionPositions[0]?.id || 'about';
   };
@@ -367,17 +367,17 @@ export default function Home() {
   // Add a more reliable scroll handler
   useEffect(() => {
     if (isLoading || !rightColumnRef.current) return;
-    
+
     const handleEnhancedScroll = debounce(() => {
       if (isScrollingRef.current) return;
-      
+
       const newActiveSection = getActiveSection();
       console.log("Enhanced scroll detection: detected section", newActiveSection);
-      
+
       if (newActiveSection !== activeSection) {
         console.log("Updating active section to:", newActiveSection);
         setActiveSection(newActiveSection);
-        
+
         // Highlight the active navlink
         document.querySelectorAll('.navlink').forEach(link => {
           if (link.getAttribute('href') === `#${newActiveSection}`) {
@@ -388,18 +388,18 @@ export default function Home() {
         });
       }
     }, 100); // Fast debounce for responsive UI
-    
+
     // Poll for section changes even when not scrolling
     const checkInterval = setInterval(() => {
       handleEnhancedScroll();
     }, 1000);
-    
+
     const scrollElement = rightColumnRef.current;
     scrollElement.addEventListener('scroll', handleEnhancedScroll);
-    
+
     // Also check when components might have been updated
     window.addEventListener('resize', handleEnhancedScroll);
-    
+
     // Clean up
     return () => {
       clearInterval(checkInterval);
@@ -414,8 +414,8 @@ export default function Home() {
     id: "about",
     "data-section": "about",
     className: "right-column-section mb-24 section-container",
-    style: { 
-      minHeight: '40vh', 
+    style: {
+      minHeight: '40vh',
       scrollMarginTop: '40px',
       border: '1px solid transparent' // Add invisible border to help with calculations
     }
@@ -426,7 +426,7 @@ export default function Home() {
     id: "experience",
     "data-section": "experience",
     className: "right-column-section mb-24 section-container",
-    style: { 
+    style: {
       minHeight: '40vh',
       scrollMarginTop: '40px',
       border: '1px solid transparent'
@@ -438,7 +438,7 @@ export default function Home() {
     id: "projects",
     "data-section": "projects",
     className: "right-column-section mb-24 section-container",
-    style: { 
+    style: {
       minHeight: '40vh',
       scrollMarginTop: '40px',
       border: '1px solid transparent'
@@ -450,7 +450,7 @@ export default function Home() {
     id: "blog",
     "data-section": "blog",
     className: "right-column-section mb-24 section-container",
-    style: { 
+    style: {
       minHeight: '40vh',
       scrollMarginTop: '40px',
       border: '1px solid transparent'
@@ -462,7 +462,7 @@ export default function Home() {
     id: "education",
     "data-section": "education",
     className: "right-column-section section-container",
-    style: { 
+    style: {
       minHeight: '40vh',
       scrollMarginTop: '40px',
       paddingBottom: '5rem',
@@ -477,80 +477,80 @@ export default function Home() {
 
   // Return main content once loading is complete
   return (
-    <div className="bg-slate-900 min-h-screen py-12 md:py-20 lg:py-24 relative overflow-hidden" 
-      style={{ 
-        paddingTop: "1rem", 
-        paddingBottom: "1.5rem", 
-        fontFeatureSettings: "'ss01', 'ss02', 'cv01', 'cv02'" 
+    <div className="bg-slate-900 min-h-screen py-12 md:py-20 lg:py-24 relative overflow-hidden"
+      style={{
+        paddingTop: "1rem",
+        paddingBottom: "1.5rem",
+        fontFeatureSettings: "'ss01', 'ss02', 'cv01', 'cv02'"
       }}
     >
       {/* Background Spotlight Effects */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         {/* Base gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/95 to-indigo-950/30 opacity-80" />
-        
+
         {/* Static gradient elements instead of motion effects */}
-        <div 
+        <div
           className="absolute w-[150vw] h-[100vh] bg-gradient-to-b from-transparent via-green/30 to-transparent skew-y-12 rotate-12"
           style={{ top: '-50%', left: '-50%', opacity: 0.1 }}
         />
-        
-        <div 
+
+        <div
           className="absolute w-[60vw] h-[60vh] bg-gradient-to-r from-green/30 to-emerald-400/20 rounded-full blur-[100px] opacity-70"
           style={{ top: '5%', left: '10%' }}
         />
-        
-        <div 
+
+        <div
           className="absolute w-[70vw] h-[70vh] bg-gradient-to-br from-indigo-500/30 via-violet-500/25 to-purple-800/20 rounded-full blur-[120px] opacity-60"
           style={{ bottom: '-10%', right: '0%' }}
         />
-        
-        <div 
+
+        <div
           className="absolute w-[40vw] h-[40vh] bg-gradient-to-tl from-blue-500/25 to-cyan-300/20 rounded-full blur-[80px] opacity-50"
           style={{ top: '60%', left: '40%' }}
         />
-        
-        <div 
+
+        <div
           className="absolute w-[35vw] h-[35vh] bg-gradient-to-tr from-rose-500/20 to-pink-400/15 rounded-full blur-[90px] opacity-40"
           style={{ top: '30%', right: '10%' }}
         />
       </div>
-      
+
       {isMobile ? (
         // Mobile View
         <div className="block p-4 sm:p-6 md:p-8" style={{ fontSize: 'small' }}>
           <header className="text-left mb-6 pt-6 sm:pt-8 relative p-3 rounded-lg" style={{ marginLeft: '1rem' }}>
-            <div 
+            <div
               className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10"
             />
-            <h1 
+            <h1
               className="font-bold text-lightest-slate mb-2 tracking-tight"
               style={{ fontSize: 'xxx-large' }}
             >
               Lokesh Para
             </h1>
-            
+
             <div
               className="flex items-center gap-1 mb-4"
             >
-              <p 
+              <p
                 className="font-semibold text-lightest-slate mb-2 tracking-tight"
                 style={{ fontSize: 'medium' }}
               >
-                Full Stack Developer | AI Specialist
+                Full Stack Java Developer | AI/ML Integration Expert
               </p>
             </div>
-            
-            <p 
+
+            <p
               className="text-light-slate opacity-70 font-light tracking-wide mb-8"
               style={{ fontSize: 'small' }}
             >
-              Transforming ideas into intelligent applications
+              Transforming complex challenges into elegant, scalable solutions
             </p>
-            
+
             <SocialMediaMobile />
           </header>
-          
+
           <main style={{ fontSize: 'small' }}>
             <div id="about" style={{ scrollMarginTop: '1rem', minHeight: '30vh' }}>
               <AboutSection />
@@ -573,14 +573,14 @@ export default function Home() {
         // Desktop View
         <>
           {/* Fixed Left Column */}
-          <div className="fixed top-0 left-0 h-screen w-[calc(min(90vw,1000px)*0.4)] max-w-[400px] z-10" style={{ 
+          <div className="fixed top-0 left-0 h-screen w-[calc(min(90vw,1000px)*0.4)] max-w-[400px] z-10" style={{
             marginLeft: 'calc((100vw - min(90vw, 1000px))/2)',
             top: '2rem'
           }}>
             <div className="flex flex-col h-full px-3 md:px-4 lg:px-5 xl:px-6">
               {/* Profile section - reduce margin */}
               <div className="relative mb-4" style={{ marginTop: '2rem' }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10"/>
+                <div className="absolute inset-0 bg-gradient-to-br from-green/5 via-slate-800/80 to-slate-900 rounded-lg -z-10" />
                 <div>
                   <div className="flex items-start">
                     <div>
@@ -599,12 +599,12 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Desktop Navigation */}
               <nav className="mb-6 pl-1" style={{ opacity: 1 }}>
                 <ul className="flex flex-col" style={{ opacity: 1 }}>
                   <li className="navlink-container" style={{ opacity: 1 }}>
-                    <a 
+                    <a
                       href="#about"
                       className={`navlink ${activeSection === 'about' ? 'navlink-active' : ''}`}
                       onClick={(e) => {
@@ -624,7 +624,7 @@ export default function Home() {
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
-                    <a 
+                    <a
                       href="#experience"
                       className={`navlink ${activeSection === 'experience' ? 'navlink-active' : ''}`}
                       onClick={(e) => {
@@ -649,7 +649,7 @@ export default function Home() {
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
-                    <a 
+                    <a
                       href="#projects"
                       className={`navlink ${activeSection === 'projects' ? 'navlink-active' : ''}`}
                       onClick={(e) => {
@@ -672,7 +672,7 @@ export default function Home() {
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
-                    <a 
+                    <a
                       href="#blog"
                       className={`navlink ${activeSection === 'blog' ? 'navlink-active' : ''}`}
                       onClick={(e) => {
@@ -691,7 +691,7 @@ export default function Home() {
                     </a>
                   </li>
                   <li className="navlink-container" style={{ opacity: 1 }}>
-                    <a 
+                    <a
                       href="#education"
                       className={`navlink ${activeSection === 'education' ? 'navlink-active' : ''}`}
                       onClick={(e) => {
@@ -716,15 +716,15 @@ export default function Home() {
                   </li>
                 </ul>
               </nav>
-              
+
               {/* Social links with icons instead of text */}
               <SocialMedia />
-        </div>
-      </div>
-      
+            </div>
+          </div>
+
           {/* Scrollable Right Column */}
-          <div 
-            ref={rightColumnRef} 
+          <div
+            ref={rightColumnRef}
             className="h-screen overflow-y-auto pt-0"
             style={{
               scrollbarWidth: 'none',
@@ -1169,18 +1169,18 @@ export default function Home() {
                 }
               }
             `}</style>
-            
+
             {/* Content container */}
-            <div className="mx-auto" style={{ 
+            <div className="mx-auto" style={{
               width: '85%',
               maxWidth: '670px',
               paddingRight: '1rem',
               paddingLeft: '1rem',
-              marginTop: '1.5rem', 
+              marginTop: '1.5rem',
               marginBottom: '1rem',
               overflow: 'hidden'
             }}>
-              <div 
+              <div
                 className="bg-slate-900/50 rounded-lg backdrop-blur-sm"
               >
                 <div>
@@ -1191,7 +1191,7 @@ export default function Home() {
                     </div>
                     <AboutSection />
                   </section>
-                  
+
                   <section {...experienceProps}>
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Experience</h2>
@@ -1199,7 +1199,7 @@ export default function Home() {
                     </div>
                     <ExperienceSection />
                   </section>
-                  
+
                   <section {...projectsProps}>
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Projects</h2>
@@ -1207,7 +1207,7 @@ export default function Home() {
                     </div>
                     <ProjectsSection />
                   </section>
-                  
+
                   <section {...blogProps}>
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Blog</h2>
@@ -1215,7 +1215,7 @@ export default function Home() {
                     </div>
                     <BlogSection />
                   </section>
-                  
+
                   <section {...educationProps}>
                     <div className="flex items-center mb-4">
                       <h2 className="text-xl font-semibold text-lightest-slate hidden">Education</h2>
@@ -1229,7 +1229,7 @@ export default function Home() {
           </div>
         </>
       )}
-      </div>
+    </div>
   );
 }
 

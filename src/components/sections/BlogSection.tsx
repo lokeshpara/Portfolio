@@ -37,15 +37,6 @@ const blogPosts = [
     date: 'March 5, 2024',
     readTime: '12 min read',
     url: 'https://medium.com/@lokeshpara17/tiny-imagenet-using-pytorch-42a3f2ee3c9d'
-  },
-  {
-    image: blog4.src,
-    title: 'Python Interpreter',
-    category: 'Programming',
-    excerpt: 'A detailed look at how Python interpreters work, including bytecode compilation, virtual machine execution, and memory management. Understand the inner workings of Python execution.',
-    date: 'March 1, 2024',
-    readTime: '9 min read',
-    url: 'https://medium.com/@lokeshpara17/python-interpreter-a4d3b7e9170f'
   }
 ];
 
@@ -59,7 +50,7 @@ const BlogSection = () => {
   const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Get the target element, handling both mouse and touch events
     let target: HTMLElement;
     if ('touches' in e) {
@@ -74,7 +65,7 @@ const BlogSection = () => {
       // Mouse event
       target = e.target as HTMLElement;
     }
-    
+
     // Get the card element
     const card = target.closest('.blog-card') as HTMLElement;
     if (!card) return;
@@ -83,17 +74,17 @@ const BlogSection = () => {
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
-    
+
     // Position ripple at click/touch point
     const rect = card.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = rect.left + rect.width / 2 - size / 2;
     const y = rect.top + rect.height / 2 - size / 2;
-    
+
     ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
-    
+
     // Add active class for animation
     ripple.classList.add('active');
 
@@ -109,7 +100,7 @@ const BlogSection = () => {
       const element = el as HTMLElement;
       element.style.color = "#64ffda";
     });
-    
+
     // Delay opening URL
     setTimeout(() => {
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -130,10 +121,10 @@ const BlogSection = () => {
   const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) return;
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.blog-card') as HTMLElement;
@@ -167,10 +158,10 @@ const BlogSection = () => {
   const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) return;
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.blog-card') as HTMLElement;
@@ -204,20 +195,20 @@ const BlogSection = () => {
         <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>BLOG</h2>
       </div>
 
-      <div 
+      <div
         className="space-y-3 blog-container"
         onMouseLeave={() => {
           setActiveCard(null);
         }}
       >
         {blogPosts.map((post, index) => (
-          <a 
+          <a
             key={index}
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg overflow-hidden cursor-pointer blog-card"
-            style={{ 
+            style={{
               padding: "10px",
               transition: "all 0.3s ease",
               borderRadius: "15px",
@@ -254,8 +245,8 @@ const BlogSection = () => {
             }}
           >
             {/* Flex container - creates two columns */}
-            <div style={{ 
-              display: "flex", 
+            <div style={{
+              display: "flex",
               flexDirection: "row",
               flexShrink: 0,
               flexGrow: 0,
@@ -264,15 +255,15 @@ const BlogSection = () => {
               height: "100%"
             }}>
               {/* Left column - Blog Image */}
-              <div style={{ 
-                width: "165px", 
+              <div style={{
+                width: "165px",
                 padding: "10px",
                 flexShrink: 0,
                 height: "100%"
               }}>
-                <div className="image-container" style={{ 
-                  overflow: "hidden", 
-                  borderRadius: "8px", 
+                <div className="image-container" style={{
+                  overflow: "hidden",
+                  borderRadius: "8px",
                   height: "100px",
                   display: "flex",
                   alignItems: "center",
@@ -280,10 +271,10 @@ const BlogSection = () => {
                   backgroundColor: "#112240",
                   width: "100%"
                 }}>
-                  <img 
-                    src={post.image} 
+                  <img
+                    src={post.image}
                     alt={post.title}
-                    style={{ 
+                    style={{
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
@@ -294,8 +285,8 @@ const BlogSection = () => {
               </div>
 
               {/* Right column - Content */}
-              <div style={{ 
-                flex: "1", 
+              <div style={{
+                flex: "1",
                 padding: "8px",
                 flexShrink: 1,
                 minWidth: 0,
@@ -304,7 +295,7 @@ const BlogSection = () => {
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}>
-                <h3 
+                <h3
                   className="font-semibold m-0 p-0 flex items-center cursor-pointer"
                   style={{
                     width: "100%",
@@ -313,8 +304,8 @@ const BlogSection = () => {
                     alignItems: "flex-start"
                   }}
                 >
-                  <span className="title-text" style={{ 
-                    fontSize: "0.8rem", 
+                  <span className="title-text" style={{
+                    fontSize: "0.8rem",
                     color: "#ccd6f6",
                     transition: "color 0.3s ease",
                     display: "flex",
@@ -323,18 +314,18 @@ const BlogSection = () => {
                     width: "100%"
                   }}>
                     {post.title}
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="18" 
-                      height="18" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="1.5" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      className="link-icon" 
-                      style={{ 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="link-icon"
+                      style={{
                         opacity: 0.6,
                         color: "#a8b2d1",
                         transition: "all 0.3s ease",
@@ -346,23 +337,23 @@ const BlogSection = () => {
                     </svg>
                   </span>
                 </h3>
-                
-                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{ 
-                  fontSize: '0.7rem', 
-                  lineHeight: 1.3, 
+
+                <p className="mt-1 mb-1 opacity-90 text-light-slate" style={{
+                  fontSize: '0.7rem',
+                  lineHeight: 1.3,
                   padding: "10px 0",
                   flex: 1
                 }}>
                   {post.excerpt}
                 </p>
-                
-                <ul className="flex flex-wrap gap-2 mt-1" style={{ 
+
+                <ul className="flex flex-wrap gap-2 mt-1" style={{
                   padding: "2px 0 10px 0",
                   width: "100%"
                 }}>
-                  <li 
+                  <li
                     className="rounded tech-item category-text"
-                    style={{ 
+                    style={{
                       fontSize: '0.65rem',
                       padding: '2px 6px',
                       margin: '2px',
@@ -375,9 +366,9 @@ const BlogSection = () => {
                   >
                     {post.category}
                   </li>
-                  <li 
+                  <li
                     className="rounded tech-item date-text"
-                    style={{ 
+                    style={{
                       fontSize: '0.65rem',
                       padding: '2px 6px',
                       margin: '2px',
@@ -390,9 +381,9 @@ const BlogSection = () => {
                   >
                     {post.date}
                   </li>
-                  <li 
+                  <li
                     className="rounded tech-item"
-                    style={{ 
+                    style={{
                       fontSize: '0.65rem',
                       padding: '2px 6px',
                       margin: '2px',
@@ -570,4 +561,4 @@ const BlogSection = () => {
   );
 };
 
-export default BlogSection; 
+export default BlogSection;

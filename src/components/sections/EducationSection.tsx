@@ -12,48 +12,55 @@ import javaTraining from '../../../images/javaTraining.png';
 // Education data
 const education = [
   {
-    period: "2023 - 2025",
-    degree: "Masters in Computer and Information Sciences",
-    institution: "Southern Arkansas University",
+    period: "August 2023 — May 2025",
+    degree: "Master of Science in Computer and Information Sciences",
+    institution: "Southern Arkansas University, Magnolia, Arkansas",
     description:
-      "Specialized in backend systems, cloud infrastructure, and applied machine learning. Building on prior industry experience to deepen technical skills and solve real-world problems.",
+      "Graduated with distinction (GPA: 3.9/4.0), specializing in enterprise software engineering, cloud infrastructure, and applied machine learning. Built on industry experience to deepen technical skills in distributed systems, microservices architecture, and full-stack development.",
     achievements: [
-      "Graduated with distinction (GPA: 3.9/4.0)",
+      "GPA: 3.9/4.0",
     ],
     url: "https://web.saumag.edu/"
-  },
-  {
-    period: "2018 - 2022",
-    degree: "Bachelor of Science in Electronics and Communication",
-    institution: "KSSEM",
-    description:
-      "I built a strong foundation in digital systems, embedded programming, and signal processing. This background supports my transition into software and backend development with a solid understanding of hardware-level systems.",
-    achievements: [
-      "Secured competitive internships at Moneyview and SmartKnower"
-    ],
-    url: "https://kssem.edu.in/"
-  },
-  // {
-  //   period: "2009 - 2013",
-  //   degree: "High School Diploma",
-  //   institution: "Tech Preparatory Academy",
-  //   description: "Advanced STEM curriculum with honors in mathematics and computer science. Participated in numerous hackathons and coding competitions.",
-  //   achievements: [
-  //     "Valedictorian",
-  //     "National Merit Scholar",
-  //     "Winner of State Programming Competition"
-  //   ],
-  //   url: "https://example.com/school"
-  // }
+  }
 ];
 
 // Certifications
 const certifications = [
   {
+    period: "December 2024",
+    name: "Oracle Cloud Infrastructure 2025 AI Foundations Associate",
+    issuer: "Oracle",
+    description: "Comprehensive certification in Oracle Cloud Infrastructure AI services. Mastered OCI AI services architecture, machine learning model deployment, and cloud-native AI application development. Gained expertise in OCI GenAI services, vision AI, language AI, and speech AI. Learned best practices for secure and scalable AI deployment on Oracle Cloud with emphasis on enterprise integration patterns.",
+    technologies: [
+      "Oracle Cloud Infrastructure",
+      "OCI AI Services",
+      "GenAI",
+      "Vision AI",
+      "Language AI",
+      "Speech AI",
+      "ML Model Deployment",
+      "Cloud Architecture"
+    ],
+    topics: [
+      "OCI AI Services Overview",
+      "Generative AI Fundamentals",
+      "OCI GenAI Service",
+      "Vision AI & Image Recognition",
+      "Language AI & NLP",
+      "Speech AI & Voice Processing",
+      "AI Model Deployment & Management",
+      "Enterprise AI Integration",
+      "Security & Compliance for AI"
+    ],
+    image: javaTraining.src,
+    url: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4AA65AF6B860D6EAAD69DA22BD1B7D4FC1B4E59A5B96C2FC6CD9F8ED78F7AB95"
+  },
+
+  {
     period: "June 2023",
     name: "Headstart Java Training Program",
     issuer: "NTT DATA",
-    description: "Comprehensive training program focused on core and advanced Java development. Covered object-oriented programming, data structures, exception handling, and multithreading. Gained hands-on experience with building Java applications using JDBC for database access, and explored web application development using Spring Boot and MVC architecture. Learned best practices for clean code, debugging, and modular development.",
+    description: "Comprehensive training program focused on core and advanced Java development. Covered object-oriented programming, data structures, exception handling, and multithreading. Gained hands-on experience building Java applications using JDBC for database access, and explored web application development using Spring Boot and MVC architecture. Learned best practices for clean code, debugging, and modular development.",
     technologies: [
       "Core Java",
       "OOP (Object-Oriented Programming)",
@@ -81,7 +88,7 @@ const certifications = [
     period: "May 30, 2023",
     name: "Deep Learning Fundamentals",
     issuer: "Cognitive Class",
-    description: "Comprehensive course covering the fundamentals of deep learning and neural networks. Mastered core concepts including backpropagation, activation functions, and optimization algorithms. Implemented various neural network architectures and learned best practices for model training and evaluation. Developed practical skills in building and deploying deep learning models for real-world applications.",
+    description: "Comprehensive course covering fundamentals of deep learning and neural networks. Mastered core concepts including backpropagation, activation functions, and optimization algorithms. Implemented various neural network architectures and learned best practices for model training and evaluation. Developed practical skills in building and deploying deep learning models for real-world applications.",
     technologies: [
       "Neural Networks",
       "Backpropagation",
@@ -150,7 +157,7 @@ const certifications = [
     period: "July 2020",
     name: "DEEP LEARNING WITH PYTORCH: ZERO TO GANS",
     issuer: "Jovian.ml",
-    description: "Intensive 6-week program covering the complete spectrum of deep learning. Started with fundamental concepts and progressed to advanced implementations. Built and trained various neural network architectures including feed-forward networks, CNNs, and GANs. Implemented transfer learning techniques and model optimization strategies. Completed hands-on projects in image classification, style transfer, and generative models.",
+    description: "Intensive 6-week program covering complete spectrum of deep learning. Started with fundamental concepts and progressed to advanced implementations. Built and trained various neural network architectures including feed-forward networks, CNNs, and GANs. Implemented transfer learning techniques and model optimization strategies. Completed hands-on projects in image classification, style transfer, and generative models.",
     technologies: ["PyTorch", "Neural Networks", "CNNs", "Transfer Learning", "Deep Learning", "GANs", "Model Optimization"],
     image: jovian.src,
     url: "https://drive.google.com/file/d/1p_MB18YYn_qGQ5_XqtBB_vaPFiNYd91z/view"
@@ -161,12 +168,12 @@ const EducationSection = () => {
   const handleCardInteraction = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) {
       return; // Don't apply any effects on touch devices
     }
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.education-card, .certification-card') as HTMLElement;
@@ -201,12 +208,12 @@ const EducationSection = () => {
   const handleCardLeave = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Only apply hover effects for desktop
     if ('touches' in e) {
       return; // Don't apply any effects on touch devices
     }
-    
+
     // Get the target element
     const target = e.target as HTMLElement;
     const card = target.closest('.education-card, .certification-card') as HTMLElement;
@@ -238,7 +245,7 @@ const EducationSection = () => {
   const handleCardClick = (url: string, e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Get the target element, handling both mouse and touch events
     let target: HTMLElement;
     if ('touches' in e) {
@@ -253,7 +260,7 @@ const EducationSection = () => {
       // Mouse event
       target = e.target as HTMLElement;
     }
-    
+
     // Get the card element
     const card = target.closest('.education-card, .certification-card') as HTMLElement;
     if (!card) return;
@@ -262,17 +269,17 @@ const EducationSection = () => {
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     document.body.appendChild(ripple);
-    
+
     // Position ripple at click/touch point
     const rect = card.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = rect.left + rect.width / 2 - size / 2;
     const y = rect.top + rect.height / 2 - size / 2;
-    
+
     ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
-    
+
     // Add active class for animation
     ripple.classList.add('active');
 
@@ -289,7 +296,7 @@ const EducationSection = () => {
       element.style.color = "#64ffda";
       element.style.backgroundColor = "rgba(100, 255, 218, 0.1)";
     });
-    
+
     // Delay opening URL
     setTimeout(() => {
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -316,7 +323,7 @@ const EducationSection = () => {
           <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
             <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>CERTIFICATIONS</h2>
           </div>
-          <div 
+          <div
             className="space-y-3 certification-container"
             style={{
               position: 'relative',
@@ -331,10 +338,10 @@ const EducationSection = () => {
             }}
           >
             {certifications.map((cert, index) => (
-              <div 
+              <div
                 key={index}
                 className="rounded-lg overflow-hidden cursor-pointer certification-card"
-                style={{ 
+                style={{
                   padding: "10px",
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
@@ -365,19 +372,19 @@ const EducationSection = () => {
                   const card = e.currentTarget as HTMLElement;
                   const startY = parseFloat(card.dataset.touchStartY || '0');
                   const currentY = e.touches[0].clientY;
-                  
+
                   if (Math.abs(currentY - startY) > 5) {
                     card.dataset.isScrolling = 'true';
                     // Reset all styles immediately
                     card.style.backgroundColor = "transparent";
                     card.style.boxShadow = "none";
                     card.style.opacity = '1';
-                    
+
                     // Reset text colors
                     const titleEl = card.querySelector(".title-text") as HTMLElement;
                     const listEls = card.querySelectorAll(".achieve-item, .tech-item");
                     const periodEl = card.querySelector(".period-text") as HTMLElement;
-                    
+
                     if (titleEl) titleEl.style.color = "#ccd6f6";
                     if (periodEl) periodEl.style.color = "#a8b2d1";
                     listEls.forEach((el: Element) => {
@@ -391,11 +398,11 @@ const EducationSection = () => {
                 onTouchEnd={(e: React.TouchEvent) => {
                   e.stopPropagation();
                   const card = e.currentTarget as HTMLElement;
-                  
+
                   if (card.dataset.isScrolling !== 'true') {
                     handleCardClick(cert.url, e);
                   }
-                  
+
                   // Clean up
                   delete card.dataset.touchStartY;
                   delete card.dataset.isScrolling;
@@ -403,55 +410,55 @@ const EducationSection = () => {
                 onClick={(e) => handleCardClick(cert.url, e)}
               >
                 {/* Flex container - creates two columns */}
-                <div style={{ 
-                  display: "flex", 
+                <div style={{
+                  display: "flex",
                   flexDirection: "row",
                   flexShrink: 0,
                   flexGrow: 0,
                   flexBasis: "auto",
                 }}>
                   {/* Left column - Certificate Image */}
-                  <div style={{ 
-                    width: "165px", 
-                    padding: "10px", 
+                  <div style={{
+                    width: "165px",
+                    padding: "10px",
                     flexShrink: 0
                   }}>
-                    <div className="image-container" style={{ 
-                      overflow: "hidden", 
-                      borderRadius: "8px", 
+                    <div className="image-container" style={{
+                      overflow: "hidden",
+                      borderRadius: "8px",
                       height: "100px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       backgroundColor: "#112240"
                     }}>
-                    <img 
-                      src={cert.image} 
-                      alt={cert.name}
-                      className="cert-image"
-                      style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        objectFit: "cover",
+                      <img
+                        src={cert.image}
+                        alt={cert.name}
+                        className="cert-image"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
                           transition: "all 0.3s ease"
-                      }}
-                    />
+                        }}
+                      />
                     </div>
                   </div>
-                  
+
                   {/* Right column - Content */}
-                  <div style={{ 
-                    flex: "1", 
+                  <div style={{
+                    flex: "1",
                     padding: "8px",
                     flexShrink: 1,
                     minWidth: 0,
                   }}>
-                    <h3 
+                    <h3
                       className="font-semibold m-0 p-0 flex items-center cursor-pointer"
                       onClick={(e) => handleCardClick(cert.url, e)}
                     >
-                      <span className="title-text" style={{ 
-                        fontSize: "0.8rem", 
+                      <span className="title-text" style={{
+                        fontSize: "0.8rem",
                         color: "#ccd6f6",
                         transition: "color 0.3s ease",
                         display: "flex",
@@ -459,18 +466,18 @@ const EducationSection = () => {
                         gap: "8px"
                       }}>
                         {cert.name} - {cert.issuer}
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="18" 
-                          height="18" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="1.5" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          className="link-icon" 
-                          style={{ 
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="link-icon"
+                          style={{
                             opacity: 0.6,
                             color: "#a8b2d1",
                             transition: "all 0.3s ease",
@@ -481,18 +488,18 @@ const EducationSection = () => {
                         </svg>
                       </span>
                     </h3>
-                    
+
                     <div className="mt-1 mb-2">
-                      <span className="subtitle-text" style={{ 
-                        fontSize: "0.75rem", 
+                      <span className="subtitle-text" style={{
+                        fontSize: "0.75rem",
                         color: "#a8b2d1",
                         transition: "color 0.3s ease"
                       }}>
                         {cert.issuer}
                       </span>
                     </div>
-                    
-                    <p style={{ 
+
+                    <p style={{
                       fontSize: "0.75rem",
                       color: "#8892b0",
                       margin: "0 0 10px 0",
@@ -500,13 +507,13 @@ const EducationSection = () => {
                     }}>
                       {cert.description}
                     </p>
-                    
+
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {cert.technologies.map((tech, i) => (
-                        <span 
+                        <span
                           key={i}
                           className="tech-item"
-                          style={{ 
+                          style={{
                             fontSize: "0.65rem",
                             padding: "3px 8px",
                             borderRadius: "4px",
@@ -525,13 +532,13 @@ const EducationSection = () => {
             ))}
           </div>
         </div>
-        
+
         {/* Academic Education */}
         <div style={{ marginTop: '3rem' }}>
           <div className="mb-4 md:hidden" style={{ marginLeft: '0.85rem' }}>
             <h2 className="text-lg font-semibold text-lightest-slate" style={{ fontSize: '0.8rem' }}>EDUCATION</h2>
           </div>
-          <div 
+          <div
             className="space-y-3 education-container"
             style={{
               position: 'relative',
@@ -546,10 +553,10 @@ const EducationSection = () => {
             }}
           >
             {education.map((edu, index) => (
-              <div 
+              <div
                 key={index}
                 className="rounded-lg overflow-hidden cursor-pointer education-card"
-                style={{ 
+                style={{
                   padding: "10px",
                   transition: "all 0.3s ease",
                   borderRadius: "15px",
@@ -581,19 +588,19 @@ const EducationSection = () => {
                   const card = e.currentTarget as HTMLElement;
                   const startY = parseFloat(card.dataset.touchStartY || '0');
                   const currentY = e.touches[0].clientY;
-                  
+
                   if (Math.abs(currentY - startY) > 5) {
                     card.dataset.isScrolling = 'true';
                     // Reset all styles immediately
                     card.style.backgroundColor = "transparent";
                     card.style.boxShadow = "none";
                     card.style.opacity = '1';
-                    
+
                     // Reset text colors
                     const titleEl = card.querySelector(".title-text") as HTMLElement;
                     const listEls = card.querySelectorAll(".achieve-item, .tech-item");
                     const periodEl = card.querySelector(".period-text") as HTMLElement;
-                    
+
                     if (titleEl) titleEl.style.color = "#ccd6f6";
                     if (periodEl) periodEl.style.color = "#a8b2d1";
                     listEls.forEach((el: Element) => {
@@ -607,11 +614,11 @@ const EducationSection = () => {
                 onTouchEnd={(e: React.TouchEvent) => {
                   e.stopPropagation();
                   const card = e.currentTarget as HTMLElement;
-                  
+
                   if (card.dataset.isScrolling !== 'true') {
                     handleCardClick(edu.url, e);
                   }
-                  
+
                   // Clean up
                   delete card.dataset.touchStartY;
                   delete card.dataset.isScrolling;
@@ -619,41 +626,41 @@ const EducationSection = () => {
                 onClick={(e) => handleCardClick(edu.url, e)}
               >
                 {/* Flex container - creates two columns */}
-                <div style={{ 
-                  display: "flex", 
+                <div style={{
+                  display: "flex",
                   flexDirection: "row",
                   flexShrink: 0,
                   flexGrow: 0,
                   flexBasis: "auto",
                 }}>
                   {/* Left column - Time period */}
-                  <div style={{ 
-                    width: "165px", 
+                  <div style={{
+                    width: "165px",
                     padding: "10px",
                     flexShrink: 0,
                   }}>
-                    <div className="font-mono period-text" style={{ 
-                      fontSize: "0.75rem", 
+                    <div className="font-mono period-text" style={{
+                      fontSize: "0.75rem",
                       color: "#a8b2d1",
                       transition: "color 0.3s ease"
                     }}>
                       {edu.period}
                     </div>
                   </div>
-                  
+
                   {/* Right column - Content */}
-                  <div style={{ 
-                    flex: "1", 
+                  <div style={{
+                    flex: "1",
                     padding: "8px",
                     flexShrink: 1,
                     minWidth: 0,
                   }}>
-                    <h3 
+                    <h3
                       className="font-semibold m-0 p-0 flex items-center cursor-pointer"
                       onClick={(e) => handleCardClick(edu.url, e)}
                     >
-                      <span className="title-text" style={{ 
-                        fontSize: "0.8rem", 
+                      <span className="title-text" style={{
+                        fontSize: "0.8rem",
                         color: "#ccd6f6",
                         transition: "color 0.3s ease",
                         display: "flex",
@@ -661,18 +668,18 @@ const EducationSection = () => {
                         gap: "8px"
                       }}>
                         {edu.degree}
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="18" 
-                          height="18" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="1.5" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          className="link-icon" 
-                          style={{ 
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="link-icon"
+                          style={{
                             opacity: 0.6,
                             color: "#a8b2d1",
                             transition: "all 0.3s ease",
@@ -683,18 +690,18 @@ const EducationSection = () => {
                         </svg>
                       </span>
                     </h3>
-                    
+
                     <div className="mt-1 mb-2">
-                      <span className="subtitle-text" style={{ 
-                        fontSize: "0.75rem", 
+                      <span className="subtitle-text" style={{
+                        fontSize: "0.75rem",
                         color: "#a8b2d1",
                         transition: "color 0.3s ease"
                       }}>
                         {edu.institution}
                       </span>
                     </div>
-                    
-                    <p style={{ 
+
+                    <p style={{
                       fontSize: "0.75rem",
                       color: "#8892b0",
                       margin: "0 0 10px 0",
@@ -702,13 +709,13 @@ const EducationSection = () => {
                     }}>
                       {edu.description}
                     </p>
-                    
+
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {edu.achievements.map((achievement, i) => (
-                        <span 
+                        <span
                           key={i}
                           className="achieve-item"
-                          style={{ 
+                          style={{
                             fontSize: "0.65rem",
                             padding: "3px 8px",
                             borderRadius: "4px",
@@ -794,4 +801,4 @@ const EducationSection = () => {
   );
 };
 
-export default EducationSection; 
+export default EducationSection;

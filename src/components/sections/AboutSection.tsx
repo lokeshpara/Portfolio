@@ -28,31 +28,31 @@ export default function AboutSection() {
             {/* No hover link icon */}
           </a>
         </div>
-        
+
         <style jsx>{`
           .highlight {
             color: #64ffda;
           }
         `}</style>
-        
+
         <div className="space-y-0">
           <p className="pb-2 text-light-slate" style={{ fontSize: '0.80rem' }}>
-             I’m a <span className="highlight">Full Stack Developer</span> with over <span className="highlight">3 years of experience</span> working with <span className="highlight">Python</span>, <span className="highlight">GoLang</span>, <span className="highlight">Django</span>, <span className="highlight">FastAPI</span>, and <span className="highlight">Flask</span>. At Groww Company, I built real-time stock trading features, portfolio dashboards, and migrated legacy services to microservices on <span className="highlight">Kubernetes</span>. I also contributed to frontend development using <span className="highlight">React.js</span>, <span className="highlight">Next.js</span>, <span className="highlight">TypeScript</span>, and <span className="highlight">Redux</span>, integrating them with live <span className="highlight">WebSocket</span> feeds and backend APIs. At Moneyview, I worked on loan automation systems, secured integrations, and <span className="highlight">CI/CD pipelines</span> using <span className="highlight">Docker</span> and <span className="highlight">Jenkins</span>.
+            I'm a <span className="highlight">Java Full Stack Developer</span> with <span className="highlight">5 years of experience</span> delivering high-volume financial systems supporting <span className="highlight">29,000+ advisors</span> and <span className="highlight">7M+ client accounts</span> in enterprises managing <span className="highlight">$1.8T+ in assets</span> across financial services, healthcare, banking, and telecommunications. Currently at <span className="highlight">LPL Financial</span>, I architect <span className="highlight">Spring Boot microservices</span> with Spring Cloud components, achieving <span className="highlight">99.9% uptime</span> and <span className="highlight">78% performance improvements</span>. I've built <span className="highlight">RESTful and GraphQL APIs</span> processing millions of daily transactions while maintaining SOC 2, HIPAA, and PCI-DSS compliance.
           </p>
-          
+
           <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.80rem' }}>
-          I work with databases like <span className="highlight">PostgreSQL</span>, <span className="highlight">MySQL</span>, and <span className="highlight">Redis</span>, and have experience optimizing queries and reducing latency in high-load environments. I’ve deployed and managed services using <span className="highlight">AWS (EC2, S3, Lambda, RDS)</span>, <span className="highlight">GCP(GKE)</span> , <span className="highlight">Docker</span>, and <span className="highlight">Kubernetes</span>. My workflow includes building <span className="highlight">GraphQL</span> and <span className="highlight">REST APIs</span>, adding <span className="highlight">caching layers</span>, monitoring systems with <span className="highlight">Prometheus</span>, <span className="highlight">Grafana</span>, and <span className="highlight">CloudWatch</span>, and writing unit and load tests with <span className="highlight">Pytest</span> and <span className="highlight">Locust</span>.
+            I develop enterprise-scale <span className="highlight">React</span> and <span className="highlight">Angular</span> frontends with <span className="highlight">TypeScript</span>, <span className="highlight">Redux</span>, and <span className="highlight">WebSocket</span> real-time communications, improving user engagement by <span className="highlight">40%</span> and reducing page load times by <span className="highlight">50%</span>. My cloud-native expertise spans <span className="highlight">AWS</span> and <span className="highlight">Azure</span> with <span className="highlight">Docker/Kubernetes</span> containerization, <span className="highlight">Apache Kafka</span> event-driven architecture, and database optimization across <span className="highlight">PostgreSQL</span>, <span className="highlight">Oracle</span>, <span className="highlight">MySQL</span>, and <span className="highlight">MongoDB</span>. I implement <span className="highlight">Redis caching</span> achieving <span className="highlight">85%+ hit rates</span> and leverage monitoring with <span className="highlight">Prometheus</span>, <span className="highlight">Grafana</span>, and <span className="highlight">ELK Stack</span>.
           </p>
-          
+
           <p className="pb-2 mb-4 text-light-slate" style={{ fontSize: '0.8rem' }}>
-          Beyond backend systems, I’ve built <span className='highlight'>AI</span> and <span className='highlight'>ML</span> projects using <span className='highlight'>PyTorch</span> and <span className='highlight'>Keras</span>, including a CIFAR-10 ResNet model with <span className='highlight'>92.22% accuracy</span> and a YOLOv3-based real-time object detection app. I also created an <span className='highlight'>OpenAI-powered resume optimizer</span> that evaluates ATS score, keyword match, and formatting improvements.
-            </p>
-          
+            I integrate <span className='highlight'>AI/ML</span> capabilities using <span className='highlight'>Python</span>, <span className='highlight'>TensorFlow</span>, and <span className='highlight'>AWS SageMaker</span> for fraud detection, preventing <span className='highlight'>$5M+ losses annually</span>. My CI/CD automation with <span className='highlight'>Jenkins</span>, <span className='highlight'>Docker</span>, and <span className='highlight'>Terraform</span> reduces deployment time by <span className='highlight'>87%</span>. I've built projects including a <span className='highlight'>CIFAR-10 ResNet model</span> with <span className='highlight'>92.22% accuracy</span>, <span className='highlight'>YOLOv3 object detection</span> system, and an <span className='highlight'>ATS-optimized resume Chrome extension</span> using OpenAI API.
+          </p>
+
           <p className="text-light-slate" style={{ fontSize: '0.8rem' }}>
-          I regularly write technical <span className='highlight'>blogs</span> on topics like <span className='highlight'>LLM fine-tuning</span>, <span className='highlight'>Chinchilla scaling laws</span>, and <span className='highlight'>computer vision</span>. I’m currently pursuing my Master’s in Computer Science (GPA 3.9/4.0) and looking for opportunities where I can apply my backend and AI skills while continuing to work with modern web technologies like React and Next.js.  
-            </p>
+            I write technical <span className='highlight'>blogs</span> on <span className='highlight'>LLM fine-tuning</span>, <span className='highlight'>Chinchilla scaling laws</span>, and <span className='highlight'>computer vision</span>. I hold an <span className='highlight'>MS in Computer Science</span> from Southern Arkansas University with a <span className='highlight'>3.9/4.0 GPA</span> and am actively seeking full-time opportunities where I can leverage my enterprise Java development expertise, cloud-native architecture skills, and AI/ML integration experience to build scalable, high-performance systems.
+          </p>
         </div>
       </div>
     </section>
   );
-} 
+}
