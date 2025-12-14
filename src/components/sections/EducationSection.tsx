@@ -8,6 +8,7 @@ import udemy from '../../../images/udemy.png';
 import eva from '../../../images/eva.png';
 import jovian from '../../../images/jovian.png';
 import javaTraining from '../../../images/javaTraining.png';
+import oracleCert from '../../../images/oracle-cert.png';
 
 // Education data
 const education = [
@@ -52,8 +53,8 @@ const certifications = [
       "Enterprise AI Integration",
       "Security & Compliance for AI"
     ],
-    image: javaTraining.src,
-    url: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4AA65AF6B860D6EAAD69DA22BD1B7D4FC1B4E59A5B96C2FC6CD9F8ED78F7AB95"
+    image: oracleCert.src,
+    url: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=EB930A40E22E2EE37931C1D193F93497A32DE556361B95F2A1AAE65F04DF9649"
   },
 
   {
@@ -395,19 +396,12 @@ const EducationSection = () => {
                   }
                 }}
                 onMouseLeave={handleCardLeave}
-                onTouchEnd={(e: React.TouchEvent) => {
-                  e.stopPropagation();
-                  const card = e.currentTarget as HTMLElement;
-
-                  if (card.dataset.isScrolling !== 'true') {
+                onClick={(e) => {
+                  // Only trigger on desktop
+                  if (window.matchMedia('(min-width: 1200px)').matches) {
                     handleCardClick(cert.url, e);
                   }
-
-                  // Clean up
-                  delete card.dataset.touchStartY;
-                  delete card.dataset.isScrolling;
                 }}
-                onClick={(e) => handleCardClick(cert.url, e)}
               >
                 {/* Flex container - creates two columns */}
                 <div style={{
@@ -455,7 +449,13 @@ const EducationSection = () => {
                   }}>
                     <h3
                       className="font-semibold m-0 p-0 flex items-center cursor-pointer"
-                      onClick={(e) => handleCardClick(cert.url, e)}
+                      onClick={(e) => {
+                        // Only trigger on mobile
+                        if (window.matchMedia('(max-width: 1199px)').matches) {
+                          e.stopPropagation();
+                          handleCardClick(cert.url, e);
+                        }
+                      }}
                     >
                       <span className="title-text" style={{
                         fontSize: "0.8rem",
@@ -503,7 +503,8 @@ const EducationSection = () => {
                       fontSize: "0.75rem",
                       color: "#8892b0",
                       margin: "0 0 10px 0",
-                      lineHeight: "1.4"
+                      lineHeight: "1.4",
+                      textAlign: 'justify'
                     }}>
                       {cert.description}
                     </p>
@@ -611,19 +612,12 @@ const EducationSection = () => {
                   }
                 }}
                 onMouseLeave={handleCardLeave}
-                onTouchEnd={(e: React.TouchEvent) => {
-                  e.stopPropagation();
-                  const card = e.currentTarget as HTMLElement;
-
-                  if (card.dataset.isScrolling !== 'true') {
+                onClick={(e) => {
+                  // Only trigger on desktop
+                  if (window.matchMedia('(min-width: 1200px)').matches) {
                     handleCardClick(edu.url, e);
                   }
-
-                  // Clean up
-                  delete card.dataset.touchStartY;
-                  delete card.dataset.isScrolling;
                 }}
-                onClick={(e) => handleCardClick(edu.url, e)}
               >
                 {/* Flex container - creates two columns */}
                 <div style={{
@@ -657,7 +651,13 @@ const EducationSection = () => {
                   }}>
                     <h3
                       className="font-semibold m-0 p-0 flex items-center cursor-pointer"
-                      onClick={(e) => handleCardClick(edu.url, e)}
+                      onClick={(e) => {
+                        // Only trigger on mobile
+                        if (window.matchMedia('(max-width: 1199px)').matches) {
+                          e.stopPropagation();
+                          handleCardClick(edu.url, e);
+                        }
+                      }}
                     >
                       <span className="title-text" style={{
                         fontSize: "0.8rem",
@@ -705,7 +705,8 @@ const EducationSection = () => {
                       fontSize: "0.75rem",
                       color: "#8892b0",
                       margin: "0 0 10px 0",
-                      lineHeight: "1.4"
+                      lineHeight: "1.4",
+                      textAlign: 'justify'
                     }}>
                       {edu.description}
                     </p>

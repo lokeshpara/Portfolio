@@ -218,7 +218,7 @@ const ExperienceSection = () => {
               transition: "all 0.3s ease",
               borderRadius: "15px",
               position: "relative",
-              touchAction: "manipulation",
+              touchAction: "pan-y", // Allow vertical scrolling
               WebkitTapHighlightColor: "transparent",
               transform: "translateZ(0)",
               backfaceVisibility: "hidden",
@@ -232,14 +232,13 @@ const ExperienceSection = () => {
               userSelect: "none"
             }}
             onMouseEnter={handleCardInteraction}
-            onTouchStart={handleCardInteraction}
             onMouseLeave={handleCardLeave}
-            onTouchEnd={(e: React.TouchEvent) => {
-              e.preventDefault();
-              handleCardLeave(e);
-              handleCardClick(exp.url, e);
+            onClick={(e: React.MouseEvent) => {
+              // Only trigger on desktop (when not a touch device)
+              if (window.matchMedia('(min-width: 1200px)').matches) {
+                handleCardClick(exp.url, e);
+              }
             }}
-            onClick={(e: React.MouseEvent) => handleCardClick(exp.url, e)}
           >
             {/* Flex container - creates two columns */}
             <div style={{
@@ -280,6 +279,13 @@ const ExperienceSection = () => {
                     height: "100%",
                     display: "flex",
                     alignItems: "flex-start"
+                  }}
+                  onClick={(e: React.MouseEvent) => {
+                    // Only trigger on mobile (when on touch device)
+                    if (window.matchMedia('(max-width: 1199px)').matches) {
+                      e.stopPropagation(); // Prevent event bubbling
+                      handleCardClick(exp.url, e);
+                    }
                   }}
                 >
                   <span className="title-text" style={{
@@ -339,7 +345,8 @@ const ExperienceSection = () => {
                   fontSize: '0.7rem',
                   lineHeight: 1.3,
                   padding: "10px 0",
-                  flex: 1
+                  flex: 1,
+                  textAlign: 'justify'
                 }}>
                   {exp.description}
                 </p>

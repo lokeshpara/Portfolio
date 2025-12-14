@@ -46,14 +46,14 @@ const projects = [
     image: yolov3.src
   },
 
-  {
-    title: "Vehicle Rental Management System",
-    description: "Built full-stack vehicle rental application using Java EE with MVC architecture. Features include secure user authentication with role-based access control, real-time vehicle inventory management, comprehensive booking system with availability tracking, payment processing integration, and detailed analytics dashboard. Implemented with JSP for presentation layer, servlets for business logic, and Log4j for application logging.",
-    technologies: ["Java EE", "JSP", "Servlets", "MVC", "MySQL", "Log4j", "Enterprise Architecture", "JDBC"],
-    url: "https://github.com/lokeshpara/VehicleRentalApplication",
-    period: "2024",
-    image: vehicleRental.src
-  }
+  // {
+  //   title: "Vehicle Rental Management System",
+  //   description: "Built full-stack vehicle rental application using Java EE with MVC architecture. Features include secure user authentication with role-based access control, real-time vehicle inventory management, comprehensive booking system with availability tracking, payment processing integration, and detailed analytics dashboard. Implemented with JSP for presentation layer, servlets for business logic, and Log4j for application logging.",
+  //   technologies: ["Java EE", "JSP", "Servlets", "MVC", "MySQL", "Log4j", "Enterprise Architecture", "JDBC"],
+  //   url: "https://github.com/lokeshpara/VehicleRentalApplication",
+  //   period: "2024",
+  //   image: vehicleRental.src
+  // }
 ];
 
 const ProjectSection = () => {
@@ -225,7 +225,7 @@ const ProjectSection = () => {
               transition: "all 0.3s ease",
               borderRadius: "15px",
               position: "relative",
-              touchAction: "manipulation",
+              touchAction: "pan-y", // Allow vertical scrolling
               WebkitTapHighlightColor: "transparent",
               transform: "translateZ(0)",
               backfaceVisibility: "hidden",
@@ -246,15 +246,14 @@ const ProjectSection = () => {
                 filter: 'none'
               })
             }}
-            onClick={(e) => handleCardClick(project.url, e)}
-            onMouseEnter={(e) => handleCardInteraction(e)}
-            onTouchStart={(e) => handleCardInteraction(e)}
-            onMouseLeave={handleCardLeave}
-            onTouchEnd={(e: React.TouchEvent) => {
-              e.preventDefault();
-              handleCardLeave(e);
-              handleCardClick(project.url, e);
+            onClick={(e) => {
+              // Only trigger on desktop
+              if (window.matchMedia('(min-width: 1200px)').matches) {
+                handleCardClick(project.url, e);
+              }
             }}
+            onMouseEnter={(e) => handleCardInteraction(e)}
+            onMouseLeave={handleCardLeave}
           >
             {/* Flex container - creates two columns */}
             <div style={{
@@ -307,6 +306,13 @@ const ProjectSection = () => {
                     display: "flex",
                     alignItems: "flex-start"
                   }}
+                  onClick={(e: React.MouseEvent) => {
+                    // Only trigger on mobile
+                    if (window.matchMedia('(max-width: 1199px)').matches) {
+                      e.stopPropagation();
+                      handleCardClick(project.url, e);
+                    }
+                  }}
                 >
                   <span className="title-text" style={{
                     fontSize: "0.8rem",
@@ -346,7 +352,8 @@ const ProjectSection = () => {
                   fontSize: '0.7rem',
                   lineHeight: 1.3,
                   padding: "10px 0",
-                  flex: 1
+                  flex: 1,
+                  textAlign: 'justify'
                 }}>
                   {project.description}
                 </p>

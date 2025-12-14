@@ -537,7 +537,7 @@ export default function Home() {
                 className="font-semibold text-lightest-slate mb-2 tracking-tight"
                 style={{ fontSize: 'medium' }}
               >
-                Full Stack Java Developer | AI/ML Integration Expert
+                Java Full Stack Developer | AI/ML Integration Expert
               </p>
             </div>
 
@@ -588,12 +588,12 @@ export default function Home() {
                         Lokesh Para
                       </h1>
                       <div className="flex items-cente mb-4">
-                        <p className="text-green opacity-70 font-semibold tracking-tight" style={{ fontSize: 'medium' }}>
-                          Full Stack Developer | AI Specialist
+                        <p className="text-green opacity-70 font-semibold tracking-tight" style={{ fontSize: 'small' }}>
+                          Java Full Stack Developer | AI/ML Integration Expert
                         </p>
                       </div>
-                      <p className="text-light-slate opacity-70 font-light tracking-wide mb-8" style={{ fontSize: 'small' }}>
-                        Transforming ideas into intelligent applications
+                      <p className="text-light-slate opacity-70 font-light tracking-wide mb-8" style={{ fontSize: 'x-small' }}>
+                        Transforming complex challenges into elegant, scalable solutions
                       </p>
                     </div>
                   </div>
@@ -1232,5 +1232,3 @@ export default function Home() {
     </div>
   );
 }
-
-

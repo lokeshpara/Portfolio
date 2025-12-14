@@ -1,0 +1,706 @@
+blob 60489c4595b04510e81ecc3096a054ef12ffcdb5 3697 scripts/fix-paths.js
+blob 1cdbeb01c37ba7b347e4fdab8042bae9fdff1435 204589 images/cifar10.png
+blob 8130fc73f6948559732cc6ca97ab636901fe80a4 272024 package-lock.json
+blob afc20b65902974acdf9c4f9b87d0ee05f3fe5b2c 6210 src/lib/readme projects/s13.md
+blob c258d024f7fd5c8eedbef7d2b8bfccdaf8fe17c5 2537 src/components/sections/AboutSection.tsx
+blob ca92c23065ed0afd051fc80c6003fb948cfe0b0f 1036 out/_next/static/chunks/8e1d74a4-a93dda0dc8ad37f7.js
+blob d7420590fbb8a53686fd0baf7ebbb37d67fdf747 9816 out/index.html
+blob ab9e8e1312fbe9a34d3d32baeec0e89257fda5d9 559535 images/jovian.png
+tree c0723044e02b1d06c4cdaa1775afe482edfd425e 271 src/app
+blob e7839045a44dc55a46cc899684e1a50dfdfd12f5 7777 out/index.html
+tree bd6442581bd0fdcaf605b12c20e05670edfcb2c4 91 out/_next/static/chunks/app
+blob c85fb67c463f20d1ee449b0ffee725a61dfb9259 393 eslint.config.mjs
+blob 47b01cc0c47f01d6a8e01f842bbf209fd5fac639 74316 out/_next/static/media/6d93bde91c0c2823-s.woff2
+blob fba4e900c80bddf9c14032e8ae9029f20bfaa236 10367 out/index.html
+blob f097cadfbaa97d5a2f3dc3e1a03f22288dfa7e95 6801 src/lib/readme projects/s5.md
+blob 8e364f28835f3db7274d66dbcb4a36e3d2fa7153 2431 out/index.txt
+tree 5f5948a77b39f0f1b65f7bb22f75d90506fa3b39 48 out/_next/static/css
+blob 944424f972b9f9c985163da8096a25b214fa1983 13036 out/_next/static/media/747892c23ea88013-s.woff2
+tree 535153a37ae791d6f57d45f7feebbe29d7fa0c41 100 src
+blob bfddf9298ca678c68334a64209fd99e434f9d1db 27656 src/components/sections/EducationSection.tsx
+tree 97d18c4652bcffd354a177a8e8a7a4d6c5f972b7 584 
+blob 33c08a6ef387c4dfbcbeebd0d7daabc27af928d1 272024 package-lock.json
+tree 8649a0558dd828416d87e78d8f76a49ea4f9174a 38 out/404
+blob b419d4302a5ae51800e2d227269e065cd4f8e73f 19072 out/_next/static/media/581909926a08bbc8-s.woff2
+blob f8230f6e00ac2c35931fc29425bf43ee72f828d9 26566 src/components/sections/EducationSection.tsx
+tree 0da6b7ebeb776276e6819c2f3af4129124f81f2a 38 .github/workflows
+blob 582d110d9ce5c9c1dcac521b73a271d81ff80bdc 10223 src/components/SocialMedia.tsx
+blob 33e921884c7a886283ec46ca8310bc4bd8f7422d 7442 src/lib/readme projects/s8.md
+tree 6f6b3d9895b22e2f8d336230c27c6bb85ef73b37 130 src
+commit 0ce1384aee45b0d17c99ca706e8867dbf6e5b110 235 
+tree a75634bdb311a16c0a6927cea4d046cd6ff6a9bf 324 out
+tree 80077daa8b07e3949afac8baff214ef50bf643d9 324 out
+blob 8bf5f40747adfa7233af581ca9ce8acad6f5e226 2237 out/_next/static/chunks/app/_not-found/page-a34d8364e4ec1493.js
+tree ae880ff1518a2d85a47d16653d252ab68df5bda3 621 src/lib/readme projects
+tree 40cf8bb4800b7c54c0e63806884ca02493f56b05 322 src/app
+blob 4586552ca45aae44d1ec1e9abea4949086f56a5d 17304 src/components/sections/ExperienceSection.tsx
+tree 1ff389cdd3fef0cc4efac0c685b95df59ff47fbb 655 out/_next/static/chunks
+blob 000ac469144a558a3834f7f2fea13b2c6df3e95b 112739 out/_next/static/chunks/main-48730ed8257161dc.js
+blob 567f17b0d7c7fb662c16d4357dd74830caf2dccb 1035 out/globe.svg
+commit ad1937aa80d04358b063b6b62f73437cf29a520b 277 
+tree 4fde5e094eb9ff06b9fd6dd047f5dd3913f21526 584 
+blob 0b7535171d5b55afd4433894ae059d836df17678 1724 src/app/globals.css
+blob b13e7a59cb60acc6ca134c75acbfd1531ef17548 16927 src/components/sections/ProjectsSection.tsx
+tree ff9d9223f33bd9b5d8c25a7f30f5e012e8f11ec2 38 out/404
+blob b633e561e745a69cae2a04d07e05848213f072d5 601 out/_next/static/chunks/app/layout-7732d453d5901cf9.js
+tree fa2908e7ca33685069f4acbdf3977fd711f00434 38 out/404
+blob 58b907b8249c846b7af453cfe14b210202eff04e 2482 out/index.txt
+tree 503567c2e7a37ae0e1ddf508e98b322117ef89ad 300 src/components
+blob 09974010724c3469a71cea7d3ff6e27105ef8878 3584 src/components/sections/AboutSection.tsx
+commit 6ec348cbe3687868e416d025b994bf89ef58e976 270 
+blob bc68675dedabfa7acc3bb88c8ce902f78aef28cd 19213 src/components/sections/ExperienceSection.tsx
+tree 2e7ef3de096763a800c20003a33ed97677eef94e 38 out/404
+commit e1c90d4f493259883596e531de1fceeaeea82c9b 1073 
+blob 496041ff17fce4f4cf26e77b2099511e10ee9d22 34480 images/vehicle-rental.png
+tree 1e7ebefdbb20844f33b3a1f92c48182ab1ee73f9 231 src/components/sections
+blob e9167a50198f1d7c6ad9f0258e52e0f5feee52b6 790 src/app/layout.tsx
+commit 8e788bbeafd9b8288383c4c1f2a955e6ed83d3f7 206 
+blob 50f2bc7b2b7e00918aba87132fe9015636ed7f72 5382 out/404.html
+tree f2af906b260392e9ff36f84f5e72088468ed386c 337 src/components/sections
+tree f12fcd6ec6632d304e9f9f8de702199393ed17ef 36 .github
+tree 93d5f4e9f0583c588cf789427e8b611bedece5f5 1144 
+blob 993e31be3c1ab06f36cf5b5c09ee0c56cdec9798 10589 out/index.html
+blob de0c055f2dbbfd9702d3bfb6fa1501f307ec7991 14489 out/_next/static/css/1237db9d323605a7.css
+commit eb3528c1808df277e52d6db1828d0f8eec68cca1 1073 
+tree f4c9c94b7f773e9e5bfcfe9f74f7fcec2eec14e4 324 out
+blob 75ae1115bcd8f9c8070b7932928fa3e37eec0299 3869 src/components/sections/AboutSection.tsx
+blob 08691dfd1647b92cd6447d55bd67bd5dceebefa8 1435 src/app/reset.css
+blob b54e08868bc83d85d7c273eb8eeefccfefebb744 2481 out/index.txt
+blob 371f46c72e3a16fd2033b5eb54c97d680feb88a9 7924 out/index.html
+tree 40d15cc926333f6e081f9949da5a1834d7eb5edb 43 src/components/ui
+blob 51a6e4e62be6d68903fc0f44a0bd8b4ea4eae7e5 92 postcss.config.mjs
+blob c5bbb2c48b933eddba295adc51cd129f0eea829e 1528 package.json
+tree 3d278604e0ca35ca20e8182a24d3062ba1e9715e 614 
+tree 38b8519d2ab2950997fc25297e92e3800ee891ef 167 scripts
+blob 1231e8829bdd17c09478c3e038beaa2fe3e86b17 17569 src/components/sections/ProjectsSection.tsx
+tree 0120f5254f81b48316cb2f90560f689b10e82f7a 100 src
+tree 9d8821e70e1a68dc94c3f5678f37cd19aae7dcd2 330 public
+blob c12b8cbb36fbe28bf841ccc68e1621d7aae7d203 5382 out/404.html
+tree 5088c3d4bd208048a9711d3418406830e4e7af9b 340 src/components
+commit 967c510afa74faa017f9d8b54621394ee7a0ef7e 323 
+tree 21ed799cd7780acfed38f328d44dd638a6e76cd3 340 src/components
+blob c19e6067d35fd101d49d9fb1384f8cc950e76644 201876 package-lock.json
+blob 9b1b2fc2a64d71a18df776d846b1fa8d87e71d94 181316 images/yolov3.png
+tree f0cb50b77f803590ae9f0a4f0b87eb938ce70a2e 467 out
+blob fc6471d236054ab36a2455384b5d95b17fe70606 1912 src/app/mobile-click.module.css
+blob d6ab85acc26dbc8250c02085f997fac9b0e6a422 18411 src/components/sections/ProjectsSection.tsx
+blob 7f5d6e73f980bb61237e7eed0c41ed745be69419 1282 package.json
+blob 62b8a52d318082638a920e7b7a5c13f94de66989 206 next-env.d.ts
+tree 215d030a9aee9f92b3d249ff928de6c4cde5acf7 300 src/components
+tree f58ac76b3872dbc7f369adf722955d5104e3eb93 322 src/app
+blob 9ffa3271597fbd2f98d5aa10d38ef990d5e33d4d 30819 src/components/sections/EducationSection.tsx
+blob be707f04a5d9a8fa9d3b6b4f602f30eddfe32c0f 19016 src/components/sections/ExperienceSection.tsx
+blob e730dfca962bfed352eadbc8030298b2b0e3184c 601 out/_next/static/chunks/app/layout-f17719f400497ccd.js
+tree 5c204cfcf93fa96a141bb7030cccb22ae6e1ea7d 614 
+blob 17e1f773ff5c7c5d94c03c4b9912230145e18607 18732 src/components/sections/BlogSection.tsx
+blob 0c2a6e1282647d31318783d92813f5d15ee10dab 102 postcss.config.js
+blob a76ea986135c2642f94efdf75669df18d0e0c762 19740 src/components/sections/ExperienceSection.tsx
+tree 43ff98378c693f1ba54fa34c1ebc03bf5be06fdb 38 out/404
+commit 1e8b848a55a0a8586012c2f18c4ad6e9e0637a91 245 
+blob 79223116aca9dcd6568359f8f69eb3e35ee013b3 2481 out/index.txt
+blob e1c346a7fa4c8f4d00f14d5feeefd925efe00240 7884 src/components/LoadingScreen.tsx
+blob 82868ec023fc566bb1d3eba4d7c57f880edf442e 2014 scripts/test-fix.js
+blob 592981b09fee09ed1a7afa9382d8522e32df1873 1609 src/app/layout.tsx
+blob 7fdf0b945543e93603888d7d777f684b15dec9d8 11220 out/_next/static/media/97e0cb1ae144a2a9-s.woff2
+blob 67c5cf81467424a47da1ee98f408b72772dea17d 7924 out/index.html
+tree 9849c10067daf5a0a7a63fd0d057d92baede9b03 614 
+tree 29d8fa6b14a28536ec1859a8d6e7448432de0131 324 out
+tree 4a4f3110a883dccf4656cf7f3ab7a8b57cddffeb 660 
+blob 3c342721b907c2489f475b3ac6efb039caddfecc 113527 out/_next/static/chunks/app/page-d067f013d157a1a8.js
+commit df0914d48c9fa5a5ed6a9855cf521c57dcbf19c9 1073 
+blob 3d0ef2c600d67b00a6522f30a18c624c01dc89f7 7350 src/lib/readme projects/s12.md
+blob 3ac73e5e3dab2aecaed5e57d9848bb81f3dbe94d 10214 src/components/SocialMedia.tsx
+blob 33b7c57236768cdc7772f0b6c9a20913a2dbcd46 687 tailwind.config.js
+blob 3f873fc6d78ecc579e5153027c5e5027a1dbc383 972 .github/workflows/deploy.yml
+tree f73938bcedab30edcc7db4804ab48af6d2dbb02b 839 images
+commit e55c49aa383d93f3ca4e5147358a0c9edba5f349 241 
+blob 14f0e62cb269edf0ee9151f6d28297c302db9aa6 1559 package.json
+blob 577c51b8c82f38e51c3a61c4da95248203daaacc 259042 package-lock.json
+blob 415b0f67827c09bbfc86f6042112bc39b4da5843 1059 src/components/sections/ExperienceSection.module.css
+blob 6a74e04b3852beb3687c3da24627bf4b21d9a281 7950 src/components/LoadingScreen.tsx
+tree b16933d0977c18c4e354dd1dd842c20706d99da5 467 out
+blob b5b8c8a299990ccdbb674e177a03e928b7d95904 1503 package.json
+blob 0e36f9d2595a062332cb7cf2333a4ea3b1d8f717 3495 _next/static/chunks/webpack-4c54b3f8d0170cae.js
+blob 360905d6d43dfadb1e98edfd5fc8ec09dfd8a5fa 568 package.json
+blob 776d6ec4b1684dd8fd7c1bf245aaab87c6d870b4 7923 out/index.html
+commit 253aaf5bd28540d8af2f6d9a24b85bbad73eed72 277 
+blob 380947b49870ad4cf77370977bd74c5fa1d68b2e 17753 src/components/sections/ProjectsSection.tsx
+blob 9e6a4cc692364e98cef024a3f9e043e9b8d66ba0 7777 out/index.html
+tree 9f5e5db2c73f008612e5a3552ddee4e236d5d7aa 271 src/app
+blob b14a7322625694864f3c0c133b6a61806fd58eef 17421 src/components/sections/ProjectsSection.tsx
+blob fdf3c27067c3f0d1dc02df0042ab33fb5cd4fd6f 2431 out/index.txt
+blob 4f62f9ca74a4f16744f9bd218cef98d265d477d9 47007 src/app/page.tsx
+blob 0009bfe14215dc6631a27e211a566a0440d46572 1785 src/app/layout.tsx
+tree 606ef8390960e99d2ec373344dfe43a989d3dc6b 33 out/_next
+blob 93570f7449ec8a7da80fa33cc3a51fae36d3addd 9219 out/404.html
+tree f2e17ff84323cf54c90b97a5db6b5dfd70d38304 398 out
+blob 522b9420fdac266721ccc52f0e517ac9b1d32e79 32086 src/components/sections/EducationSection.tsx
+tree 2059df0ed3c8e6c89006321cf379ade2d6d1a414 1178 
+blob 49cc8ef0e116cef009fe0bd72473a964bbd07f9b 6 .nojekyll
+blob 0c6916e27e6962f86842d939257786f3a1d06dae 9020 src/components/sections/CertificateSection.tsx
+blob 6abf14110568477308ec46eec703c580afcffb4a 126417 out/_next/static/chunks/main-3c242516563c0227.js
+blob 5180e7e99313d1b6527db8eaf87b02b715cfde17 18408 src/components/sections/ProjectsSection.tsx
+tree c32b23996a4b4b80e54ec431f270247056cf9b9f 584 
+tree 11baa7986ef298571811967b90d8aee046cf8516 281 src/app
+blob 14406dcef7a1433eaded126f32eaf35f25cf453b 17060 src/components/sections/ProjectsSection.tsx
+blob 393eb2f60703d9f62dcbdc7b709d502a90ceb548 19474 src/components/sections/ExperienceSection.tsx
+tree 6a44929d7022db16dd8e2ef4eac2f47f7fce0984 340 src/components
+blob cbafd910d94e690e98e48ab853a51b5b1acd3116 601 out/_next/static/chunks/app/layout-11819d62b0eaf3e2.js
+blob fc305aae1e6dae21b50c1dad39592fb863cc1132 544 out/_next/static/tO8xoFrwSQNz5EA2rdy4F/_buildManifest.js
+tree eac6b2faa87389b54d092b911122a74fc6cbc071 143 out/_next/static/chunks/app
+blob 88ef2512041cadbe94bdf8e19fcd5486eecb9865 620 src/app/layout.tsx
+blob b784bd118d1bbd57193125139b2a078e81cb76b2 10666 src/components/LoadingScreen.tsx
+blob 5ef6a520780202a1d6addd833d800ccb1ecac0bb 480 .gitignore
+tree 460a9920e8faebbdebbb90ca3bffef7040caaf4d 1178 
+blob 5174b28c565c285e3e312ec5178be64fbeca8398 1375 out/next.svg
+tree bcb2d12f2616afb389ed222e7191cb9dfec9c4a1 218 public
+tree 546a205665925b559b78997b554de01d12c92c35 38 out/404
+blob e0cadd5a405213cfe8df73cc73b401d659c9048f 551 next.config.js
+blob 50dbcfd699b8aef55aa56672448478f4bdc8d4a3 18252 src/components/sections/BlogSection.tsx
+tree b5745b14ed7830a322e3cae9e178b6e360c7fb17 655 out/_next/static/chunks
+blob 97365f2b2f8756d280acc0795779c4b7fbc7f2a2 5382 out/404.html
+tree 9c3adf0de29ff191c814f15f815e79a1a7c79195 472 _next/static/media
+blob e35497351c0e35f113de93bea364d1f87cc7051f 2550 src/app/globals.css
+blob c0bde78ba5ac9e3099658cd2d629f8981fc676b0 51762 src/app/page.tsx
+blob 05b3372ae491efe76aa13a38eacf7207e5c61d4b 14409 out/_next/static/css/1fd90ec68519d177.css
+blob 79a0c44f78cd9a9ce6656939cd626f093cc61c68 41475 src/app/page.tsx
+blob 22028470ec294841cedd8966257b41f22bc5f8dd 7036 out/404.html
+blob 2ef9964f89bfd7a7f5e43518c5cd1fc5d6c5d98d 370 .gitignore
+blob bc8b4101491a7ffdb801d86b6ffca38964c5593f 765 .github/workflows/deploy.yml
+blob f42a18d6b618d7b1ad1158f5ebdbc5d81bc550b6 4295 out/index.txt
+blob a326a02b00590fcb01882a2a343455ef8bc48b2c 7536 src/lib/readme projects/word search.md
+commit 7aa5951b4b6bf5bf33906e42d4935823c37ca7d6 247 
+blob 4f8a08761b6ca845f9da14139abd2e8705c31a15 26611 src/components/sections/EducationSection.tsx
+commit bb45bd248e66008668ba6e0ff6e501d7c2613037 244 
+blob 8a78a89a24dde83f2b2214213d4c91bfb2c235eb 1238 src/styles/globals.css
+tree 6487a4d82d7e2f7d212e26fc68ef96ef53c20fde 467 out
+blob c1334095f876a408c10f2357faaced969ec090ab 602 tsconfig.json
+blob 482697bc61eabf72ee06cace2ca73ac9a1c06421 27778 images/blog1.png
+blob 5a52be1b9ce2e7527a760bcdffb9fd6cddc05083 19442 src/components/sections/ExperienceSection.tsx
+blob 23fc0a53614ea8fd47036df85026bec3babf7e2b 503 src/app/not-found.tsx
+blob 57b2bb7985c2557fa4aecf447301bd73b3bf796a 104231 _next/static/chunks/app/page-cf9d8c7d0eca2357.js
+blob f7c8a2f9a5d1b3634ecd1784c3374b13fabf5589 426 next.config.js
+tree b155901d7964d18a13bc35830d71516d6dbf09b5 340 src/components
+blob a661d718df0947b6696565f64f77748089bf03f8 18811 src/components/sections/BlogSection.tsx
+commit 6132d1ed02ba632519210ae3006bd5efbe81e634 279 
+blob 7797fba6bcf874a161dba1cb5ce7c74207be1d30 7923 out/index.html
+tree c39c8f1fe7e8faafaf50a1a62e84347595be0c73 230 src/app
+blob 3536594483eb3c345e7ae522724a9ff312bd20ea 30886 src/components/sections/EducationSection.tsx
+blob 12ad8397a6f6cd0d1a2312f12457795c6ebcf602 7420 src/lib/readme projects/s10.md
+tree c9e8e2082e46727489cdd4d7f29c71d8f3bcd14d 271 src/app
+commit 6adf6dd9b1751377dc3780ab3d501cd1bc3fe9b2 1073 
+tree 8616f559c109cefcda5dd3f48857f51b35bc294d 330 public
+tree b1d3438d84a57f342e3e3c9c6b1fb8bdc8bbe93b 231 src/components/sections
+tree 4f39241b03e76fa54849314b8a108d1a35bbdccd 660 
+commit b341496e26a0e91c9d5fe0b86c4f8a4dbbd222d1 277 
+blob 7a532863d64cbe890977deb3161b24abe4bbb343 1707 out/_next/static/css/5c14d059704bda72.css
+blob 9a02987f141edfaaea8caf36b163d59a49bbb2a9 15566 src/components/sections/BlogSection.tsx
+blob 8c829189c864e0fed96189977496a71e68baf1b6 4287 out/index.txt
+blob b8ab6abcb7b8ca8f7e0e6e70e544055397ba2406 231 .eslintrc.json
+blob 7d29cf802f204ba6e34b77e5b10fb07cc8ba1a16 311439 images/news-analysis.png
+tree beb8543bca4dd9a04dc7cbeb5557b10e45b9c801 36 .github
+tree be2158cdd1aba20a519050de5e4b1b42c1b80a66 716 
+tree 8d11e7fb6f453cf79d51870b521cbc246cb7e423 96 out/_next/static/css
+blob d32291f9ae65fefb65b8b61ef87ba72bdab7420e 11681 images/word-explainer.png
+tree c88f389de09f418da376598c42e8788d4fb6d172 185 public
+commit 931b9c28cd0e34416abe6144dd83f72cb6c34deb 262 
+tree 0e381ebcae776daee997008b1d959a2e64b5b467 716 
+blob 1a419522ea0bc71e8eee39420e9a5ed5bab47906 9305 out/404.html
+blob d27aea76bd8b861e73a71f0cc31c63a7f8b458e7 401 out/_next/static/chunks/53c13509-48ecd9d0106e1ac5.js
+blob ab422b94a4fbe76275d31c0bf7ef334768b39cae 112594 out/_next/static/chunks/polyfills-42372ed130431b0a.js
+tree 87e1b124f87b73a8923e2ca1c07f54853ab3936b 231 src/components/sections
+blob 759b8041b51892f35bd1ab8e154d16dfaab3270b 535 next.config.js
+blob 06665fd1a21a4756cda8785e63f00d5147b294b2 46804 src/app/page.tsx
+tree 797e6857451dcfd17924a363439a6df355b12530 767 out/_next/static/chunks
+commit b5ad3205083540c37f2735abf3fd56e5aff360d1 243 
+blob dc7996e76c12a88f05d9729badc43f8669afa32d 997 .github/workflows/deploy.yml
+blob 4b880b8f2f972ae3b5b9a359cf7e975ca4af0cd0 21406 src/components/sections/BlogSection.tsx
+tree 07731a929be76a19af7c85a077230ca702aed676 1178 
+blob 4d693822fd4f0d8c2cab0b2433f8bc381baeaa21 600 .github/workflows/deploy.yml
+tree 51fb088ef38eb68af3f84e218eccaf3d3eae7e1e 64 src/components
+blob 132b56923aa45425681be2dc8ec4cdc9f9ae5142 27305 src/components/sections/EducationSection.tsx
+blob 32baff9a3ec043696c6f1e516bc88a7c76ae4ed1 19618 src/components/sections/BlogSection.tsx
+blob 731fe78c6661ca5aff713445c2bdf7c57bae4b4e 175255 out/_next/static/chunks/684-2726f882f4cbdcea.js
+tree d853b5239bde2ea808b287f8b5e4bfba59add45b 88 _next/static/ZURqaWYBCMzh22AhEoguM
+blob 37c3d1991e55d6d12c0ae189a31251f09badb566 2597 src/components/sections/AboutSection.tsx
+blob 97535c98d4735e4d33964180d5bf9a2129ac83d5 7713 src/components/SocialMediaMobile.tsx
+blob 1b37c06c3c1177c8b3de819eb7a86229cfab2eec 1506 src/components/MobileSocialLinks.tsx
+commit 33c26900ca87bd7c562168adcb04cee9ab27676c 265 
+tree 52b41c5cab1c66414583dd9ddb4485f4a2a9d068 767 out/_next/static/chunks
+tree 436cc81eb4e3c1ada5188e1c1832ddf8cda93d00 660 
+blob 2d73082c73bdb7ae037512a2c8af6e1c2ba8b660 476 src/app/utilities.css
+blob df9155b55ae19d25d260b4b46a977e5bd6a81006 5670 README.md
+blob dd4c025bc9a9432afb5995d2c7b42a8073a80ca5 14924 resume-content.txt
+commit 030e2f28035c22d30f9e4e64fb259e00a7ea3904 268 
+blob 2eb1b01bb5823c0cb7f1a7fe6d07ea3e2ea787ff 776 src/app/layout.tsx
+commit ba4c28179e489b3beb747242301ec32fa77016a3 307 
+blob 40681adf5dc440d918bb1b8fa41bb0f05ca730f6 128445 _next/static/chunks/main-a9c727e573ac5080.js
+tree df31bd7734ea57d4fde3f92f71dbbe072aa6b9c2 287 src/components/sections
+blob c7d0b2e643feddb37a95175be5ac92130da6530d 3837 scripts/fix-paths.js
+commit a25724ddf4d74a04269683ab96a5dfb9a5f3b966 244 
+blob b2b2a44f6ebc70c450043c05a002e7a93ba5d651 385 out/window.svg
+tree 074358a056d75a84c3b754f9fbb89f16f8a57caa 324 out
+blob e9ffa3083ad279ecf95fd8eae59cb253e9a539c4 133 next.config.ts
+tree f553fe20070d758fa22643410497fe35fba4c8f9 287 src/components/sections
+tree a36b5a3b0612ec08b01407110dc20029fda43295 340 src/components
+tree 61a92e0c242fdbf36fadd3651eb7de9d2fa35ccb 130 src
+commit c3404f0828e5bfa1c1f0e98736808e46a244e4f1 258 
+blob 7132076c3ca04b053fbd26d3c7ba295f13a1d147 2109 scripts/verify-paths.js
+tree d121d8b9ab882ab0f691ce1f3a02294a26a1d093 397 
+tree 7a80138080025630636140f9d744887db7a1326d 660 
+blob a3f0b628c7f785fa2ffa2decef9e4925d8a08c8a 2501 scripts/prepare-deploy.js
+blob e61aea2dd764ad6ead5c0c495bfb6aaad2a00359 18103 src/components/sections/BlogSection.tsx
+tree fef4575c0699a517f4184dfcb08c9a49ba9f7470 614 
+blob f0774dd7e64412fcd7804d199502e8d5e49f3efb 2090 src/lib/readme projects/s6.md
+tree 930084a72ad49c70555bcc8388a31f9eba9e9353 614 
+tree 2a21fdbba0bd412f253a1bd24bb31a52ff9e5db6 130 src
+blob 54e6700432dfc8a49e41b9abb66083beba9df2b7 4432 out/index.txt
+blob c577abdef993c728044666b4737848a8c69dc9dc 15902 out/_next/static/css/4a66be5aa1093b56.css
+blob 0d69d92b447dbcc6b109f3f3c2f517b6e19cf467 10589 out/index.html
+tree feaafe8a8c3a863b0f313ef85410ac7fd99cc159 38 out/404
+commit 997a4bdbf0907499a30498656c5a40599c9e9ed4 236 
+blob 4cdd204cdb2711efb74849aaa3c5eb32629c7b38 2541 src/components/sections/AboutSection.tsx
+blob 52fde616de1bd59404fa3c06810b477b409bee0a 259170 package-lock.json
+blob 95a9e92c87f603d0869fb836c3e2e4e4589ba2b1 1136 fix-script.js
+blob 4677d12657d7eb67c57ad501b61bf9de039a4083 2546 src/components/sections/AboutSection.tsx
+tree 4b909b4b04a3de0e09a32e4394f78925bb99f53f 767 out/_next/static/chunks
+blob 629e851c27ae7f695f3b0195c65ae2c37b9924a8 10510 src/components/LoadingScreen.tsx
+tree 24a804ce99158483aaeecfbe884dda7347983f77 324 out
+commit 6fdcb0904ab64d83cddbd857f26d9589981de88e 1073 
+blob 7f2a39edbd3ce03e9a996f9aad047b9533981aba 8249 README.md
+commit 6c6c4732ab18c525927f0c12f4309e72980dd01b 235 
+tree d4622401e5724595a98f4db208cb7bcdb697df12 337 src/components/sections
+blob dae182b7f80ac7567d8c6bd9989586355d97b601 10025 out/404.html
+blob 63937c98b96ce8d4dc1df529face51517197a721 421 next.config.js
+blob dd8f0725d09de15d312aa2da8694285b9f978a82 2481 out/index.txt
+blob 0ea8eeaac9edebe7a11b7f8028f3283610977889 21468 src/components/sections/ExperienceSection.tsx
+blob 072229b870650dd4ef5370a52c6aa62b3a9752c7 10280 out/_next/static/media/df0a9ae256c0569c-s.woff2
+tree 946b4e2122c0c8fadb383d886fddd3bb43974e60 660 
+blob bd4b16b25c1681314a0b61e71cdb2fb204974ba9 94 postcss.config.js
+tree 0cd31a2643cbfbdc32d0ac20315431bf50972edc 467 out
+blob b50988e62fc799b297b8fc8eef2758feba967220 2550 src/app/globals.css
+tree 819399fc59b6dbb62375a7102a8c047a6596219d 584 
+commit f491795baaa3ceae84def30e1cb5d38a961bac00 254 
+blob 631ad2250aaebe8e5e758237a44fe870b3958734 5382 out/404.html
+tree 2a8a549b6a00e1b628f26f38ecbb03ab08956b3c 38 out/404
+blob 42842dcec3a9c7d1f95c58408c7ff468369523f1 168413 out/_next/static/chunks/4bd1b696-e9240999cc26e271.js
+blob 2db2656c37daac7c7aecc7a074e060ee3994f06e 139844 out/_next/static/chunks/framework-6d868e9bc95e10d8.js
+blob e62f83649658ba245d45890ab4d5b77c5a94e4e9 25775 src/components/sections/EducationSection.tsx
+commit b9ee35f35ef96e656944e47a981b9847944c205b 247 
+tree 4289e244f2492e8fdadf5814e30c0112f294112b 67 src
+tree 5d0e4e451992e5f77db2a01cc7304a1bbe93ab54 130 src
+blob 66d0edff35e05ee6253ef0b91efa2d63d6938453 216 vercel.json
+tree 0796b36a84ba62ecf31a32fe1a0686961092af97 1178 
+blob 52a7d71a4f82b7cc04874978e19ebb5fa292a4fb 5382 out/404.html
+tree bb8f056de56163da16b75279736463d2b092a026 655 out/_next/static/chunks
+blob 2952c62647447826e0020cd0f1ddecec70927b93 14183 out/_next/static/css/2fe94eda3c984243.css
+blob ed42ae962691319363cf12757aaea3b116925905 1363 src/app/reset.css
+blob 1b3be0840f3f6a2bc663b53f4b17d05d2d924df6 211 next-env.d.ts
+tree 708656e365b412b4d95fdb1906888d30ce9215e6 67 src
+tree 1ed6e5058d1d2403e44fbc425b7b7f4f7491d25c 52 out/_next/static/chunks/app/_not-found
+blob 4953b3362267bd6848254f0894f99b518e9199fa 4159 scripts/fix-404-routes.js
+blob f0a809772947e1f9be3d9c0eb897012ff590eea7 297 next.config.ts
+tree bb9627c58b648d135ba0d2ecb5afc152eb90e912 30 src
+tree 8b36ef02ebcfddbb25393faa820864b4638f9bd0 143 _next/static/chunks/app
+blob 1b90f14f2b22f9910d3004285f0ff879fa8ee35a 18438 src/components/sections/ProjectsSection.tsx
+tree 3db1e897c5ba4c88682d885232023feda58ebb25 67 src
+blob 4bb7bfabc61ddb12be2bb551fb942a3dbc8eaa85 2431 out/index.txt
+blob 28529fb5e53abfddad74297f5d3c1a70f28e94fc 2035 src/components/ui/ProjectCard.tsx
+commit bba3f349297a0941467aa25544b2c9908e2edb44 235 
+blob ef9f15d7b3c637348d12c5b0312a87537e8d9c95 3493 out/_next/static/chunks/webpack-e2f0073850e587d9.js
+tree 637df7feaff27e2ad152eab9fb8254298a8d9924 716 
+blob 11a79919c07136e35a9a685045c8be79f88d3ef6 3503 out/_next/static/chunks/webpack-cbe9b952bcca6f67.js
+tree 98eb6a8c0b8be661fbe14da1bacd914a778d19af 33 out/_next
+blob e713d520f5c1123c4b0ab4aaf3efd01bda8c2bd6 1475 src/app/reset.css
+blob 1f717ed6fb11a1fb765e567df9acea69888bed9c 6134 _next/static/chunks/pages/_error-71d2b6a7b832d02a.js
+tree aa82f9be3630d3e6231f5edcc933a4520b8bce27 119 images
+blob 15cc6ca0abccd2096f5b5a20dea5196c6d8baf29 20481 images/minion-cursor.png
+tree 5962b46408cdf0e14ce88c53812edfc7078a5c02 100 src
+tree 43c80044dc1f9035fbeb56b9556980e56189d448 660 
+blob 15e9c1d931db5707167bb6088b51eed862899219 7982 out/_next/static/chunks/341.056900400c7cb71c.js
+tree edc909f1894a1c2e9720389c21ffffdc7a892116 36 .github
+blob 6ec1287c809c61942390bfe44b386f32ef891887 2482 out/index.txt
+blob e65956cd569a052571e114407760163a54887901 1503 package.json
+blob fa960bd97bb4e3b288b5730e22f550485e886a99 1423 package.json
+blob 491ae9076985105f1d6f8bbfa721eeaea6883d13 42590 src/app/page.tsx
+tree 36f31fd79c08e2ef1b0418b86adf96fa4f882fdb 130 src
+blob 9ccc503cf069c795b734d29213ccde5ae787f689 234517 package-lock.json
+commit 3895902e8044b421b6fcbe6ccdfa628387f55f44 245 
+blob ce3b6d869499c43841276351b01db67aa387d29c 4520 src/components/ClickEffect.tsx
+tree 34a5b468901d033354268693c84be3eb5887af3f 324 out
+blob 146eec197822fd5cbf11c3b2a029f0e22f86fde8 36430 src/app/page.tsx
+commit 2a2e6810ff532269f3523917a841bcbb86fada4e 271 
+tree 8af383c6fb8a46c8e345be11fe86f56cba8666cd 38 out/404
+blob ba447a2f9829a06dacb4b780ccd552602185d4a6 1059 src/components/sections/ExperienceSection.module.css
+tree e7abdd3fcb230bdf19584f0c3c04a24f2c853731 430 out
+tree 7228580fcf397ef5fc049446f76b69308f84c646 41 images/projects
+commit 85c648f3b89cc00f6e97388133d7dec4843a5ca2 247 
+tree 4d587a16f3c23ccdfee480779dc72de87b83ac77 256 public
+blob a2dc41ecee5ec435200fe7cba2bde4107f823774 488 src/app/globals.css
+blob 30ed6f4851e84fd4124abf105cc4e64cfa817b0c 10595 out/_next/static/chunks/535-2c3451378f3f3c81.js
+tree 3edf40f5c9a45ec71e39c26e3db964eb757ff7c6 340 src/components
+tree c864288d858013a889c56c178d55c083517ff63b 281 src/app
+tree da06b69f69160accd040d69cc75b5ea94d7fcf69 88 out/_next/static/tO8xoFrwSQNz5EA2rdy4F
+tree 81b94492a2fbd10998075e257556f0acf67fa675 614 
+tree 5e22148c01def7bd6a988ca168a97dba537f99ce 584 
+blob 922f3c44c279b1926cbe63dde7e7d9fdb97f427e 58693 src/app/page.tsx
+tree 2733232d6dc56451eef26b2cc3f82e588a7f3524 795 images
+tree 9da9bbec9c6ad98ccb1ee4075b419b1a5a7f0a3c 548 _next/static/chunks
+tree 70a1d892f98ce34f3600df00842f2077a87e9f6f 614 
+tree 627c9b7740e8227e00368ecae188ecb41d7e8146 375 public
+blob ad8cd0829497032500064aa6f16a7f963a7e6ea1 5382 out/404.html
+tree 4ee69543378506ff9507bc7527c397f0c67e514f 430 out
+blob 79d247a8995a023bd2111408f797a5f4177e3e9f 3059 out/index.txt
+tree 1dd8efd119ba00298fe5e217cff43808927dd8e7 287 src/components/sections
+blob a6dbc40f947cb6260bd7c7b384dcb513647da245 12789 _next/static/css/59cf1301be86776a.css
+blob b2e9277264a5d286266db0dabcc66c337e7d867f 6236 src/components/SocialMediaMobile.tsx
+blob 3b3f8af2978856fcad507dd9e8bd17e73a7d41d1 7923 out/index.html
+tree b4fbe3851d81614f73fcaa676b5afcdb617d39b2 106 _next/static/chunks/pages
+blob 2c1067502ee7f677d5162758bf675e3e837d09e3 99 postcss.config.js
+blob 9698c4f3d073a4652a7ba07a85196f0de27cc6ce 9810 out/index.html
+blob aa5ef3a251a7ca93858a16a9bb8d3154c77c9ad0 606 next.config.js
+blob e035f95c48a5b93065a38ed1f94baba50f7c5cc5 588177 images/image-processing.png
+tree f9ad62235ff70f6c5090562e2a016a9f0f7beeaf 38 out/404
+blob e5daba6fc9406c48a0ce6d3e2c6ef169377bcbd4 1536 package.json
+blob 6a572e4a585368656c3e471b0e110c79647b6b5b 5174 src/components/sections/AboutSection.tsx
+tree 0623f9603406352f4861192024493a24967b58b2 716 
+blob 1877e585cfca42aad996dc93ca1914c6f47aa066 2138 src/components/SocialLinks.module.css
+tree cb84e121730802f8deb31c37c2fae8777f7a5a24 38 out/404
+blob 0fc96b95b7303e308b5760e0dfbd6e131279b2bc 78678 images/eva.png
+tree 2185f7ffe7ec29b5dd32a45be95d18711a798426 1178 
+blob a7b2233fd1b3fea3663c52048d4ac22e79793944 1256 src/app/reset.css
+tree 44d5a9c2995d3e2fd3b8272a5ad503bac37873ad 340 src/components
+blob 9a1c6034f302360886c6799fca62ceecfd782a7c 175210 out/_next/static/chunks/684-d648b8fc34382047.js
+blob aec9937eef156673b358e274a1765a089d7810ea 2099 src/components/ui/ProjectCard.tsx
+commit 441889d9b28ea90cbe499a5c57e10bb877ea4cb1 368 
+commit 158fe2a522480dc44d755cd03d55ec30776df509 263 
+blob 5b3ff592fd46c8736892a12864fdf3fed8775202 80 out/_next/static/zRObdObr_vcatc2-d3BqD/_ssgManifest.js
+tree b57331a8579911d4bc927d1e19fa328a1076b379 38 out/404
+blob 718d6fea4835ec2d246af9800eddb7ffb276240c 25931 out/favicon.ico
+commit 7eecd73f5386e84006cfc19f5f04288575f27773 270 
+blob 75f6b3fda44d62f533bcb837a79d48316e75cd7b 36288 src/app/page.tsx
+tree 2cc8180803dc0e6cff6e3ecfd54dd3add1759f0e 231 src/components/sections
+tree f58d67d12fc8120e5bf9f71820154fffc0751642 130 src
+blob 822b6e7e4eff480675bc0bc68b5be94b8374ee34 724495926 dog-breed-identification.zip
+blob 63cd9b465ecdfd8d2663d63380513985067495e8 20236 src/components/sections/ExperienceSection.tsx
+blob 860c5484032b298f145e8c2911cf97c2b87475e6 252683 package-lock.json
+blob c9dac116ad062e3c4a56b3e5d3ede43c80747406 19626 src/components/sections/BlogSection.tsx
+tree 7726eb2c248e62298d66592b62f1506ce9745574 231 src/components/sections
+blob f4e1523495cf03455c1d633ffcc6110e7873755f 1560 src/components/MobileSocialLinks.tsx
+tree c856480943e52638e2ec370e25de57ee9172f516 48 out/_next/static/css
+commit e97225c749d3e0232c8e47359313c41972a0acff 1073 
+blob fdac80277e6bb2378e3403699052647884728e2a 8567 images/cloudit.png
+blob 2849f808e0f513527e492fd2c59590f60b725d8e 47006 src/app/page.tsx
+tree 007454ff48ab8f3394b6b3f254a5c1802472379e 614 
+blob 41e3517c2015e3519cdba986a2f9228aaf72283b 19091 src/components/sections/BlogSection.tsx
+tree 0e7ed25acd3c5caa38b7345aecb5e5e92871bce0 614 
+blob e06191aaa9f16244a4c7f54e6378ac1d6c711d39 5382 out/404.html
+tree 9b268144a3309d9da9621d74089a8b503b7116c3 614 
+blob b2e37e20b0c3b72a92ee2b309892944cab7097ed 29212 src/components/sections/EducationSection.tsx
+blob bb038289d8c5e04b20302dd4fc624d6e6870805c 7924 out/index.html
+blob f93d822d49fdce490373f02bbacfdf8e26700e2f 5382 out/404.html
+blob 9fa25d8c7e5129ecd363e363db2f99b8d96fb287 13461 images/profile.jpg
+tree 048e9dd6b1d94ee574943d585cea9606706f8ca5 67 src
+blob 6ecce503e069548330e9a6f15244206caa6f8207 920 package.json
+blob 49de6197a822fb9fa0198e4a197488c8e36f5c11 272502 package-lock.json
+blob 8e5e1ada8d5f7072a18cd2b26a252e335a6f19d7 175312 out/_next/static/chunks/684-c0be3d6cfb09d9e9.js
+commit 503077bc5ca7c2306b18a7cffd2984376f0cc29e 1073 
+blob 6716ba11f1f4445944b1ca7b881a4e2cb26f0527 7685 src/lib/readme projects/cloudit.md
+blob 051b5f9c1019ce47305b11f2a6098a28f06dd745 7993 src/components/SocialMediaMobile.tsx
+blob a1f15e98939406a1eea449baeb16f9bb986d70cf 1060 src/components/sections/ExperienceSection.module.css
+blob 6a5f250398a1273fac9bf893919dc4ebf86d1f48 7923 out/index.html
+blob 46efdbdbc828839112404c8285ab7e516a6cec45 12608 out/_next/static/media/9610d9e46709d722-s.woff2
+tree 7a27a4e9406e41825ff7f54ce820126ea86cea50 43 src/components/ui
+commit f749fab05eadee978fcf638867c913f46cb7aa93 256 
+tree 87cce353a44795afa765726ffcf7bc37b06c7e43 300 src/components
+blob bcdb9a3fb073679a4169189c44c38d82656c3abe 46752 src/app/page.tsx
+blob 6eeeac69abb8a92452b844b880526b94a46bc700 493 next.config.js
+commit 4aa2ab0759466b5c3b335087759c80cb6ba39aef 279 
+blob a18559fdd6005a62ed102ce5de44ef3b376ab161 9997 src/components/SocialMedia.tsx
+blob c1bca237f58ba1614c10087b879b24cbf36a33db 266589 package-lock.json
+tree 40035297da95efc98a4e4629e19c4f12ee69aca6 614 
+blob 7e5a8ee885f805770fe21e8aefde5a44aa699b47 7777 out/index.html
+blob 9552c86e05c92d312900fb19a9e8eca8bc6943a6 62064 images/blog2.png
+blob f338f20a05c7c86accc6dfa0523253820e6910ca 111105 images/projects/ecommerce.jpg
+blob 40208d3330c91d8c86f0eb604647fbad4d6905eb 2022 scripts/fix-paths.js
+tree 1a1300fdc35ae8fdfdee6e1519d19af9bc68c682 143 _next/static
+blob a45224d0c69ca1a3a19adf662a9a41b8396882bf 54840 src/app/page.tsx.backup.final
+tree 75314dcd07377e47b20d00bf64b447039768442d 36 .github
+commit 5c832a471978bb486fbc897c8322749067bab93c 1073 
+tree 7055179cf98f31bc57c60d35a6942f647867380a 287 src/components/sections
+blob 47516d9595eb78d76d2716974b6e05cca266ac6d 240070 package-lock.json
+blob 53b769d3b2b4d3c463d17563836619caa9668eac 1324 package.json
+blob 27ef5b6180671c113d56329a11971b7e02663dc0 175318 _next/static/chunks/684-54a55c06fa5c9cff.js
+commit 59dc2883e4403e803209d51c89dcc32f663bfa01 271 
+blob 0f7fb8fae232a6aac90fc7d6d7ef0ab28a6614fd 756 .github/workflows/deploy.yml
+blob d9f2e5967af1efd9c2c2d69dd2e2355140659092 3059 out/index.txt
+blob 71cf6e28d1d9bfc8e876ab37d94ec69a766583d8 5957 src/lib/readme projects/s7.md
+blob d1bb51dfaba9c30264d8dfb1754840100e6574bd 1830 src/app/mobile-click.module.css
+tree 12515acf2097a9661641d341a066bf5cc265725f 481 src/components
+blob b376bbc4dfa55484cc97f5dc8387673b8a64a460 1975 out/_next/static/chunks/8e1d74a4-4c9b9b08c749ecba.js
+commit fe52d55d445d55cdef20a943ab13f4ed648436f1 281 
+tree e3d9e830cd49aca85061937ef5347253c26474f7 143 out/_next/static
+blob 30f28f5413525c352054f4f937f6a42184643f89 54990 src/app/page.tsx.backup
+blob ca47243f0307116d6a053ec3b21749b0a9642f41 1097 public/404.html
+tree c7bb7233ea2dba3da1f8c08a50f826ebe063e937 231 src/components/sections
+blob 9abb5fe0bffe4b90efabb98f422fb8b7d3634d9a 111277 images/deep-learning.png
+blob a8af045776ed960977eb293b5ccaa95d1d6310e6 3035 src/app/globals.css
+blob 670514f52375062d0a69c76ca7e260b118626673 1447 package.json
+tree c76ce8730fcba9243e9b7019b7db27e8fa61c698 1178 
+blob bd214f0401783d3ec28c0e8a2501c88e395ffbfe 1188 package.json
+blob 94b4713308475b0beae8c0b26e3d0e41de5fbedc 612 out/_next/static/QfMbgzR5PXOJMgXAiDCv2/_buildManifest.js
+tree 749e4f4fa5264dfb4c2c077a87e553ab3c5eff63 38 .github/workflows
+blob 240a8220c2fd8318f12567c555ddea687d5ed08b 4716 src/components/sections/AboutSection.tsx
+tree 8df47884f9f1ee0ce0023eec4e44da4b845ea818 482 src/components
+blob d0c6758c18302d8b080680f3420b4ea6ab5dd020 3483 out/_next/static/chunks/webpack-c0858a93a3733b03.js
+commit ca97d038bcda3b637d12f38d74650cc55d6d0cac 314 
+blob c0bea66aebbe40eb914504cdb5f6376fc15ceb74 15376 src/components/sections/ProjectsSection.tsx
+blob f1d24c516bd549004ca6077e1088ea994b5ccbdc 6475 src/components/SocialMediaMobile.tsx
+blob 84ec97abe649fc359fbce8bc9505c9322b5cb9c6 1844 src/app/mobile-click.module.css
+tree 35037e0f555fd1feee1112f3e3b5bb66ae5c2ebb 488 
+blob 5288964e334eca7001d1120086a02059745be6c3 5018 README.md
+blob ca4b6672eeadb59d73a0e982dd1c7581765b89b2 2357 fix-script.js
+blob a059faa1e58ec89d2da1bbff47718f067d5b8434 1067 public/404.html
+blob a7d86e6d07531d2604395a30e698a61ed85b54e2 691 tailwind.config.js
+tree 492e0af2900e3e795815f1c401efed0bf85b1417 38 out/404
+tree 2859b4ef87111f55c2ab6442407854413b5a68b9 561 
+blob 8876b7ded36dd4cfd1de0d12915674d5485a0e46 8901 src/lib/readme projects/s9.md
+tree f5594b986a57a677471ce9437bd3e1b9d059f59f 143 out/_next/static/chunks/app
+tree 765e6144c00aefaf6d244ccb471540ee8e5975b7 230 src/app
+tree 8267edac7fa503ef4b6330d8185c7ed44f59341b 38 .github/workflows
+blob 66e378b57da2e87cfe502afba1c5a2682b58ad75 508 src/app/utilities.css
+tree e0c86cdec359fd30c0a110674da9f7a9bc584f6c 271 src/app
+blob 229e6e36e1796e4b4918f30d86c1c1433b57d512 10221 src/components/SocialMedia.tsx
+blob 1ad6be8e80ba0bc48e050b6e630e1d394457b4f8 8282 src/components/SocialMediaMobile.tsx
+tree bcb951e8b607d40126f0a4d128089e17c8578c44 38 .github/workflows
+tree 3d0602f645e0e8a01ed7e0c24a91f1019e573a68 143 out/_next/static
+blob a91b8449ee080aa3f59ffe3f7dfbb23b5c564eb2 460 next.config.js
+tree 20bd48961ec60c3b7a0e7c714b23e518e955fa3d 287 src/components/sections
+tree cec65a474adada52aa5f3d28e0571a30515599eb 259 scripts
+tree 0260ef577e52b50e375483e96e573cf617556bb0 36 .github
+blob 0d91b7ab5006825688e7e753718c794d14549f4c 48556 out/_next/static/media/a34f9d1faa5f3315-s.p.woff2
+blob 611902aeb5ef8c7a2d87fed00c5026561b5400f5 9780 out/index.html
+tree 1cc6b38ffc1f6c5fc90cfa439795debc5053f771 324 out
+tree ec730dfa978ba53c7f5b1285f016bf28aa537415 100 src
+tree befcb96be67ea4961b384a7e26243bfaee5341c0 143 out/_next/static
+blob 795c65423f79b979d642965a22fd09745952f663 4657 out/index.txt
+blob ccd4b4bd089b4a36c4e71ecc11f2618f3252cf73 47251 src/app/page.tsx
+blob 76faf1f3906413a2d2d4057fbcab8ee524529e20 216 next-env.d.ts
+blob c31ebd6f37190654c4c1fcca3db0b6202152856f 143596 images/blog3.png
+tree fb412f7226a7218dcab6d44dd23de60da451b73d 255 public
+commit 9937b793f21551b428b5977452d7d060519b9ecd 277 
+tree 19362e9cd43b8b0ee52bb7f090633b32b25123ce 67 src
+blob a9845365e670a0b75ee06bf0463a4f977450ece8 9489 src/lib/readme projects/s4.md
+blob d0eda77372331b83651f35834d7cba11a3500842 11619 images/javaTraining.png
+tree dfb962a31dfb87bc9506cf31f49fa4d9bc500384 322 src/app
+blob bbd6fca366c8aa40023f33c480c80647bd4e481f 2490 src/app/globals.css
+blob 87b13a21498570de52c0736482444090dd4dd355 4759 src/lib/readme projects/java velhicle rent.md
+tree eb7f17bb7cf876a89a81cda8ef1a7c64064cf303 324 out
+blob 77053960334e2e34dc584dea8019925c3b4ccca9 128 out/vercel.svg
+blob 3397bee712ace3533f4356c08e665308cb4c0acd 528 next.config.js
+blob 78be4996c2aaa9c0f6dd10cf064fea41f04b59fb 129893 out/_next/static/chunks/app/page-12d71cc45c9fc782.js
+blob e215bc4ccf138bbc38ad58ad57e92135484b3c0f 1450 README.md
+blob d16e2559d60f4ec8677cb6ff389bcabc294b0bf5 14389 out/_next/static/css/09cc3dff3118ee14.css
+blob 348e83738b1c8f3c62726497a8571e3f984b0be1 8199 src/components/LoadingScreen.tsx
+tree f4c4ed1550ba731bcbebf444d370326e6849e0f3 398 out
+tree 1072162716e7ade296289d6be2543021d249b1f0 48 _next/static/css
+blob 80dd5ed4d8b7cc38e3473c26c9ebba400648feac 7528 src/components/CursorEffect.tsx
+blob b89239161d0389e490ff1980fd4cc96adc48bd03 990 .github/workflows/deploy.yml
+tree 21285fe4876563ffa40aa1e2c44d72f0c2481453 88 out/_next/static/QfMbgzR5PXOJMgXAiDCv2
+blob 054a73d7f1ae0fda65791592c93099774c472d9b 2431 out/index.txt
+blob 7b1f9160e29d39c88eb22c2998461713fc4720a8 6799 src/lib/readme projects/s11.md
+tree a0b78c3e7ae3270d006e2997408c74c7b54662c6 467 out
+blob 2f38b5a50cd665802b264ce76df0c09d5f462528 2029 src/components/SmoothScroll.tsx
+tree 054b9752c5243044938e24a3a43fa62ec944bba2 259 scripts
+blob e03c469b19818cbf31e323d32e11d41f5544876c 8152 out/_next/static/chunks/pages/_error-c67e5ae945ee3c40.js
+blob de52fb1c6ad172222d42a55ea48a02dcc1438623 29042 src/components/sections/EducationSection.tsx
+blob 0ce43d81b4a6002ed485975e0e6e20fc9542fa7e 5382 out/404.html
+blob d1ae370438140976796741fea9ef0ba4e942dc47 2481 out/index.txt
+tree 9be60f4b416b4dc7e48e514c501c676f5e42c724 324 out
+tree 3a88189282dd908265551bc04007559a43426589 38 out/404
+blob 004145cddf3f9db91b57b9cb596683c8eb420862 391 out/file.svg
+blob 57eb2b57edc458569376480a6f16e105bd410193 518 out/_next/static/chunks/main-app-1f754c92ec50b375.js
+tree d3eaa0d521dfca052d60f8c18448da54ab4032a7 38 out/404
+tree 91fe4e64fedb2ab2e2c3b7d4288bd3680b3ffc94 340 src/components
+blob 0519ecba6ea913e21689ec692e81e9e4973fbf73 1 public/.nojekyll
+tree 7596a12b12adf5c98a845f0ed60f564f3b3f9b27 38 out/404
+blob 0b5283144cae44b88af539caa18f6993e53f76b8 7475 src/components/CursorEffect.tsx
+blob 3a27e632eb14fffc6fce03483049986ba13f6802 18820 out/_next/static/media/26a46d62cd723877-s.woff2
+tree defaff60f49793c110b4b56c4869d3dddb3ec62e 36 .github
+blob 1902deede30eef86a21a8efbb6cc7eed103c7f05 1115 fix-script.js
+blob 97380ac0ac5134a31d09f1beac857a2feb3be6a8 4664 resume-content.txt
+commit 1386ac02059bfa0a4c65682e5afda8533bd92228 276 
+blob deec8f76226f34f088335b9505af3424b13bd018 8374 out/index.html
+tree 139fc50308d76257f7150e9cc97fb2d4373b1d39 271 src/app
+tree d0ecbbf096126a63999215291cdd7fee893b0d99 109 src/components
+blob 3034dfec0bace465784d47639059be158b3afbb4 3492 src/components/SocialLinks.tsx
+blob 5b4945db12552c285766d3aca5112b38a13ab810 628 out/_next/static/zRObdObr_vcatc2-d3BqD/_buildManifest.js
+blob 4cd1d94e0949c2b7ef6382b66a23e1b9dd3a1186 1612 src/app/layout.tsx
+tree 22f4ec533ce02e010893c060916a4db555398e2b 259 scripts
+blob 2b6edd163567b76726a6c637f1d88570f6397a51 2222 scripts/verify-paths.js
+tree c9c4966615c8b7b4a64555de1bfb81304e3937bb 143 out/_next/static/chunks/app
+blob 92b02b7494c8e6311eab32361b4de450c2391c1d 910 out/_next/static/chunks/pages/_app-f49b2a5977e4bd4f.js
+blob 69d4f7de5ecc59f039a71de50cea9763ae390cba 2546 src/components/sections/AboutSection.tsx
+blob a06f73ae0b08425cea8797bc918bf3f27f38c7c4 632 _next/static/ZURqaWYBCMzh22AhEoguM/_buildManifest.js
+blob 10b359e2b5a19b43fe5a4ff7dc281b9ca7386057 9225 out/404/index.html
+blob 447084e6e13d12ab99069980f13d3c2a7537a2ef 29446 src/components/sections/EducationSection.tsx
+tree 07bfc1c1bc0be263581edbcf3a52d1a8b9372d3b 38 .github/workflows
+blob f7c0541fa5a93bfbeab401b992e525766f371ccb 276696 package-lock.json
+tree 72cdb1ddd10237c25362d5d859c844eb1b365f41 43 src/components/ui
+blob 6c2be828b2d660ef23861a2f39d78709863634e3 110636 out/_next/static/chunks/app/page-677a74ba3beee2c8.js
+blob 33e68e3416ea71badb09cf81b18a490b8b363209 2450 scripts/prepare-deploy.js
+blob f7d62d981f59ff3e22e004931ae77276e835778e 5382 out/404.html
+blob 3ea331aa822519e14331a7f1c40c7798bb35008b 1647 package.json
+tree 8b5ec46a2ceb5464cb67f2a16fb9515258349dda 230 src/app
+blob 18385228214b93a22d3ab4381b476da341345fbf 9998 src/components/SocialMedia.tsx
+tree fa70cd85930ad730d7c47c4039be4421e133f3a8 324 out
+blob f5b7504915c1cd138ce1e56f6ca9017bf6339aa2 18276 src/components/sections/BlogSection.tsx
+blob daf18ff89b899f4953b17c6fb7564c369e32d5eb 1836 src/components/SpotlightBackground.tsx
+tree b0950d724c4f1ebd14795bfa6d95ded43832c8a9 38 out/404
+tree d3bd20041593ef1ce16b2df88ca9714e133294fc 67 src
+blob 503431e1932d130da3bf541e656963ddd9324e32 1557 package.json
+tree 663d22cdc9361109265657093be25bd30f31ae5f 38 out/404
+blob 6a18b127bd3a152a88d6a4337115d798e8314c50 489 next.config.js
+blob ee7f2f27dd9111ed6e438abb91235f9b463081a0 32034 src/components/sections/EducationSection.tsx
+tree 5a2c713def08b390862012ed3c95ff5f33303773 33 out/_next
+commit 92035687c42d10b7dd4bbdd81cf51db42ff0e9b9 233 
+tree 19282d3695af709f8025df3af1e524600a2fba90 324 out
+tree 51442a7604c31278ee6e0fe383cc7515bc2f9e6d 67 src
+tree e1ded30895b9a073c0d0a6e88019004df92f9862 33 _next
+blob 21538b7092751a5b1f1b5c62fb962d948a2f4df3 9001 src/lib/readme projects/fetch news.md
+blob 34a693c9d9809f372f4ea9de139dac0d932ebcc0 22552 images/ats.png
+blob b9ceafbafd6844393b13a63e64a16dd4e52eb302 410 out/_next/static/chunks/795d4814-303d1164005420bd.js
+tree 6bc50ba0a8b20ac3740c15761de2e35a902e6e0f 143 out/_next/static
+tree cd9b05b40986011e72689b964cab6de0162e3b08 152 src/app
+tree ab891ee36340bc1bbe00134473664c48ae2dc657 38 out/404
+blob 496db56163fea7ecf6fa32393d60ad14a82da873 273912 package-lock.json
+tree 3ac836dabc7523e10268b17f72250a18972d5a0b 340 src/components
+blob 2f6c5da381dc9740f809d059f9651408242ced3f 9672 index.html
+blob 2c67263c5eafca0069293fea0f647188f02caa86 739 out/_next/static/chunks/472.a3826d29d6854395.js
+blob 46ecbdf3558aa458b0dc38cb5ffd9725c42c605d 601 out/_next/static/chunks/app/layout-c6613b77075f612c.js
+blob 6ae353f0714b7e6039d259e68fe63e18d42c446a 18198 images/blog4.png
+blob 109e7752803def904fce0b612ec5cf3aa32bd1ec 4298 out/index.txt
+blob c3230ca2d342ea70ea7e0a176471f864912bc0da 390 next.config.ts
+blob 3d39bed19d5af27892bdb4b2cada940b682aac6b 8275 src/components/SocialMediaMobile.tsx
+tree 549083c4e3b1025b97a0910c7ed198456f2a7eb6 614 
+blob c7bcb4b1ee14cd5e25078c2c934529afdd2a7df9 81 postcss.config.mjs
+blob 23f69598ec59b71306f14d6eafa30be91f29bf45 444 next.config.js
+tree d11b28233e2a701f19738da7c73c61bc95299f4e 67 src
+tree 21b746b1c006990a0d339eed9dfd22ade92838f3 482 src/components
+tree 21b5ee45453013ae48d72fad41c1c8f85b27cbb8 1039 
+blob ed45afde80375f27f0fb3e52630db9da48278a4a 4657 out/index.txt
+tree 513c85c0b059227e659c94c7dca7036462278844 267 images
+blob ecb0bc5cb00ce5b38d62f16bbdd29b798327227c 181264 images/udemy.png
+tree ba922bd8a683000ee6fc3883a9967b5356265849 33 out/_next
+tree e34a47cbdbbecccc625e0285a5201fae85263aaf 130 src
+blob 0aec8e857168db930cce9becd442ec8dfd257288 2481 out/index.txt
+blob 13256d79f8957f952c9ef4185ebf75d8b7255e6f 1666 src/app/layout.tsx
+tree ac1136fc759391768442735ba7d461712c25485d 524 out/_next/static/media
+tree dda673ac63751110d3009b374bfd59482a24e769 231 src/components/sections
+tree 5e55d55afcfc4bdf8682ae50cc2dcacc70239421 33 out/_next
+blob c7e31eff51b660556b0f069d78dade63c523346b 9037 src/components/sections/CertificateSection.tsx
+tree c362d6def3156c82eb253d8990f398f028219e02 38 .github/workflows
+blob 67ff60fbb170e88369b44bd2b72ead6b7a218d87 46600 src/app/page.tsx
+tree 382a10bffdee8330092e338c2514b9888421559c 48 out/_next/static/css
+blob 98a7db2a356e284aa27c63174f82f429e2212a2f 7923 out/index.html
+tree 476fe34bd32430f936c3b8900ea5444f8821191c 143 out/_next/static/chunks/app
+blob 8b412900d9fba27f8426611d41142632b3202aa2 2268 README.md
+tree b1c407014e2e136f64626c60426f80184c1ff56d 716 
+blob e9f3d42f12e8126f415e2d7e4d45ab0da41fa264 128362 out/_next/static/chunks/main-b993f4e178e1601d.js
+tree 2b2077eb9891928723bd1d0c260ef900bb1f2696 143 out/_next/static/chunks/app
+blob aa56d1a1f9fc21a1b9ed14b90ceaac26e41ea3db 9319 404.html
+blob 15aaa70d9a05bdd4cfdd9da6a70ba51a601d9390 13503 src/components/sections/ProjectsSection.tsx
+blob 5aa66bc6f0ff211a626ddae362dcd8b2bc1d655f 7924 out/index.html
+tree c62f4b6010c122872988e8ade83aee059f1d0199 324 out
+tree ac214e10b088c59dc8252435cf155cca481ca10b 1219 
+blob 9a5aada4bc000720b6fda104a8572277721c8faf 2482 out/index.txt
+commit a8c230c51da6bd1d48157b31d1e7edab1b46d820 254 
+tree 49f87be035af5345b75de223afe8ce52981ae124 67 src
+tree 08f4850ad52ec610ecb461adc8bc3bdcd61a03ca 42 src/lib
+blob f7fa87eb875260ed98651bc419c8139b5119e554 689 src/app/layout.tsx
+blob 840ea891ba28909340b4076bd03c00f09618ab68 8374 out/index.html
+tree f821c5918524f7538cc9194f38855e820818a122 109 src/components
+blob 68eeb7f4bd4a789bc1600f76e6ebac0a0c170d46 31288 out/_next/static/media/93f479601ee12b01-s.p.woff2
+blob 327cefcfeb8d5f6f8c121a795186d7769a167629 397 .gitignore
+tree ce7bbafba7dfab550121f3d10c478d095a164675 38 .github/workflows
+blob 715942f218ba559f43faec697f1dc4f2851606df 5899 _next/static/chunks/341.df3329d77a5faa19.js
+tree 4fe80b5a6d7c4822031dce8a382c74240015efe6 48 out/_next/static/css
+blob 1124eef940a8f91322d9581368265d4f98159a73 601 _next/static/chunks/app/layout-fa549e51819b623b.js
+tree 926f08a6d70d48af2ab02b50421c31877b158bd3 584 
+tree ef1b191ecd8f0e8749317674d8111a1bf0150f34 130 src
+blob 769f8574e4d82ed5789e3f262025b2831214ffbc 15966 images/mnist.png
+blob bcf38fd18ee05e4de3d4025cf51939418a14aa53 25908 out/_next/static/media/55c55f0601d81cf3-s.woff2
+tree 93672799de1ac70ef1a706994f718fb232147aa7 152 src/components
+blob fe0896afaeb808cef614fee9069e3728d91420de 2045 src/components/SocialLinks.module.css
+blob 67da1f5a415a8ecd1a5673bef9ef60ff8e141f77 5382 out/404.html
+blob 6cbe05f4f8d3db513e70b9c21e1e194f2e141eb4 1629 src/app/globals.css
+blob 3293742e1566c5eabfb393b39cf8319f4313e294 47005 src/app/page.tsx
+blob 59aefdb5616912c09f18547262bf9e841a13970e 3485 out/_next/static/chunks/webpack-7d9c778150f35e3d.js
+tree 30061921a9e5f8a648bd8dd393d046a3081392bf 36 .github
+tree ea19028985fcd7bc2634bda5f96c908ec5132780 106 out/_next/static/chunks/pages
+tree 6932c93f4179bfce1f3360cd3457850326131093 38 out/404
+blob 43511582e37e01971dd97bbe3b09972ff712a21a 18515 src/components/sections/ProjectsSection.tsx
+blob 0b68a27a9731222ef807ba0c64a9e7f3311218be 18321 src/components/sections/ExperienceSection.tsx
+tree 8ed92bd1c097f632135a61288b0e495ecf11f891 287 src/components/sections
+tree e57c90ddc108229c4ea911b3f7379dadcf11f112 614 
+commit 23d9393273250664f5b79310d7d1b30711ad0850 251 
+blob 745b1ef89a4800ae5aceae467d82e700c611861a 19558 src/components/sections/ExperienceSection.tsx
+blob 57e666d3dc26196ab21257c7f78e6289b3116647 9224 src/components/SocialLinks.tsx
+blob 502cdb269e288e365f12825e6ce03498661144f9 1553 package.json
+blob 759056183d3d0af94e77f05923d2054d1c11239b 543 .github/workflows/deploy.yml
+blob 742bc62d73736662182d083e7f9b4210e710f578 10230 out/index.html
+blob aa83bb61d51df86d1f5f3d03cf02396f0d108517 2482 out/index.txt
+blob 414596c7bc8daf357c91eb818ca59614490fe097 9199 out/404.html
+blob 64cd825536e5595b91211ab558395c0b230fba9c 1518 package.json
+blob 9bda42d44fc657150ffcabdf49afd2f8720f4dc5 722 .github/workflows/deploy.yml
+blob c0860727bbb973690bd4fda0deaf0613fd0f2b87 26710 src/components/sections/EducationSection.tsx
+tree f01a92a6212e996859099e36813cb441630ed4f1 38 out/404
+tree f8d91b28c71a3fcdb4218d97183753f0970e7ec1 38 .github/workflows
+blob 221891e0f8eaab61c96a71ab7bcd9acc880e5ddd 9305 out/404.html
+tree b0efd224ad726a40ab613b22311162cadb0e23ce 281 src/app
+tree 4665a5c335dfe4ef32eebc43ba7b7457860dbae7 38 .github/workflows
+blob 2496e52028d62b1d6903b7c9d62a2b6ce30d5b58 786 tailwind.config.ts
+tree c28d98dff99cf16b21ae972e699c4960a50c65a8 584 
+commit f29fc114ff6937c1e4cd0a0a199332fe0c1d73d0 280 
+tree a8910d4301f0756118d0f4cbd4a90e46a50c1bf2 33 out/_next
+tree 05288ba22ab63c84f0bcceb4fdc058ed260b760f 88 out/_next/static/zRObdObr_vcatc2-d3BqD
+tree bf3bcc70b3b63aaed9b3cb189066fd329c0b4cc6 281 src/app
+tree 31a9e37e2a92491d9ea70f8026a58ba5ba0ad0b6 337 src/components/sections
+tree 4d1b85b6e346207b5ee0b9e3be13e91f6b0aaf8d 39 src/styles
+tree 6fa7462dd285f13027b93fa3cf630e84db0a8675 65 out/_next/static
+commit f111c93859cb097d7c9277814b430cd90a2eaf68 231 
+tree d7735ef969a2c4cd4d4100af55fd3125010a0ca6 100 src
+commit 398868d88df5b3904b9c9e02ecbf517009e0a04c 1073 
+tree b813ad8d738e6d8fd705192e31571551db09a958 74 out/images
+blob 26c2c3fc481c226cc9d74b6dc26ec95ddb08b7ee 1480 package.json
+blob db2eb50b6d3e1c14d0176dcaef235fcefc085b5b 7036 out/404.html
+blob c7d1a15bbc400d296da26e2c6851709f8e0852c6 5764 src/lib/readme projects/freecodecamp.md
+blob 17ac0ba0f7f02365d674febd402e447a26074f04 5382 out/404.html
+blob 5be6678b0978fa61c07d9f725d6494bb300744d8 4238 index.txt
+tree 59e36a51a41f5be3219b2f7f1fa7659cbf06fc47 614 
+tree 03e70b5eab4cc96fc78847cfd0429fbf2b06eed3 614 
+blob eff4bb73a8b2029a7cb9d632bb34695bd40698e5 5382 out/404.html
+blob 99cc9392bb8f22bfe684126ab3a766ff69067e6d 246747 package-lock.json
+blob 2404e3134ab77e50054c912faf8da072ef05c6cf 18249 src/components/sections/BlogSection.tsx
+commit f33e0073c8150cc295d390d9228f0f8d05947c46 1073 
+tree 47d5e209c8c01b973b944e4f18ccf056b5054835 143 out/_next/static
+tree 23a0b47d0cb21795ea0ab97136c09002e6047b15 1178 
+tree 66b26289ec2f9b8e14f64ed9778f06873504318b 36 .github
+blob 090ecc1b9b2c00883fcbf10957958e940003d4a2 7777 out/index.html
+blob e129a0c600b75533645e4c8a4ccd9d254a03b7e0 2089 src/components/ui/ProjectCard.tsx
+tree bbc59ffc6a3a6f2d3ad967fadd5d25161f03adf1 36 .github
+tree 6682649f11e0e50f8f449d01fbc4f0221e035d82 109 src/components
+blob ed897e2b804ad84e881f1b832e356a2ac302dad6 18983 src/components/sections/ProjectsSection.tsx
+tree e023f3bb4d4f876d8e579d312375d72c6e02c791 38 404
+blob a8dc0a7d0ae94ab45c0f924eda4f229bbe029f8a 10595 out/_next/static/chunks/535-a17fbf6c9cdd8d76.js
+blob fe6796bf39c8da49998773a04302ced815026b18 5233 src/lib/readme projects/ats.md
+blob e68abe6bd57f9a5bd5ac0abc423811cd39025c92 4086 src/app/page.tsx
+blob a37e532220194746a66a495187d53b8710024bb6 1066 .github/workflows/deploy.yml
+blob 8f322f0d8f49570a594b865ef8916c428a01afc1 368 .gitignore
+tree c3e50561b7c2a2d8732a27b5f78eb8092e01ab68 230 src/app
+blob b98201cdaa45238c41126b8555f203a414014f0e 2135 scripts/debug-deployment.js
+blob 1e657c9ef7fad338ad3cf397dd67d67fef013572 168413 out/_next/static/chunks/4bd1b696-2581ea8f93aa337b.js
+blob bc672b795959c9f040f089ff6af234c912013420 9305 out/404.html
+blob 59821d109d8ee2771ab73372ff41f084f200de31 567 next.config.js
+blob 3467b3f9a58c75822b0237094ef81699db00dc1d 182764 _next/static/chunks/framework-f593a28cde54158e.js
+tree 6c2ed906c0c87b0abb2dcae11f66fd53240021e0 271 src/app

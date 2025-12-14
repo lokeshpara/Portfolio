@@ -213,7 +213,7 @@ const BlogSection = () => {
               transition: "all 0.3s ease",
               borderRadius: "15px",
               position: "relative",
-              touchAction: "manipulation",
+              touchAction: "pan-y", // Allow vertical scrolling
               WebkitTapHighlightColor: "transparent",
               transform: "translateZ(0)",
               backfaceVisibility: "hidden",
@@ -234,15 +234,14 @@ const BlogSection = () => {
                 filter: 'none'
               })
             }}
-            onClick={(e) => handleCardClick(post.url, e)}
-            onMouseEnter={handleCardInteraction}
-            onTouchStart={handleCardInteraction}
-            onMouseLeave={handleCardLeave}
-            onTouchEnd={(e: React.TouchEvent) => {
-              e.preventDefault();
-              handleCardLeave(e);
-              handleCardClick(post.url, e);
+            onClick={(e) => {
+              // Only trigger on desktop
+              if (window.matchMedia('(min-width: 1200px)').matches) {
+                handleCardClick(post.url, e);
+              }
             }}
+            onMouseEnter={handleCardInteraction}
+            onMouseLeave={handleCardLeave}
           >
             {/* Flex container - creates two columns */}
             <div style={{
@@ -303,6 +302,13 @@ const BlogSection = () => {
                     display: "flex",
                     alignItems: "flex-start"
                   }}
+                  onClick={(e: React.MouseEvent) => {
+                    // Only trigger on mobile
+                    if (window.matchMedia('(max-width: 1199px)').matches) {
+                      e.stopPropagation();
+                      handleCardClick(post.url, e);
+                    }
+                  }}
                 >
                   <span className="title-text" style={{
                     fontSize: "0.8rem",
@@ -342,7 +348,8 @@ const BlogSection = () => {
                   fontSize: '0.7rem',
                   lineHeight: 1.3,
                   padding: "10px 0",
-                  flex: 1
+                  flex: 1,
+                  textAlign: 'justify'
                 }}>
                   {post.excerpt}
                 </p>
