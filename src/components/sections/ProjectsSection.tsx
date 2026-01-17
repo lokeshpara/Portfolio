@@ -5,6 +5,7 @@ import cifar10 from '../../../images/cifar10.png';
 import yolov3 from '../../../images/yolov3.png';
 import ats from '../../../images/ats.png';
 import resumeOptimizer from '../../../images/ats.png';
+import cloudit from '../../../images/cloudit.png';
 import bankStatement from '../../../images/mnist.png';
 import vehicleRental from '../../../images/vehicle-rental.png';
 
@@ -32,18 +33,28 @@ const projects = [
     title: "CIFAR-10 Image Classification with ResNet",
     description: "Implemented custom ResNet architecture achieving 92.22% test accuracy on CIFAR-10 dataset. Features include One Cycle Policy for learning rate scheduling, advanced data augmentation using Albumentations library, and gradient accumulation for effective batch size management. Utilized PyTorch for model development with comprehensive training visualization and checkpoint management.",
     technologies: ["PyTorch", "ResNet", "Computer Vision", "Deep Learning", "Albumentations", "One Cycle Policy"],
-    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/S11",
+    url: "https://github.com/lokeshpara/CIFAR10-Custom-ResNet",
     period: "2024",
     image: cifar10.src
   },
 
   {
-    title: "YOLOv3 Real-Time Object Detection",
-    description: "Implemented YOLOv3 for real-time object detection with both pre-trained and custom training capabilities. Features include video processing pipeline, GPU acceleration with CUDA, custom dataset training with data augmentation, and confidence threshold tuning achieving >90% detection accuracy. Built comprehensive evaluation metrics including mAP calculation and inference time optimization.",
-    technologies: ["PyTorch", "YOLOv3", "OpenCV", "CUDA", "Computer Vision", "Object Detection"],
-    url: "https://github.com/lokeshpara/Deep-Learning/tree/main/S13",
+    title: "Cloud IT Resources – Company Website",
+    description: "Built a modern, responsive company website using Next.js to establish Cloud IT Resources’ digital presence. Implemented a dark-mode-first UI with glassmorphism, parallax effects, and smooth animations using Framer Motion. Designed a component-based architecture with reusable layouts, responsive navigation, animated hero sections, interactive service cards, and scroll-triggered transitions. Optimized performance and SEO using Next.js rendering, image optimization, and static deployment via GitHub Pages.",
+    technologies: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "SCSS Modules",
+      "Framer Motion",
+      "UI/UX Design",
+      "Responsive Design",
+      "GitHub Pages",
+      "Google Maps API"
+    ],
+    url: "https://lokeshpara.github.io/cloud-it-resources/",
     period: "2024",
-    image: yolov3.src
+    image: cloudit.src
   },
 
   // {
