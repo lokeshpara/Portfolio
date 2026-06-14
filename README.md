@@ -2,7 +2,6 @@
 
 <div align="center">
 
-[![Live Portfolio](https://img.shields.io/badge/View%20Portfolio-https://lokeshpara.github.io/Portfolio/-blueviolet?style=for-the-badge)](https://lokeshpara.github.io/Portfolio/)
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
@@ -12,10 +11,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 </div>
-
-## ✨ Live Demo
-
-Visit the live portfolio at: [https://lokeshpara.github.io/Portfolio/](https://lokeshpara.github.io/Portfolio/)
 
 ### 🌟 Key Features
 - Interactive cursor animations
